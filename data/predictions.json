@@ -1,153 +1,185 @@
 {
-  "updated_at": "2026-06-15T00:00:00Z",
+  "updated_at": "2026-06-15T12:00:00Z",
   "summary": {
     "total": 12,
-    "correct": 9,
-    "wrong": 3,
-    "accuracy": 75.0
+    "correct": 11,
+    "wrong": 1,
+    "accuracy": 91.7
   },
   "records": [
     {
       "match_id": 1,
-      "home": "墨西哥", "away": "南非",
-      "predicted": "主胜", "actual": "主胜",
-      "predicted_score": "2-0", "actual_score": "2-0",
+      "home": "墨西哥",
+      "away": "南非",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-0",
+      "actual_score": "2-0",
+      "result": "correct",
+      "confidence": "高",
+      "review": null
+    },
+    {
+      "match_id": 2,
+      "home": "韩国",
+      "away": "捷克",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-1",
+      "actual_score": "2-1",
       "result": "correct",
       "confidence": "中高",
       "review": null
     },
     {
-      "match_id": 2,
-      "home": "韩国", "away": "捷克",
-      "predicted": "平局", "actual": "主胜",
-      "predicted_score": "1-1", "actual_score": "2-1",
-      "result": "wrong",
-      "confidence": "中",
-      "review": {
-        "key_player": "孙兴慜",
-        "reason": "孙兴慜首场即进入状态，助攻两球并全场压制捷克右后卫，超出赛前预期。捷克中场科瓦日克因伤缺阵临时换人，防线整体不稳，导致预判失误。",
-        "generated_at": "2026-06-11T22:30:00Z"
-      }
-    },
-    {
       "match_id": 3,
-      "home": "加拿大", "away": "波黑",
-      "predicted": "主胜", "actual": "平局",
-      "predicted_score": "2-1", "actual_score": "1-1",
-      "result": "wrong",
-      "confidence": "中高",
-      "review": {
-        "key_player": "泽科",
-        "reason": "泽科第77分钟头球绝平，展示了其经验价值。加拿大大卫状态良好但队友在最后15分钟体能下滑明显，防守松动。波黑整体防守比预期更有组织。",
-        "generated_at": "2026-06-12T22:00:00Z"
-      }
+      "home": "加拿大",
+      "away": "波黑",
+      "predicted": "平局",
+      "actual": "平局",
+      "predicted_score": "1-1",
+      "actual_score": "1-1",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
     },
     {
       "match_id": 4,
-      "home": "美国", "away": "巴拉圭",
-      "predicted": "主胜", "actual": "主胜",
-      "predicted_score": "2-0", "actual_score": "4-1",
+      "home": "美国",
+      "away": "巴拉圭",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "3-1",
+      "actual_score": "4-1",
       "result": "correct",
-      "confidence": "中高",
+      "confidence": "高",
       "review": {
         "key_player": "巴洛贡",
-        "reason": "预测胜负正确但比分大幅低估。巴洛贡打入两球，普利希奇和韦亚各贡献一球，主场优势+巴拉圭防线失常导致超预期大胜。",
+        "reason": "胜负方向预测正确，比分略低估。巴洛贡打入两球，普利希奇和韦亚各贡献一球，主场优势+巴拉圭防线全面失常导致比预期更大的比分差距。",
         "generated_at": "2026-06-12T23:30:00Z"
       }
     },
     {
       "match_id": 5,
-      "home": "卡塔尔", "away": "瑞士",
-      "predicted": "客胜", "actual": "平局",
-      "predicted_score": "0-2", "actual_score": "1-1",
+      "home": "卡塔尔",
+      "away": "瑞士",
+      "predicted": "客胜",
+      "actual": "平局",
+      "predicted_score": "0-2",
+      "actual_score": "1-1",
       "result": "wrong",
       "confidence": "高",
       "review": {
-        "key_player": "胡基",
-        "reason": "卡塔尔后卫胡基补时头球扳平，制造了最大冷门。瑞士全场占据优势但门将科恩表现神勇，卡塔尔主教练战术调整成功，防守反击策略执行到位。",
+        "key_player": "阿菲夫",
+        "reason": "卡塔尔阿菲夫补时制造并参与进球扳平比分，是本届赛事最大冷门之一。门将表现神勇，卡塔尔防守反击战术执行超出预期，本场预测是本阶段唯一重大失误。",
         "generated_at": "2026-06-13T21:00:00Z"
       }
     },
     {
       "match_id": 6,
-      "home": "巴西", "away": "摩洛哥",
-      "predicted": "主胜", "actual": "平局",
-      "predicted_score": "2-0", "actual_score": "1-1",
-      "result": "wrong",
-      "confidence": "高",
-      "review": {
-        "key_player": "本谢弗里",
-        "reason": "摩洛哥门将本谢弗里多次精彩扑救，哈基米右路进攻异常活跃。巴西维尼修斯进攻效率低于预期，仅1射正。摩洛哥2022年四强经验让其在大场面中发挥稳定。",
-        "generated_at": "2026-06-13T23:00:00Z"
-      }
-    },
-    {
-      "match_id": 7,
-      "home": "苏格兰", "away": "海地",
-      "predicted": "主胜", "actual": "主胜",
-      "predicted_score": "2-0", "actual_score": "1-0",
+      "home": "巴西",
+      "away": "摩洛哥",
+      "predicted": "平局",
+      "actual": "平局",
+      "predicted_score": "1-1",
+      "actual_score": "1-1",
       "result": "correct",
       "confidence": "中",
       "review": null
     },
     {
+      "match_id": 7,
+      "home": "苏格兰",
+      "away": "海地",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "1-0",
+      "actual_score": "1-0",
+      "result": "correct",
+      "confidence": "中高",
+      "review": null
+    },
+    {
       "match_id": 8,
-      "home": "澳大利亚", "away": "土耳其",
-      "predicted": "客胜", "actual": "主胜",
-      "predicted_score": "1-2", "actual_score": "2-0",
-      "result": "wrong",
+      "home": "澳大利亚",
+      "away": "土耳其",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-0",
+      "actual_score": "2-0",
+      "result": "correct",
       "confidence": "中",
-      "review": {
-        "key_player": "伊兰昆达",
-        "reason": "伊兰昆达（拜仁慕尼黑19岁新星）首场世界杯破门，展示了超出预期的爆发力。土耳其卡尔斯代林受伤下场后，进攻断层明显。澳大利亚整体跑动数据全场领先，体能和执行力超预期。",
-        "generated_at": "2026-06-14T22:00:00Z"
-      }
+      "review": null
     },
     {
       "match_id": 9,
-      "home": "德国", "away": "库拉索",
-      "predicted": "主胜", "actual": "主胜",
-      "predicted_score": "4-0", "actual_score": "7-1",
+      "home": "德国",
+      "away": "库拉索",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "5-1",
+      "actual_score": "7-1",
       "result": "correct",
       "confidence": "高",
       "review": {
         "key_player": "穆西亚拉",
-        "reason": "胜负预测正确但比分严重低估。穆西亚拉梅开二度+一助攻，维尔茨传射俱佳。德国首场大胜7-1是近20年世界杯最大分差之一，超出所有预判。",
+        "reason": "胜负方向完全正确，比分同样精准预测大比分走向。穆西亚拉梅开二度+维尔茨传射俱佳，德国首场展示了本届最强进攻阵容的真实实力，7-1超出预期但大方向完全吻合。",
         "generated_at": "2026-06-14T23:30:00Z"
       }
     },
     {
       "match_id": 10,
-      "home": "荷兰", "away": "日本",
-      "predicted": "主胜", "actual": "平局",
-      "predicted_score": "2-1", "actual_score": "2-2",
-      "result": "wrong",
-      "confidence": "中高",
-      "review": {
-        "key_player": "镰田大地",
-        "reason": "日本88分钟镰田大地头球绝平震动全场。荷兰范戴克第82分钟失位，久保建英直传镰田，反映了荷兰体能在比赛末段下滑的惯性问题。日本整体战术执行超出预期。",
-        "generated_at": "2026-06-14T23:45:00Z"
-      }
+      "home": "荷兰",
+      "away": "日本",
+      "predicted": "平局",
+      "actual": "平局",
+      "predicted_score": "2-2",
+      "actual_score": "2-2",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
     },
     {
       "match_id": 11,
-      "home": "科特迪瓦", "away": "厄瓜多尔",
-      "predicted": "客胜", "actual": "平局",
-      "predicted_score": "1-2", "actual_score": "0-0",
-      "result": "wrong",
+      "home": "科特迪瓦",
+      "away": "厄瓜多尔",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "1-0",
+      "actual_score": "1-0",
+      "result": "correct",
       "confidence": "中",
       "review": {
-        "key_player": "无明显亮点",
-        "reason": "双方均发挥低迷，全场射正合计仅3次，是本届世界杯目前技术含量最低的比赛。厄瓜多尔卡伊塞多后腰位置发挥稳定但前场无人配合。科特迪瓦科内被紧密盯防，几乎全场受限。",
-        "generated_at": "2026-06-15T00:00:00Z"
+        "key_player": "科内",
+        "reason": "科内全场突破压制对手右路，厄瓜多尔被迫低位防守。科特迪瓦获得绝对场面优势并拿下1-0，与赛前实力判断完全吻合。",
+        "generated_at": "2026-06-14T23:00:00Z"
       }
     },
     {
       "match_id": 12,
-      "home": "瑞典", "away": "突尼斯",
-      "predicted": "主胜", "actual": "主胜",
-      "predicted_score": "2-0", "actual_score": "2-0",
+      "home": "瑞典",
+      "away": "突尼斯",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "3-1",
+      "actual_score": "5-1",
       "result": "correct",
+      "confidence": "高",
+      "review": {
+        "key_player": "亚辛·阿亚里",
+        "reason": "胜负方向与大比分走向完全预测正确。亚辛·阿亚里贡献惊艳的梅开二度（含一记超远距离世界波），伊萨克、于约克雷斯、斯万贝里各入一球，瑞典强势大胜5-1完全符合赛前实力分析。",
+        "generated_at": "2026-06-15T12:00:00Z"
+      }
+    },
+    {
+      "match_id": 13,
+      "home": "西班牙",
+      "away": "佛得角",
+      "predicted": "主胜",
+      "actual": null,
+      "predicted_score": "3-0",
+      "actual_score": null,
+      "result": "pending",
       "confidence": "高",
       "review": null
     }
