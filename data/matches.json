@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-16T02:08:45Z",
+  "updated_at": "2026-06-16T03:29:52Z",
   "matches": [
     {
       "id": 1,
@@ -160,9 +160,9 @@
       "group": "G",
       "home": "伊朗",
       "away": "新西兰",
-      "home_score": 1,
-      "away_score": 1,
-      "status": "live",
+      "home_score": 2,
+      "away_score": 2,
+      "status": "finished",
       "bjt": "12:00"
     },
     {
