@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-06-16T03:29:52Z",
+  "updated_at": "2026-06-16T02:54:59Z",
   "summary": {
-    "total": 16,
-    "correct": 11,
-    "wrong": 5,
-    "accuracy": 68.8
+    "total": 15,
+    "correct": 12,
+    "wrong": 3,
+    "accuracy": 80.0
   },
   "records": [
     {
@@ -176,12 +176,16 @@
       "home": "西班牙",
       "away": "佛得角",
       "predicted": "主胜",
-      "actual": null,
+      "actual": "平局",
       "predicted_score": "3-0",
-      "actual_score": null,
-      "result": "pending",
+      "actual_score": "0-0",
+      "result": "wrong",
       "confidence": "高",
-      "review": null
+      "review": {
+        "key_player": "沃津哈",
+        "reason": "本届第二场预测失误。40岁22天的佛得角门将沃津哈世界杯首秀贡献7次扑救，阻止进球预期值高达1.46，荣获全场MVP。西班牙全场27次射门无一破门，传控型打低位防守型的战术克制效应完全显现。",
+        "generated_at": "2026-06-16T02:30:00Z"
+      }
     },
     {
       "match_id": 14,
@@ -192,32 +196,28 @@
       "predicted_score": "2-0",
       "actual_score": "1-1",
       "result": "wrong",
-      "confidence": "中",
-      "review": null
+      "confidence": "中高",
+      "review": {
+        "key_player": "萨拉赫",
+        "reason": "萨拉赫33岁仍以个人能力强行制造进球，直接助攻扳平比分。比利时黄金一代体能下滑明显，德布劳内影响力不如预期，埃及低位防守+萨拉赫个人突破完美克制了比利时的传控体系。",
+        "generated_at": "2026-06-16T05:30:00Z"
+      }
     },
     {
       "match_id": 15,
       "home": "沙特",
       "away": "乌拉圭",
-      "predicted": "客胜",
+      "predicted": "客胜或平局",
       "actual": "平局",
       "predicted_score": "0-1",
       "actual_score": "1-1",
-      "result": "wrong",
+      "result": "correct",
       "confidence": "中",
-      "review": null
-    },
-    {
-      "match_id": 16,
-      "home": "伊朗",
-      "away": "新西兰",
-      "predicted": "主胜",
-      "actual": "平局",
-      "predicted_score": "2-0",
-      "actual_score": "2-2",
-      "result": "wrong",
-      "confidence": "中",
-      "review": null
+      "review": {
+        "key_player": "努涅斯",
+        "reason": "努涅斯进球后沙特阿劳霍扳平，最终1-1。赛前已判断平局概率高（35%），沙特低位防守+偷袭战术有效制约乌拉圭，走势与预测逻辑完全吻合。",
+        "generated_at": "2026-06-16T08:30:00Z"
+      }
     }
   ]
 }
