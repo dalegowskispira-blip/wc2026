@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-16T06:47:59Z",
+  "updated_at": "2026-06-16T07:00:00Z",
   "matches": [
     {
       "id": 1,
@@ -9,27 +9,30 @@
       "away": "南非",
       "home_score": 2,
       "away_score": 0,
-      "status": "finished"
+      "status": "finished",
+      "bjt": "03:00"
     },
     {
       "id": 2,
-      "date": "2026-06-11",
+      "date": "2026-06-12",
       "group": "A",
       "home": "韩国",
       "away": "捷克",
       "home_score": 2,
       "away_score": 1,
-      "status": "finished"
+      "status": "finished",
+      "bjt": "10:00"
     },
     {
       "id": 3,
-      "date": "2026-06-12",
+      "date": "2026-06-13",
       "group": "B",
       "home": "加拿大",
       "away": "波黑",
       "home_score": 1,
       "away_score": 1,
-      "status": "finished"
+      "status": "finished",
+      "bjt": "03:00"
     },
     {
       "id": 4,
@@ -39,7 +42,8 @@
       "away": "巴拉圭",
       "home_score": 4,
       "away_score": 1,
-      "status": "finished"
+      "status": "finished",
+      "bjt": "09:00"
     },
     {
       "id": 5,
@@ -49,7 +53,8 @@
       "away": "瑞士",
       "home_score": 1,
       "away_score": 1,
-      "status": "finished"
+      "status": "finished",
+      "bjt": "03:00"
     },
     {
       "id": 6,
@@ -59,17 +64,19 @@
       "away": "摩洛哥",
       "home_score": 1,
       "away_score": 1,
-      "status": "finished"
+      "status": "finished",
+      "bjt": "06:00"
     },
     {
       "id": 7,
-      "date": "2026-06-13",
+      "date": "2026-06-14",
       "group": "C",
-      "home": "苏格兰",
-      "away": "海地",
-      "home_score": 1,
-      "away_score": 0,
-      "status": "finished"
+      "home": "海地",
+      "away": "苏格兰",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "finished",
+      "bjt": "09:00"
     },
     {
       "id": 8,
@@ -79,7 +86,8 @@
       "away": "土耳其",
       "home_score": 2,
       "away_score": 0,
-      "status": "finished"
+      "status": "finished",
+      "bjt": "12:00"
     },
     {
       "id": 9,
@@ -89,7 +97,8 @@
       "away": "库拉索",
       "home_score": 7,
       "away_score": 1,
-      "status": "finished"
+      "status": "finished",
+      "bjt": "01:00"
     },
     {
       "id": 10,
@@ -99,17 +108,19 @@
       "away": "日本",
       "home_score": 2,
       "away_score": 2,
-      "status": "finished"
+      "status": "finished",
+      "bjt": "04:00"
     },
     {
       "id": 11,
-      "date": "2026-06-14",
+      "date": "2026-06-15",
       "group": "E",
       "home": "科特迪瓦",
       "away": "厄瓜多尔",
       "home_score": 1,
       "away_score": 0,
-      "status": "finished"
+      "status": "finished",
+      "bjt": "07:00"
     },
     {
       "id": 12,
@@ -119,7 +130,8 @@
       "away": "突尼斯",
       "home_score": 5,
       "away_score": 1,
-      "status": "finished"
+      "status": "finished",
+      "bjt": "10:00"
     },
     {
       "id": 13,
@@ -210,11 +222,11 @@
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": "00:00"
+      "bjt": "12:00"
     },
     {
       "id": 21,
-      "date": "2026-06-17",
+      "date": "2026-06-18",
       "group": "K",
       "home": "葡萄牙",
       "away": "刚果(金)",
@@ -269,7 +281,7 @@
     },
     {
       "id": 26,
-      "date": "2026-06-18",
+      "date": "2026-06-19",
       "group": "B",
       "home": "瑞士",
       "away": "波黑",
@@ -291,14 +303,14 @@
     },
     {
       "id": 28,
-      "date": "2026-06-18",
+      "date": "2026-06-19",
       "group": "A",
       "home": "墨西哥",
       "away": "韩国",
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": "11:00"
+      "bjt": "09:00"
     },
     {
       "id": 29,
@@ -314,30 +326,8 @@
     {
       "id": 30,
       "date": "2026-06-20",
-      "group": "D",
-      "home": "土耳其",
-      "away": "巴拉圭",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "06:00"
-    },
-    {
-      "id": 31,
-      "date": "2026-06-19",
       "group": "C",
-      "home": "巴西",
-      "away": "苏格兰",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "03:00"
-    },
-    {
-      "id": 32,
-      "date": "2026-06-19",
-      "group": "C",
-      "home": "海地",
+      "home": "苏格兰",
       "away": "摩洛哥",
       "home_score": null,
       "away_score": null,
@@ -345,29 +335,29 @@
       "bjt": "06:00"
     },
     {
-      "id": 33,
+      "id": 31,
       "date": "2026-06-20",
-      "group": "E",
-      "home": "德国",
-      "away": "科特迪瓦",
+      "group": "C",
+      "home": "巴西",
+      "away": "海地",
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": "04:00"
+      "bjt": "08:30"
     },
     {
-      "id": 34,
-      "date": "2026-06-21",
-      "group": "E",
-      "home": "厄瓜多尔",
-      "away": "库拉索",
+      "id": 32,
+      "date": "2026-06-20",
+      "group": "D",
+      "home": "土耳其",
+      "away": "巴拉圭",
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": "08:00"
+      "bjt": "11:00"
     },
     {
-      "id": 35,
+      "id": 33,
       "date": "2026-06-21",
       "group": "F",
       "home": "荷兰",
@@ -378,6 +368,28 @@
       "bjt": "01:00"
     },
     {
+      "id": 34,
+      "date": "2026-06-21",
+      "group": "E",
+      "home": "德国",
+      "away": "科特迪瓦",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "04:00"
+    },
+    {
+      "id": 35,
+      "date": "2026-06-21",
+      "group": "E",
+      "home": "厄瓜多尔",
+      "away": "库拉索",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "08:00"
+    },
+    {
       "id": 36,
       "date": "2026-06-21",
       "group": "F",
@@ -386,32 +398,10 @@
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": "04:00"
+      "bjt": "12:00"
     },
     {
       "id": 37,
-      "date": "2026-06-22",
-      "group": "G",
-      "home": "比利时",
-      "away": "伊朗",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "03:00"
-    },
-    {
-      "id": 38,
-      "date": "2026-06-22",
-      "group": "G",
-      "home": "新西兰",
-      "away": "埃及",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "09:00"
-    },
-    {
-      "id": 39,
       "date": "2026-06-22",
       "group": "H",
       "home": "西班牙",
@@ -422,8 +412,19 @@
       "bjt": "00:00"
     },
     {
-      "id": 40,
-      "date": "2026-06-21",
+      "id": 38,
+      "date": "2026-06-22",
+      "group": "G",
+      "home": "比利时",
+      "away": "伊朗",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "03:00"
+    },
+    {
+      "id": 39,
+      "date": "2026-06-22",
       "group": "H",
       "home": "乌拉圭",
       "away": "佛得角",
@@ -433,7 +434,29 @@
       "bjt": "06:00"
     },
     {
+      "id": 40,
+      "date": "2026-06-22",
+      "group": "G",
+      "home": "新西兰",
+      "away": "埃及",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "09:00"
+    },
+    {
       "id": 41,
+      "date": "2026-06-23",
+      "group": "J",
+      "home": "阿根廷",
+      "away": "奥地利",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "01:00"
+    },
+    {
+      "id": 42,
       "date": "2026-06-23",
       "group": "I",
       "home": "法国",
@@ -444,7 +467,7 @@
       "bjt": "05:00"
     },
     {
-      "id": 42,
+      "id": 43,
       "date": "2026-06-23",
       "group": "I",
       "home": "挪威",
@@ -453,17 +476,6 @@
       "away_score": null,
       "status": "upcoming",
       "bjt": "08:00"
-    },
-    {
-      "id": 43,
-      "date": "2026-06-23",
-      "group": "J",
-      "home": "阿根廷",
-      "away": "奥地利",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "01:00"
     },
     {
       "id": 44,
@@ -489,7 +501,29 @@
     },
     {
       "id": 46,
-      "date": "2026-06-23",
+      "date": "2026-06-24",
+      "group": "L",
+      "home": "英格兰",
+      "away": "加纳",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "04:00"
+    },
+    {
+      "id": 47,
+      "date": "2026-06-24",
+      "group": "L",
+      "home": "巴拿马",
+      "away": "克罗地亚",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "07:00"
+    },
+    {
+      "id": 48,
+      "date": "2026-06-24",
       "group": "K",
       "home": "哥伦比亚",
       "away": "刚果(金)",
@@ -499,40 +533,7 @@
       "bjt": "10:00"
     },
     {
-      "id": 47,
-      "date": "2026-06-24",
-      "group": "L",
-      "home": "英格兰",
-      "away": "加纳",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "09:00"
-    },
-    {
-      "id": 48,
-      "date": "2026-06-24",
-      "group": "L",
-      "home": "巴拿马",
-      "away": "克罗地亚",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "09:00"
-    },
-    {
       "id": 49,
-      "date": "2026-06-24",
-      "group": "B",
-      "home": "卡塔尔",
-      "away": "波黑",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "03:00"
-    },
-    {
-      "id": 50,
       "date": "2026-06-25",
       "group": "B",
       "home": "瑞士",
@@ -543,18 +544,40 @@
       "bjt": "03:00"
     },
     {
-      "id": 51,
-      "date": "2026-06-24",
-      "group": "A",
-      "home": "韩国",
-      "away": "南非",
+      "id": 50,
+      "date": "2026-06-25",
+      "group": "B",
+      "home": "波黑",
+      "away": "卡塔尔",
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
       "bjt": "03:00"
     },
     {
+      "id": 51,
+      "date": "2026-06-25",
+      "group": "C",
+      "home": "摩洛哥",
+      "away": "海地",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "06:00"
+    },
+    {
       "id": 52,
+      "date": "2026-06-25",
+      "group": "C",
+      "home": "苏格兰",
+      "away": "巴西",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "06:00"
+    },
+    {
+      "id": 53,
       "date": "2026-06-25",
       "group": "A",
       "home": "捷克",
@@ -565,22 +588,11 @@
       "bjt": "09:00"
     },
     {
-      "id": 53,
-      "date": "2026-06-25",
-      "group": "C",
-      "home": "摩洛哥",
-      "away": "苏格兰",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "03:00"
-    },
-    {
       "id": 54,
       "date": "2026-06-25",
-      "group": "C",
-      "home": "海地",
-      "away": "巴西",
+      "group": "A",
+      "home": "南非",
+      "away": "韩国",
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
@@ -588,39 +600,28 @@
     },
     {
       "id": 55,
-      "date": "2026-06-25",
-      "group": "D",
-      "home": "巴拉圭",
-      "away": "美国",
+      "date": "2026-06-26",
+      "group": "E",
+      "home": "厄瓜多尔",
+      "away": "德国",
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": "03:00"
+      "bjt": "04:00"
     },
     {
       "id": 56,
-      "date": "2026-06-25",
-      "group": "D",
-      "home": "土耳其",
-      "away": "澳大利亚",
+      "date": "2026-06-26",
+      "group": "E",
+      "home": "库拉索",
+      "away": "科特迪瓦",
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": "09:00"
+      "bjt": "04:00"
     },
     {
       "id": 57,
-      "date": "2026-06-26",
-      "group": "F",
-      "home": "日本",
-      "away": "瑞典",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "07:00"
-    },
-    {
-      "id": 58,
       "date": "2026-06-26",
       "group": "F",
       "home": "突尼斯",
@@ -631,73 +632,40 @@
       "bjt": "07:00"
     },
     {
-      "id": 59,
+      "id": 58,
       "date": "2026-06-26",
-      "group": "E",
-      "home": "科特迪瓦",
-      "away": "德国",
+      "group": "F",
+      "home": "日本",
+      "away": "瑞典",
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": "04:00"
+      "bjt": "07:00"
+    },
+    {
+      "id": 59,
+      "date": "2026-06-26",
+      "group": "D",
+      "home": "土耳其",
+      "away": "美国",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "10:00"
     },
     {
       "id": 60,
       "date": "2026-06-26",
-      "group": "E",
-      "home": "库拉索",
-      "away": "厄瓜多尔",
+      "group": "D",
+      "home": "巴拉圭",
+      "away": "澳大利亚",
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": "04:00"
+      "bjt": "10:00"
     },
     {
       "id": 61,
-      "date": "2026-06-27",
-      "group": "G",
-      "home": "埃及",
-      "away": "伊朗",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "11:00"
-    },
-    {
-      "id": 62,
-      "date": "2026-06-27",
-      "group": "G",
-      "home": "新西兰",
-      "away": "比利时",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "11:00"
-    },
-    {
-      "id": 63,
-      "date": "2026-06-26",
-      "group": "H",
-      "home": "佛得角",
-      "away": "沙特",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "08:00"
-    },
-    {
-      "id": 64,
-      "date": "2026-06-27",
-      "group": "H",
-      "home": "乌拉圭",
-      "away": "西班牙",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "08:00"
-    },
-    {
-      "id": 65,
       "date": "2026-06-27",
       "group": "I",
       "home": "挪威",
@@ -708,7 +676,7 @@
       "bjt": "03:00"
     },
     {
-      "id": 66,
+      "id": 62,
       "date": "2026-06-27",
       "group": "I",
       "home": "塞内加尔",
@@ -717,6 +685,50 @@
       "away_score": null,
       "status": "upcoming",
       "bjt": "03:00"
+    },
+    {
+      "id": 63,
+      "date": "2026-06-27",
+      "group": "H",
+      "home": "乌拉圭",
+      "away": "西班牙",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "08:00"
+    },
+    {
+      "id": 64,
+      "date": "2026-06-27",
+      "group": "H",
+      "home": "佛得角",
+      "away": "沙特",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "08:00"
+    },
+    {
+      "id": 65,
+      "date": "2026-06-27",
+      "group": "G",
+      "home": "新西兰",
+      "away": "比利时",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "11:00"
+    },
+    {
+      "id": 66,
+      "date": "2026-06-27",
+      "group": "G",
+      "home": "埃及",
+      "away": "伊朗",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "11:00"
     },
     {
       "id": 67,
@@ -742,7 +754,7 @@
     },
     {
       "id": 69,
-      "date": "2026-06-27",
+      "date": "2026-06-28",
       "group": "K",
       "home": "刚果(金)",
       "away": "葡萄牙",
@@ -753,7 +765,7 @@
     },
     {
       "id": 70,
-      "date": "2026-06-27",
+      "date": "2026-06-28",
       "group": "K",
       "home": "哥伦比亚",
       "away": "乌兹别克",
@@ -764,25 +776,25 @@
     },
     {
       "id": 71,
-      "date": "2026-06-27",
+      "date": "2026-06-28",
       "group": "L",
-      "home": "克罗地亚",
+      "home": "巴拿马",
       "away": "英格兰",
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": "10:00"
+      "bjt": "05:00"
     },
     {
       "id": 72,
-      "date": "2026-06-27",
+      "date": "2026-06-28",
       "group": "L",
-      "home": "巴拿马",
+      "home": "克罗地亚",
       "away": "加纳",
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": "10:00"
+      "bjt": "05:00"
     }
   ]
 }
