@@ -1,16 +1,70 @@
 {
   "predictions": {
-    "西班牙|佛得角": {"win": 88, "draw": 8, "loss": 4, "top_score": "3-0", "confidence": "高"},
-    "法国|塞内加尔": {"win": 75, "draw": 16, "loss": 9, "top_score": "2-0", "confidence": "中高"},
-    "伊拉克|挪威": {"win": 18, "draw": 22, "loss": 60, "top_score": "0-2", "confidence": "中"},
-    "阿根廷|阿尔及利亚": {"win": 82, "draw": 12, "loss": 6, "top_score": "3-0", "confidence": "高"},
-    "奥地利|约旦": {"win": 65, "draw": 22, "loss": 13, "top_score": "2-0", "confidence": "中"},
-    "葡萄牙|刚果(金)": {"win": 84, "draw": 11, "loss": 5, "top_score": "3-0", "confidence": "高"},
-    "英格兰|克罗地亚": {"win": 58, "draw": 25, "loss": 17, "top_score": "2-1", "confidence": "中"},
-    "加纳|巴拿马": {"win": 52, "draw": 28, "loss": 20, "top_score": "1-0", "confidence": "低"},
-    "乌兹别克|哥伦比亚": {"win": 22, "draw": 28, "loss": 50, "top_score": "0-2", "confidence": "中"}
+    "西班牙|佛得角": {
+      "win": 88,
+      "draw": 8,
+      "loss": 4,
+      "top_score": "3-0",
+      "confidence": "高"
+    },
+    "法国|塞内加尔": {
+      "win": 75,
+      "draw": 16,
+      "loss": 9,
+      "top_score": "2-0",
+      "confidence": "中高"
+    },
+    "伊拉克|挪威": {
+      "win": 18,
+      "draw": 22,
+      "loss": 60,
+      "top_score": "0-2",
+      "confidence": "中"
+    },
+    "阿根廷|阿尔及利亚": {
+      "win": 82,
+      "draw": 12,
+      "loss": 6,
+      "top_score": "3-0",
+      "confidence": "高"
+    },
+    "奥地利|约旦": {
+      "win": 65,
+      "draw": 22,
+      "loss": 13,
+      "top_score": "2-0",
+      "confidence": "中"
+    },
+    "葡萄牙|刚果(金)": {
+      "win": 84,
+      "draw": 11,
+      "loss": 5,
+      "top_score": "3-0",
+      "confidence": "高"
+    },
+    "英格兰|克罗地亚": {
+      "win": 58,
+      "draw": 25,
+      "loss": 17,
+      "top_score": "2-1",
+      "confidence": "中"
+    },
+    "加纳|巴拿马": {
+      "win": 52,
+      "draw": 28,
+      "loss": 20,
+      "top_score": "1-0",
+      "confidence": "低"
+    },
+    "乌兹别克|哥伦比亚": {
+      "win": 22,
+      "draw": 28,
+      "loss": 50,
+      "top_score": "0-2",
+      "confidence": "中"
+    }
   },
-  "updated_at": "2026-06-16T06:47:59Z",
+  "updated_at": "2026-06-16T07:34:29Z",
   "summary": {
     "total": 16,
     "correct": 12,
