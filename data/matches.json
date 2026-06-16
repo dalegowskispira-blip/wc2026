@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-16T18:55:28Z",
+  "updated_at": "2026-06-16T21:39:35Z",
   "matches": [
     {
       "id": 1,
@@ -186,9 +186,9 @@
       "group": "I",
       "home": "法国",
       "away": "塞内加尔",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 3,
+      "away_score": 1,
+      "status": "finished",
       "bjt": "03:00"
     },
     {

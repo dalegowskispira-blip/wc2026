@@ -64,12 +64,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-16T18:55:28Z",
+  "updated_at": "2026-06-16T21:39:35Z",
   "summary": {
-    "total": 16,
-    "correct": 12,
+    "total": 17,
+    "correct": 13,
     "wrong": 4,
-    "accuracy": 75.0
+    "accuracy": 76.5
   },
   "records": [
     {
@@ -299,6 +299,18 @@
         "reason": "新西兰阿劳霍补时扳平，制造本届又一大冷门。伊朗塔雷米两度领先却两度被追平，新西兰顽强程度被严重低估，第四场预测失误。",
         "generated_at": "2026-06-16T12:00:00Z"
       }
+    },
+    {
+      "match_id": 17,
+      "home": "法国",
+      "away": "塞内加尔",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-0",
+      "actual_score": "3-1",
+      "result": "correct",
+      "confidence": "中高",
+      "review": null
     }
   ]
 }
