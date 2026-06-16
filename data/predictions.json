@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-06-16T02:54:59Z",
+  "updated_at": "2026-06-16T03:44:42Z",
   "summary": {
-    "total": 15,
+    "total": 16,
     "correct": 12,
-    "wrong": 3,
-    "accuracy": 80.0
+    "wrong": 4,
+    "accuracy": 75.0
   },
   "records": [
     {
@@ -217,6 +217,22 @@
         "key_player": "努涅斯",
         "reason": "努涅斯进球后沙特阿劳霍扳平，最终1-1。赛前已判断平局概率高（35%），沙特低位防守+偷袭战术有效制约乌拉圭，走势与预测逻辑完全吻合。",
         "generated_at": "2026-06-16T08:30:00Z"
+      }
+    },
+    {
+      "match_id": 16,
+      "home": "伊朗",
+      "away": "新西兰",
+      "predicted": "主胜",
+      "actual": "平局",
+      "predicted_score": "2-0",
+      "actual_score": "2-2",
+      "result": "wrong",
+      "confidence": "中高",
+      "review": {
+        "key_player": "阿劳霍",
+        "reason": "新西兰阿劳霍补时扳平，制造本届又一大冷门。伊朗塔雷米两度领先却两度被追平，新西兰顽强程度被严重低估，第四场预测失误。",
+        "generated_at": "2026-06-16T12:00:00Z"
       }
     }
   ]
