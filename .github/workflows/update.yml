@@ -26,7 +26,9 @@ jobs:
         env:
           FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/update_data.py
+        run: |
+          python scripts/debug_dates.py
+          python scripts/update_data.py
 
       - name: 提交更新
         run: |
