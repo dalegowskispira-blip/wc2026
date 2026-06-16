@@ -46,6 +46,10 @@ TEAM_NAME_MAP = {
     "Portugal": "葡萄牙", "DR Congo": "刚果(金)", "England": "英格兰",
     "Croatia": "克罗地亚", "Ghana": "加纳", "Panama": "巴拿马",
     "Uzbekistan": "乌兹别克", "Colombia": "哥伦比亚",
+    "South Korea": "韩国", "Ivory Coast": "科特迪瓦",
+    "Bosnia-Herzegovina": "波黑", "Bosnia and Herz": "波黑",
+    "Congo DR": "刚果(金)", "Cape Verde Islands": "佛得角",
+    "Czechia": "捷克", "Czech Republic": "捷克",
 }
  
 # 预测数据（与 index.html 保持一致，用于赛后核对）
@@ -144,29 +148,9 @@ def update_matches(api_matches):
             if local_m["home"] == home and local_m["away"] == away:
                 local_date = local_m.get("date", "")
  
-                # 日志：打印每场比赛的时间对比
-                print(f"  📅 {home} vs {away}")
-                print(f"     API UTC原始时间: {utc_date_str}")
-                print(f"     转换后北京时间日期: {bjt_date}")
-                print(f"     本地存储日期: {local_date}")
- 
                 changed = False
- 
-                # 保护逻辑：如果BJT日期与本地日期相差超过1天，不覆盖日期
-                if bjt_date and local_date:
-                    try:
-                        d_bjt = datetime.strptime(bjt_date, "%Y-%m-%d")
-                        d_local = datetime.strptime(local_date, "%Y-%m-%d")
-                        diff = abs((d_bjt - d_local).days)
-                        if diff > 1:
-                            print(f"  ⚠️  日期偏差 {diff} 天（BJT:{bjt_date} vs 本地:{local_date}），跳过日期覆盖，只更新比分和状态")
-                        elif bjt_date != local_date:
-                            local_m["date"] = bjt_date
-                            changed = True
-                            print(f"  ✏️  日期更新: {local_date} → {bjt_date}")
-                    except ValueError:
-                        print(f"  ⚠️  日期解析失败，跳过日期更新")
-                elif bjt_date and not local_date:
+                # 用北京时间日期更新date字段
+                if bjt_date and local_m.get("date") != bjt_date:
                     local_m["date"] = bjt_date
                     changed = True
  
