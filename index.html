@@ -1752,6 +1752,30 @@ function renderFocus() {
   document.getElementById('focus-content').innerHTML = renderCards(nextMatches, header);
 }
 
+  // 今天还有 upcoming 比赛 → 正常展示
+  if (todayUpcoming.length) {
+    const header = `<div style="font-size:11px;color:var(--t2);margin-bottom:14px">今日 ${today} 共 ${todayUpcoming.length} 场待开赛 · 按关注优先级排列</div>`;
+    document.getElementById('focus-content').innerHTML = renderCards(todayUpcoming, header);
+    return;
+  }
+
+  // 今天 upcoming 为空 → 找最近的下一个有比赛的日期
+  const futureMatches = matchesData.filter(m => m.date > today && m.status === 'upcoming');
+
+  if (!futureMatches.length) {
+    document.getElementById('focus-content').innerHTML = `
+      <div class="no-data"><div class="no-data-icon">🏆</div><div>全部比赛已结束</div></div>`;
+    return;
+  }
+
+  // 取最近的下一个日期
+  const nextDate = futureMatches.reduce((min, m) => m.date < min ? m.date : min, futureMatches[0].date);
+  const nextMatches = futureMatches.filter(m => m.date === nextDate);
+
+  const header = `<div style="font-size:11px;color:var(--amber);margin-bottom:14px">今日比赛已全部结束 · 预告 ${nextDate} 共 ${nextMatches.length} 场 · 按关注优先级排列</div>`;
+  document.getElementById('focus-content').innerHTML = renderCards(nextMatches, header);
+}
+
 // ────────────────────────────────────────
 // FALLBACK DATA (当JSON文件无法fetch时)
 // ────────────────────────────────────────
