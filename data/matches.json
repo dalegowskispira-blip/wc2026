@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-17T18:42:03Z",
+  "updated_at": "2026-06-17T21:08:27Z",
   "matches": [
     {
       "id": 1,
@@ -230,9 +230,9 @@
       "group": "K",
       "home": "葡萄牙",
       "away": "刚果(金)",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 1,
+      "away_score": 1,
+      "status": "finished",
       "bjt": "01:00"
     },
     {
@@ -241,9 +241,9 @@
       "group": "L",
       "home": "英格兰",
       "away": "克罗地亚",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 2,
+      "away_score": 2,
+      "status": "live",
       "bjt": "04:00"
     },
     {

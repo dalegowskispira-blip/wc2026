@@ -64,12 +64,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-17T18:42:03Z",
+  "updated_at": "2026-06-17T21:08:27Z",
   "summary": {
-    "total": 20,
+    "total": 21,
     "correct": 16,
-    "wrong": 4,
-    "accuracy": 80.0
+    "wrong": 5,
+    "accuracy": 76.2
   },
   "records": [
     {
@@ -346,6 +346,18 @@
       "actual_score": "3-1",
       "result": "correct",
       "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 21,
+      "home": "葡萄牙",
+      "away": "刚果(金)",
+      "predicted": "主胜",
+      "actual": "平局",
+      "predicted_score": "3-0",
+      "actual_score": "1-1",
+      "result": "wrong",
+      "confidence": "高",
       "review": null
     }
   ]
