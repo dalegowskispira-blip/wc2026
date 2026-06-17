@@ -64,12 +64,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-17T02:06:55Z",
+  "updated_at": "2026-06-17T06:02:44Z",
   "summary": {
-    "total": 18,
-    "correct": 14,
+    "total": 19,
+    "correct": 15,
     "wrong": 4,
-    "accuracy": 77.8
+    "accuracy": 78.9
   },
   "records": [
     {
@@ -322,6 +322,18 @@
       "actual_score": "1-4",
       "result": "correct",
       "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 19,
+      "home": "阿根廷",
+      "away": "阿尔及利亚",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "3-0",
+      "actual_score": "3-0",
+      "result": "correct",
+      "confidence": "高",
       "review": null
     }
   ]
