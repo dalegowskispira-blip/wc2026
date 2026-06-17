@@ -64,12 +64,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-17T21:08:27Z",
+  "updated_at": "2026-06-17T22:58:19Z",
   "summary": {
-    "total": 21,
-    "correct": 16,
+    "total": 22,
+    "correct": 17,
     "wrong": 5,
-    "accuracy": 76.2
+    "accuracy": 77.3
   },
   "records": [
     {
@@ -358,6 +358,18 @@
       "actual_score": "1-1",
       "result": "wrong",
       "confidence": "高",
+      "review": null
+    },
+    {
+      "match_id": 22,
+      "home": "英格兰",
+      "away": "克罗地亚",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-1",
+      "actual_score": "4-2",
+      "result": "correct",
+      "confidence": "中",
       "review": null
     }
   ]

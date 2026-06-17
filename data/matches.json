@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-17T21:08:27Z",
+  "updated_at": "2026-06-17T22:58:19Z",
   "matches": [
     {
       "id": 1,
@@ -241,9 +241,9 @@
       "group": "L",
       "home": "英格兰",
       "away": "克罗地亚",
-      "home_score": 2,
+      "home_score": 4,
       "away_score": 2,
-      "status": "live",
+      "status": "finished",
       "bjt": "04:00"
     },
     {
