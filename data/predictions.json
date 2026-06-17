@@ -64,12 +64,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-17T06:02:44Z",
+  "updated_at": "2026-06-17T06:43:08Z",
   "summary": {
-    "total": 19,
-    "correct": 15,
+    "total": 20,
+    "correct": 16,
     "wrong": 4,
-    "accuracy": 78.9
+    "accuracy": 80.0
   },
   "records": [
     {
@@ -334,6 +334,18 @@
       "actual_score": "3-0",
       "result": "correct",
       "confidence": "高",
+      "review": null
+    },
+    {
+      "match_id": 20,
+      "home": "奥地利",
+      "away": "约旦",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-0",
+      "actual_score": "3-1",
+      "result": "correct",
+      "confidence": "中",
       "review": null
     }
   ]
