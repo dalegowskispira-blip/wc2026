@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-18T04:56:52Z",
+  "updated_at": "2026-06-18T05:18:07Z",
   "matches": [
     {
       "id": 1,
@@ -254,7 +254,7 @@
       "away": "巴拿马",
       "home_score": 1,
       "away_score": 0,
-      "status": "finished",
+      "status": "live",
       "bjt": "07:00"
     },
     {
