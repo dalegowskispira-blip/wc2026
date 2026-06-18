@@ -4,63 +4,117 @@
       "win": 88,
       "draw": 8,
       "loss": 4,
-      "top_score": "3-0",
+      "lean": "主胜",
+      "scores": {
+        "main": ["3-0", "2-0"],
+        "secondary": ["4-0", "2-1"],
+        "upset": ["0-1"]
+      },
+      "analysis": "",
       "confidence": "高"
     },
     "法国|塞内加尔": {
       "win": 75,
       "draw": 16,
       "loss": 9,
-      "top_score": "2-0",
+      "lean": "主胜",
+      "scores": {
+        "main": ["2-0", "2-1"],
+        "secondary": ["3-1", "1-0"],
+        "upset": ["1-2"]
+      },
+      "analysis": "",
       "confidence": "中高"
     },
     "伊拉克|挪威": {
       "win": 18,
       "draw": 22,
       "loss": 60,
-      "top_score": "0-2",
+      "lean": "客胜",
+      "scores": {
+        "main": ["0-2", "0-1"],
+        "secondary": ["1-2", "0-3"],
+        "upset": ["1-0"]
+      },
+      "analysis": "",
       "confidence": "中"
     },
     "阿根廷|阿尔及利亚": {
       "win": 82,
       "draw": 12,
       "loss": 6,
-      "top_score": "3-0",
+      "lean": "主胜",
+      "scores": {
+        "main": ["3-0", "2-0"],
+        "secondary": ["3-1", "2-1"],
+        "upset": ["0-1"]
+      },
+      "analysis": "",
       "confidence": "高"
     },
     "奥地利|约旦": {
       "win": 65,
       "draw": 22,
       "loss": 13,
-      "top_score": "2-0",
+      "lean": "主胜",
+      "scores": {
+        "main": ["2-0", "2-1"],
+        "secondary": ["1-0", "3-0"],
+        "upset": ["1-2"]
+      },
+      "analysis": "",
       "confidence": "中"
     },
     "葡萄牙|刚果(金)": {
       "win": 84,
       "draw": 11,
       "loss": 5,
-      "top_score": "3-0",
+      "lean": "主胜",
+      "scores": {
+        "main": ["3-0", "2-0"],
+        "secondary": ["4-0", "3-1"],
+        "upset": ["1-1"]
+      },
+      "analysis": "",
       "confidence": "高"
     },
     "英格兰|克罗地亚": {
       "win": 58,
       "draw": 25,
       "loss": 17,
-      "top_score": "2-1",
+      "lean": "主胜",
+      "scores": {
+        "main": ["2-1", "1-0"],
+        "secondary": ["2-0", "3-1"],
+        "upset": ["0-1"]
+      },
+      "analysis": "",
       "confidence": "中"
     },
     "加纳|巴拿马": {
       "win": 52,
       "draw": 28,
       "loss": 20,
-      "top_score": "1-0",
+      "lean": "主胜",
+      "scores": {
+        "main": ["1-0", "2-1"],
+        "secondary": ["2-0", "3-1"],
+        "upset": ["0-1"]
+      },
+      "analysis": "",
       "confidence": "低"
     },
     "乌兹别克|哥伦比亚": {
       "win": 22,
       "draw": 28,
       "loss": 50,
-      "top_score": "0-2",
+      "lean": "客胜",
+      "scores": {
+        "main": ["0-2", "0-1"],
+        "secondary": ["1-2", "0-3"],
+        "upset": ["1-0"]
+      },
+      "analysis": "",
       "confidence": "中"
     }
   },

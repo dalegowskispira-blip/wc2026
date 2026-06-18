@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WC2026 今日海报</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#06060f;display:flex;flex-direction:column;align-items:center;gap:28px;padding:28px 0 48px;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif}
+
+/* ─── 两张海报共用容器 ─── */
+.poster{width:390px;background:linear-gradient(160deg,#0d0d1a 0%,#0a0a14 60%,#0d1020 100%);border-radius:20px;overflow:hidden;box-shadow:0 8px 48px rgba(0,0,0,.85)}
+
+/* ─── header ─── */
+.ph{background:linear-gradient(135deg,#1a1430 0%,#0e1628 100%);padding:22px 20px 16px;border-bottom:1px solid rgba(245,194,0,.15)}
+.ph-title{font-size:21px;font-weight:800;color:#f5c200;letter-spacing:1px;line-height:1}
+.ph-sub{margin-top:6px;font-size:11.5px;color:rgba(255,255,255,.4);letter-spacing:.4px}
+.ph-stat{margin-top:10px;display:inline-flex;align-items:center;gap:5px;background:rgba(245,194,0,.08);border:1px solid rgba(245,194,0,.2);border-radius:20px;padding:4px 12px}
+.ph-stat-label{font-size:11px;color:rgba(255,255,255,.45)}
+.ph-stat-val{font-size:12px;font-weight:700;color:#f5c200;margin-left:3px}
+
+/* ─── date strip ─── */
+.date-strip{padding:7px 20px;background:rgba(245,194,0,.04);border-bottom:1px solid rgba(255,255,255,.06);font-size:11px;color:rgba(255,255,255,.38);letter-spacing:.3px}
+
+/* ─── 预测页卡片 ─── */
+.cards{padding:11px 13px 4px}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 13px 11px;margin-bottom:9px}
+.card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.card-teams{font-size:13px;font-weight:700;color:#f0f0f0;letter-spacing:.2px}
+.card-meta{display:flex;gap:5px;align-items:center;flex-shrink:0;margin-left:6px}
+.card-time{font-size:10px;color:rgba(255,255,255,.32)}
+.gpill{font-size:9.5px;padding:2px 6px;border-radius:99px;background:rgba(245,194,0,.12);color:#f5c200;font-weight:600}
+.card-lean{font-size:10px;color:rgba(255,255,255,.32);margin-bottom:6px}
+.card-lean span{color:rgba(245,194,0,.75);font-weight:600}
+
+/* ─── 三档比分 chips ─── */
+.chips{display:flex;gap:6px}
+.chip{flex:1;border-radius:8px;padding:8px 4px 7px;text-align:center;min-width:0}
+.chip-label{font-size:9px;font-weight:600;letter-spacing:.4px;margin-bottom:4px}
+.chip-scores{display:flex;flex-direction:column;gap:2px}
+.chip-s1{font-size:17px;font-weight:800;letter-spacing:1px;line-height:1.1}
+.chip-s2{font-size:12px;font-weight:600;letter-spacing:.5px;opacity:.7;line-height:1.1}
+
+/* 主推 = 绿 */
+.chip-main{background:rgba(34,197,94,.11);border:1px solid rgba(34,197,94,.28)}
+.chip-main .chip-label{color:#86efac}
+.chip-main .chip-s1,.chip-main .chip-s2{color:#22c55e}
+/* 次选 = 琥珀 */
+.chip-secondary{background:rgba(245,194,0,.09);border:1px solid rgba(245,194,0,.25)}
+.chip-secondary .chip-label{color:#fde68a}
+.chip-secondary .chip-s1,.chip-secondary .chip-s2{color:#f5c200}
+/* 爆冷 = 红 */
+.chip-upset{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.26)}
+.chip-upset .chip-label{color:#fca5a5}
+.chip-upset .chip-s1,.chip-upset .chip-s2{color:#ef4444}
+/* 无数据 */
+.chip-none{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
+.chip-none .chip-label,.chip-none .chip-s1{color:rgba(255,255,255,.22)}
+
+/* ─── 分析页卡片 ─── */
+.analysis-cards{padding:11px 13px 4px}
+.ac{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 13px 12px;margin-bottom:9px}
+.ac-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.ac-teams{font-size:13px;font-weight:700;color:#f0f0f0;letter-spacing:.2px}
+.ac-meta{display:flex;gap:5px;align-items:center;flex-shrink:0;margin-left:6px}
+.ac-text{font-size:12px;line-height:1.65;color:rgba(255,255,255,.72)}
+.ac-pending{font-size:12px;color:rgba(255,255,255,.28);font-style:italic}
+
+/* ─── 无比赛 ─── */
+.no-today{padding:32px 20px;text-align:center;color:rgba(255,255,255,.28);font-size:13px}
+
+/* ─── footer ─── */
+.pf{padding:11px 20px 15px;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+.pf-disclaimer{font-size:11px;color:rgba(255,255,255,.22);letter-spacing:.5px}
+.pf-brand{margin-top:4px;font-size:10px;color:rgba(245,194,0,.28);letter-spacing:.5px}
+
+/* ─── 页码标签（仅屏幕显示，截图时不显示） ─── */
+.page-badge{width:390px;text-align:center;font-size:11px;color:rgba(255,255,255,.2);margin-bottom:-10px}
+</style>
+</head>
+<body>
+
+<div class="page-badge">▲ 海报一：截图这张发预测</div>
+<div class="poster" id="poster1">
+  <div class="ph">
+    <div class="ph-title">⚽ WC2026 今日比分参考</div>
+    <div class="ph-sub">三档比分 · 模型倾向 · 娱乐向</div>
+    <div class="ph-stat" id="stat-bar"><span class="ph-stat-label">加载中…</span></div>
+  </div>
+  <div class="date-strip" id="date-strip1">北京时间</div>
+  <div class="cards" id="cards-area"><div class="no-today">加载中…</div></div>
+  <div class="pf">
+    <div class="pf-disclaimer">娱乐仅供参考 · 理性观赛</div>
+    <div class="pf-brand">WC2026 看板</div>
+  </div>
+</div>
+
+<div class="page-badge">▲ 海报二：截图这张发判断依据</div>
+<div class="poster" id="poster2">
+  <div class="ph">
+    <div class="ph-title">🔍 WC2026 判断依据</div>
+    <div class="ph-sub">模型分析 · 赛前参考</div>
+  </div>
+  <div class="date-strip" id="date-strip2">北京时间</div>
+  <div class="analysis-cards" id="analysis-area"><div class="no-today">加载中…</div></div>
+  <div class="pf">
+    <div class="pf-disclaimer">娱乐仅供参考 · 理性观赛</div>
+    <div class="pf-brand">WC2026 看板</div>
+  </div>
+</div>
+
+<script>
+// ── 北京时间 ──
+function getBJTDateStr(offsetDays) {
+  const d = new Date(Date.now() + 8 * 3600000 + (offsetDays || 0) * 86400000);
+  return [d.getUTCFullYear(), String(d.getUTCMonth()+1).padStart(2,'0'), String(d.getUTCDate()).padStart(2,'0')].join('-');
+}
+const todayStr    = () => getBJTDateStr(0);
+const yesterdayStr = () => getBJTDateStr(-1);
+
+// ── FLAGS ──
+const FLAGS = {
+  '西班牙':'🇪🇸','法国':'🇫🇷','阿根廷':'🇦🇷','英格兰':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','葡萄牙':'🇵🇹',
+  '德国':'🇩🇪','巴西':'🇧🇷','荷兰':'🇳🇱','比利时':'🇧🇪','挪威':'🇳🇴',
+  '摩洛哥':'🇲🇦','日本':'🇯🇵','美国':'🇺🇸','墨西哥':'🇲🇽','韩国':'🇰🇷',
+  '加拿大':'🇨🇦','澳大利亚':'🇦🇺','克罗地亚':'🇭🇷','哥伦比亚':'🇨🇴','乌拉圭':'🇺🇾',
+  '瑞士':'🇨🇭','厄瓜多尔':'🇪🇨','塞内加尔':'🇸🇳','科特迪瓦':'🇨🇮','苏格兰':'🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+  '瑞典':'🇸🇪','波黑':'🇧🇦','土耳其':'🇹🇷','巴拉圭':'🇵🇾','卡塔尔':'🇶🇦',
+  '伊朗':'🇮🇷','埃及':'🇪🇬','沙特':'🇸🇦','佛得角':'🇨🇻','新西兰':'🇳🇿',
+  '伊拉克':'🇮🇶','阿尔及利亚':'🇩🇿','奥地利':'🇦🇹','约旦':'🇯🇴','刚果(金)':'🇨🇩',
+  '乌兹别克':'🇺🇿','加纳':'🇬🇭','巴拿马':'🇵🇦','南非':'🇿🇦','海地':'🇭🇹',
+  '库拉索':'🇨🇼','突尼斯':'🇹🇳','捷克':'🇨🇿',
+};
+
+// ── 内嵌 PREDS（旧格式兜底，与 index.html 同步）──
+const PREDS = {
+  '西班牙|佛得角':    {win:88,draw:8,loss:4,scores:[{s:'3-0',p:28},{s:'2-0',p:24},{s:'4-0',p:14},{s:'2-1',p:12},{s:'3-1',p:10}]},
+  '比利时|埃及':      {win:72,draw:18,loss:10,scores:[{s:'2-0',p:26},{s:'2-1',p:22},{s:'1-0',p:16},{s:'1-1',p:14},{s:'3-1',p:10}]},
+  '沙特|乌拉圭':      {win:15,draw:35,loss:50,scores:[{s:'0-1',p:22},{s:'1-1',p:20},{s:'0-2',p:16},{s:'1-2',p:14},{s:'0-0',p:14}]},
+  '伊朗|新西兰':      {win:71,draw:20,loss:9,scores:[{s:'2-0',p:28},{s:'1-0',p:24},{s:'2-1',p:16},{s:'3-0',p:12},{s:'1-1',p:10}]},
+  '法国|塞内加尔':    {win:75,draw:16,loss:9,scores:[{s:'2-0',p:24},{s:'2-1',p:22},{s:'3-1',p:14},{s:'1-0',p:14},{s:'1-1',p:12}]},
+  '伊拉克|挪威':      {win:18,draw:22,loss:60,scores:[{s:'0-2',p:24},{s:'0-1',p:20},{s:'1-2',p:18},{s:'0-3',p:14},{s:'1-1',p:12}]},
+  '阿根廷|阿尔及利亚':{win:82,draw:12,loss:6,scores:[{s:'3-0',p:24},{s:'2-0',p:22},{s:'3-1',p:16},{s:'2-1',p:14},{s:'4-0',p:10}]},
+  '奥地利|约旦':      {win:65,draw:22,loss:13,scores:[{s:'2-0',p:22},{s:'2-1',p:18},{s:'1-0',p:18},{s:'3-0',p:12},{s:'1-1',p:14}]},
+  '葡萄牙|刚果(金)':  {win:84,draw:11,loss:5,scores:[{s:'3-0',p:28},{s:'2-0',p:22},{s:'4-0',p:14},{s:'3-1',p:14},{s:'2-1',p:10}]},
+  '英格兰|克罗地亚':  {win:58,draw:25,loss:17,scores:[{s:'2-1',p:22},{s:'1-0',p:20},{s:'2-0',p:16},{s:'1-1',p:16},{s:'3-1',p:10}]},
+  '加纳|巴拿马':      {win:52,draw:28,loss:20,scores:[{s:'1-0',p:22},{s:'1-1',p:20},{s:'2-1',p:16},{s:'2-0',p:14},{s:'0-0',p:14}]},
+  '乌兹别克|哥伦比亚':{win:22,draw:28,loss:50,scores:[{s:'0-2',p:24},{s:'0-1',p:20},{s:'1-2',p:16},{s:'1-1',p:16},{s:'0-3',p:12}]},
+  '捷克|南非':        {win:58,draw:24,loss:18,scores:[{s:'2-0',p:24},{s:'1-0',p:20},{s:'2-1',p:16},{s:'1-1',p:16},{s:'3-1',p:10}]},
+  '瑞士|波黑':        {win:60,draw:25,loss:15,scores:[{s:'2-0',p:22},{s:'1-0',p:20},{s:'2-1',p:18},{s:'1-1',p:16},{s:'3-1',p:10}]},
+  '加拿大|卡塔尔':    {win:68,draw:20,loss:12,scores:[{s:'2-0',p:24},{s:'2-1',p:20},{s:'3-0',p:16},{s:'1-0',p:16},{s:'1-1',p:12}]},
+  '墨西哥|韩国':      {win:50,draw:26,loss:24,scores:[{s:'1-0',p:20},{s:'2-1',p:18},{s:'1-1',p:18},{s:'2-0',p:14},{s:'0-1',p:12}]},
+  '美国|澳大利亚':    {win:55,draw:24,loss:21,scores:[{s:'2-1',p:22},{s:'1-0',p:18},{s:'1-1',p:18},{s:'2-0',p:14},{s:'0-1',p:12}]},
+  '巴拉圭|土耳其':    {win:38,draw:30,loss:32,scores:[{s:'1-1',p:22},{s:'0-1',p:18},{s:'1-2',p:16},{s:'0-0',p:14},{s:'1-0',p:12}]},
+  '巴西|苏格兰':      {win:82,draw:12,loss:6,scores:[{s:'3-0',p:26},{s:'2-0',p:22},{s:'3-1',p:16},{s:'2-1',p:12},{s:'4-0',p:10}]},
+  '摩洛哥|海地':      {win:78,draw:15,loss:7,scores:[{s:'3-0',p:26},{s:'2-0',p:22},{s:'3-1',p:14},{s:'2-1',p:14},{s:'1-0',p:12}]},
+  '德国|科特迪瓦':    {win:75,draw:16,loss:9,scores:[{s:'3-1',p:22},{s:'2-0',p:20},{s:'3-0',p:16},{s:'2-1',p:16},{s:'4-1',p:10}]},
+  '厄瓜多尔|库拉索':  {win:72,draw:18,loss:10,scores:[{s:'2-0',p:26},{s:'3-0',p:20},{s:'2-1',p:18},{s:'1-0',p:16},{s:'3-1',p:10}]},
+  '荷兰|瑞典':        {win:60,draw:24,loss:16,scores:[{s:'2-1',p:22},{s:'2-0',p:18},{s:'1-0',p:16},{s:'1-1',p:16},{s:'3-1',p:12}]},
+  '突尼斯|日本':      {win:30,draw:28,loss:42,scores:[{s:'0-2',p:22},{s:'1-2',p:18},{s:'0-1',p:18},{s:'1-1',p:16},{s:'0-3',p:10}]},
+  '比利时|伊朗':      {win:68,draw:20,loss:12,scores:[{s:'2-0',p:24},{s:'2-1',p:20},{s:'3-1',p:16},{s:'1-0',p:16},{s:'1-1',p:12}]},
+  '新西兰|埃及':      {win:40,draw:30,loss:30,scores:[{s:'1-1',p:20},{s:'1-0',p:18},{s:'0-1',p:18},{s:'0-0',p:16},{s:'2-1',p:12}]},
+  '西班牙|沙特':      {win:85,draw:10,loss:5,scores:[{s:'3-0',p:28},{s:'2-0',p:22},{s:'4-0',p:14},{s:'2-1',p:12},{s:'3-1',p:10}]},
+  '乌拉圭|佛得角':    {win:72,draw:18,loss:10,scores:[{s:'2-0',p:26},{s:'2-1',p:20},{s:'3-0',p:16},{s:'1-0',p:16},{s:'1-1',p:10}]},
+  '法国|伊拉克':      {win:85,draw:10,loss:5,scores:[{s:'3-0',p:26},{s:'2-0',p:22},{s:'3-1',p:16},{s:'4-0',p:14},{s:'2-1',p:12}]},
+  '挪威|塞内加尔':    {win:55,draw:25,loss:20,scores:[{s:'2-1',p:22},{s:'2-0',p:18},{s:'1-0',p:16},{s:'1-1',p:16},{s:'3-1',p:10}]},
+  '阿根廷|奥地利':    {win:72,draw:18,loss:10,scores:[{s:'2-0',p:24},{s:'3-0',p:20},{s:'2-1',p:18},{s:'1-0',p:16},{s:'1-1',p:10}]},
+  '约旦|阿尔及利亚':  {win:42,draw:30,loss:28,scores:[{s:'1-0',p:20},{s:'1-1',p:20},{s:'0-1',p:18},{s:'0-0',p:14},{s:'2-1',p:12}]},
+  '葡萄牙|乌兹别克':  {win:88,draw:9,loss:3,scores:[{s:'3-0',p:28},{s:'4-0',p:22},{s:'3-1',p:14},{s:'2-0',p:14},{s:'5-0',p:10}]},
+  '哥伦比亚|刚果(金)':{win:68,draw:22,loss:10,scores:[{s:'2-0',p:24},{s:'2-1',p:20},{s:'3-0',p:18},{s:'1-0',p:16},{s:'1-1',p:10}]},
+  '英格兰|加纳':      {win:78,draw:15,loss:7,scores:[{s:'3-0',p:26},{s:'2-0',p:22},{s:'3-1',p:14},{s:'2-1',p:14},{s:'1-0',p:12}]},
+  '巴拿马|克罗地亚':  {win:25,draw:28,loss:47,scores:[{s:'0-2',p:22},{s:'0-1',p:20},{s:'1-2',p:18},{s:'1-1',p:16},{s:'0-3',p:10}]},
+  '捷克|墨西哥':      {win:45,draw:28,loss:27,scores:[{s:'1-1',p:20},{s:'2-1',p:18},{s:'1-0',p:18},{s:'0-1',p:14},{s:'2-0',p:14}]},
+  '南非|韩国':        {win:35,draw:30,loss:35,scores:[{s:'1-1',p:22},{s:'0-1',p:18},{s:'1-2',p:16},{s:'0-0',p:14},{s:'1-0',p:14}]},
+  '波黑|加拿大':      {win:38,draw:28,loss:34,scores:[{s:'1-1',p:20},{s:'0-1',p:18},{s:'1-2',p:16},{s:'1-0',p:14},{s:'0-2',p:14}]},
+  '美国|巴拉圭':      {win:62,draw:22,loss:16,scores:[{s:'2-1',p:22},{s:'2-0',p:20},{s:'3-1',p:16},{s:'1-0',p:16},{s:'1-1',p:12}]},
+  '澳大利亚|土耳其':  {win:50,draw:26,loss:24,scores:[{s:'2-0',p:20},{s:'1-0',p:18},{s:'2-1',p:18},{s:'1-1',p:16},{s:'0-1',p:12}]},
+};
+
+// ── 翻转 lean（rev 时用）──
+function flipLean(lean) {
+  if (lean === '主胜') return '客胜';
+  if (lean === '客胜') return '主胜';
+  return lean;
+}
+
+// ── 翻转比分字符串 "H-A" → "A-H" ──
+function flipScore(s) {
+  const [h, a] = s.split('-');
+  return `${a}-${h}`;
+}
+
+// ── 推算三档比分，优先读 JSON 新结构 ──
+function deriveScores(home, away, jsonPreds) {
+  const k1 = `${home}|${away}`;
+  const k2 = `${away}|${home}`;
+
+  // 先查 JSON predictions（新结构）
+  let jsonEntry = null, rev = false;
+  if (jsonPreds) {
+    if (jsonPreds[k1]) { jsonEntry = jsonPreds[k1]; rev = false; }
+    else if (jsonPreds[k2]) { jsonEntry = jsonPreds[k2]; rev = true; }
+  }
+
+  if (jsonEntry) {
+    const sc = jsonEntry.scores;
+    // 新结构：scores.main 是数组
+    if (sc && Array.isArray(sc.main)) {
+      const flip = arr => (arr || []).map(flipScore);
+      return {
+        main:      rev ? flip(sc.main)      : (sc.main      || []),
+        secondary: rev ? flip(sc.secondary) : (sc.secondary || []),
+        upset:     rev ? flip(sc.upset)     : (sc.upset     || []),
+        dirLabel:  rev ? flipLean(jsonEntry.lean || '主胜') : (jsonEntry.lean || '主胜'),
+        analysis:  jsonEntry.analysis || '',
+      };
+    }
+    // 旧结构：只有 top_score
+    if (jsonEntry.top_score) {
+      const ts = rev ? flipScore(jsonEntry.top_score) : jsonEntry.top_score;
+      const lean = jsonEntry.lean || '主胜';
+      return {
+        main: [ts], secondary: [], upset: [],
+        dirLabel: rev ? flipLean(lean) : lean,
+        analysis: jsonEntry.analysis || '',
+      };
+    }
+  }
+
+  // 最终兜底：用内嵌 PREDS 推算
+  let pred = null;
+  if (PREDS[k1]) { pred = PREDS[k1]; rev = false; }
+  else if (PREDS[k2]) { pred = PREDS[k2]; rev = true; }
+  if (!pred) return null;
+
+  const homeWin = rev ? pred.loss : pred.win;
+  const awayWin = rev ? pred.win  : pred.loss;
+  const drawP   = pred.draw;
+  let mainDir;
+  if (homeWin >= drawP && homeWin >= awayWin) mainDir = 'home';
+  else if (drawP >= homeWin && drawP >= awayWin) mainDir = 'draw';
+  else mainDir = 'away';
+
+  const parsed = pred.scores.map(s => {
+    let [h, a] = s.s.split('-').map(Number);
+    if (rev) { [h, a] = [a, h]; }
+    const dir = h > a ? 'home' : h < a ? 'away' : 'draw';
+    return {score: `${h}-${a}`, dir, p: s.p};
+  }).sort((a, b) => b.p - a.p);
+
+  const mainArr  = parsed.filter(s => s.dir === mainDir).map(s => s.score);
+  let upsetDir;
+  if (mainDir === 'home') upsetDir = 'away';
+  else if (mainDir === 'away') upsetDir = 'home';
+  else upsetDir = homeWin >= awayWin ? 'away' : 'home';
+  const upsetArr = parsed.filter(s => s.dir === upsetDir).map(s => s.score);
+  const otherArr = parsed.filter(s => s.dir !== mainDir && s.dir !== upsetDir).map(s => s.score);
+
+  const dirLabel = mainDir === 'home' ? '主胜' : mainDir === 'away' ? '客胜' : '平局';
+  return {
+    main:      mainArr.slice(0, 2),
+    secondary: mainArr.slice(2, 4).concat(otherArr.slice(0, 1)).slice(0, 2),
+    upset:     upsetArr.slice(0, 1),
+    dirLabel,
+    analysis:  '',
+  };
+}
+
+// ── 渲染比分 chip ──
+function renderChip(cls, label, scores) {
+  if (!scores || !scores.length) {
+    return `<div class="chip chip-none"><div class="chip-label">${label}</div><div class="chip-scores"><div class="chip-s1">-</div></div></div>`;
+  }
+  const s1 = scores[0] || '';
+  const s2 = scores[1] || '';
+  return `<div class="chip ${cls}">
+    <div class="chip-label">${label}</div>
+    <div class="chip-scores">
+      <div class="chip-s1">${s1}</div>
+      ${s2 ? `<div class="chip-s2">${s2}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+// ── 渲染预测卡片（海报一）──
+function renderPredCard(m, jsonPreds) {
+  const sc = deriveScores(m.home, m.away, jsonPreds);
+  const hf = FLAGS[m.home] || '🏳️';
+  const af = FLAGS[m.away] || '🏳️';
+  const leanHtml = sc ? `<div class="card-lean">模型倾向 <span>${sc.dirLabel}</span></div>` : '';
+  return `<div class="card">
+    <div class="card-head">
+      <div class="card-teams">${hf} ${m.home} <span style="color:rgba(255,255,255,.28);font-weight:400">vs</span> ${m.away} ${af}</div>
+      <div class="card-meta">
+        <span class="card-time">${m.bjt || ''} BJT</span>
+        <span class="gpill">${m.group}组</span>
+      </div>
+    </div>
+    ${leanHtml}
+    <div class="chips">
+      ${renderChip('chip-main',      '主推', sc?.main)}
+      ${renderChip('chip-secondary', '次选', sc?.secondary)}
+      ${renderChip('chip-upset',     '爆冷', sc?.upset)}
+    </div>
+  </div>`;
+}
+
+// ── 渲染分析卡片（海报二）──
+function renderAnalysisCard(m, jsonPreds) {
+  const hf = FLAGS[m.home] || '🏳️';
+  const af = FLAGS[m.away] || '🏳️';
+  const sc = deriveScores(m.home, m.away, jsonPreds);
+  const analysis = sc?.analysis || '';
+  const bodyHtml = analysis
+    ? `<div class="ac-text">${analysis}</div>`
+    : `<div class="ac-pending">分析生成中…</div>`;
+  return `<div class="ac">
+    <div class="ac-head">
+      <div class="ac-teams">${hf} ${m.home} <span style="color:rgba(255,255,255,.28);font-weight:400">vs</span> ${m.away} ${af}</div>
+      <div class="ac-meta">
+        <span class="card-time">${m.bjt || ''} BJT</span>
+        <span class="gpill">${m.group}组</span>
+      </div>
+    </div>
+    ${bodyHtml}
+  </div>`;
+}
+
+// ── 昨日命中统计 ──
+function getYesterdayStat(matchesData, predictionsData) {
+  const yest = yesterdayStr();
+  const records = predictionsData?.records || [];
+  const matchMap = {};
+  (matchesData || []).forEach(m => { matchMap[m.id] = m; });
+  const yestRec = records.filter(r => {
+    const m = matchMap[r.match_id];
+    return m && m.date === yest && r.result !== 'pending';
+  });
+  if (yestRec.length) {
+    const correct = yestRec.filter(r => r.result === 'correct').length;
+    return {label: `昨日方向 ${correct} 中 ${yestRec.length}`, found: true};
+  }
+  const allDone = records.filter(r => r.result !== 'pending');
+  if (allDone.length) {
+    const correct = allDone.filter(r => r.result === 'correct').length;
+    return {label: `累计方向命中 ${correct}/${allDone.length}`, found: false};
+  }
+  return {label: '方向命中统计', found: false};
+}
+
+// ── 主渲染 ──
+function render(matchesData, predictionsData) {
+  const today = todayStr();
+  const todayMatches = (matchesData || [])
+    .filter(m => m.date === today)
+    .sort((a, b) => (a.bjt || '').localeCompare(b.bjt || ''));
+
+  const dt = new Date(today + 'T12:00:00+08:00');
+  const wd = ['日','一','二','三','四','五','六'][dt.getDay()];
+  const dateLabel = `${dt.getMonth()+1}月${dt.getDate()}日（周${wd}）· 北京时间`;
+  document.getElementById('date-strip1').textContent = dateLabel;
+  document.getElementById('date-strip2').textContent = dateLabel;
+
+  const stat = getYesterdayStat(matchesData, predictionsData);
+  document.getElementById('stat-bar').innerHTML =
+    `<span class="ph-stat-label">${stat.found ? '昨日战绩' : '历史战绩'}</span><span class="ph-stat-val">${stat.label}</span>`;
+
+  const jsonPreds = predictionsData?.predictions || null;
+
+  const area1 = document.getElementById('cards-area');
+  const area2 = document.getElementById('analysis-area');
+
+  if (!todayMatches.length) {
+    area1.innerHTML = area2.innerHTML = '<div class="no-today">今日暂无比赛安排</div>';
+    return;
+  }
+
+  area1.innerHTML = todayMatches.map(m => renderPredCard(m, jsonPreds)).join('');
+  area2.innerHTML = todayMatches.map(m => renderAnalysisCard(m, jsonPreds)).join('');
+}
+
+// ── 兜底数据 ──
+const FALLBACK_MATCHES = [
+  {id:21,date:'2026-06-18',group:'K',home:'葡萄牙',away:'刚果(金)',bjt:'01:00',status:'upcoming'},
+  {id:22,date:'2026-06-18',group:'L',home:'英格兰',away:'克罗地亚',bjt:'04:00',status:'upcoming'},
+  {id:23,date:'2026-06-18',group:'L',home:'加纳',away:'巴拿马',bjt:'07:00',status:'upcoming'},
+  {id:24,date:'2026-06-18',group:'K',home:'乌兹别克',away:'哥伦比亚',bjt:'10:00',status:'upcoming'},
+];
+const FALLBACK_PREDICTIONS = {
+  records:[
+    {match_id:13,result:'wrong'},{match_id:14,result:'wrong'},
+    {match_id:15,result:'correct'},{match_id:16,result:'wrong'},
+    {match_id:17,result:'correct'},{match_id:18,result:'correct'},
+    {match_id:19,result:'correct'},{match_id:20,result:'correct'},
+  ]
+};
+
+// ── 加载 ──
+(async function() {
+  let matchesData, predictionsData;
+  try {
+    const [mRes, pRes] = await Promise.all([
+      fetch('data/matches.json?t=' + Date.now()),
+      fetch('data/predictions.json?t=' + Date.now()),
+    ]);
+    matchesData = (await mRes.json()).matches || [];
+    predictionsData = await pRes.json();
+  } catch (e) {
+    console.warn('fetch failed, using fallback:', e.message);
+    matchesData = FALLBACK_MATCHES;
+    predictionsData = FALLBACK_PREDICTIONS;
+  }
+  render(matchesData, predictionsData);
+})();
+</script>
+</body>
+</html>
