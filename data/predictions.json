@@ -6,9 +6,17 @@
       "loss": 4,
       "lean": "主胜",
       "scores": {
-        "main": ["3-0", "2-0"],
-        "secondary": ["4-0", "2-1"],
-        "upset": ["0-1"]
+        "main": [
+          "3-0",
+          "2-0"
+        ],
+        "secondary": [
+          "4-0",
+          "2-1"
+        ],
+        "upset": [
+          "0-1"
+        ]
       },
       "analysis": "",
       "confidence": "高"
@@ -19,9 +27,17 @@
       "loss": 9,
       "lean": "主胜",
       "scores": {
-        "main": ["2-0", "2-1"],
-        "secondary": ["3-1", "1-0"],
-        "upset": ["1-2"]
+        "main": [
+          "2-0",
+          "2-1"
+        ],
+        "secondary": [
+          "3-1",
+          "1-0"
+        ],
+        "upset": [
+          "1-2"
+        ]
       },
       "analysis": "",
       "confidence": "中高"
@@ -32,9 +48,17 @@
       "loss": 60,
       "lean": "客胜",
       "scores": {
-        "main": ["0-2", "0-1"],
-        "secondary": ["1-2", "0-3"],
-        "upset": ["1-0"]
+        "main": [
+          "0-2",
+          "0-1"
+        ],
+        "secondary": [
+          "1-2",
+          "0-3"
+        ],
+        "upset": [
+          "1-0"
+        ]
       },
       "analysis": "",
       "confidence": "中"
@@ -45,9 +69,17 @@
       "loss": 6,
       "lean": "主胜",
       "scores": {
-        "main": ["3-0", "2-0"],
-        "secondary": ["3-1", "2-1"],
-        "upset": ["0-1"]
+        "main": [
+          "3-0",
+          "2-0"
+        ],
+        "secondary": [
+          "3-1",
+          "2-1"
+        ],
+        "upset": [
+          "0-1"
+        ]
       },
       "analysis": "",
       "confidence": "高"
@@ -58,9 +90,17 @@
       "loss": 13,
       "lean": "主胜",
       "scores": {
-        "main": ["2-0", "2-1"],
-        "secondary": ["1-0", "3-0"],
-        "upset": ["1-2"]
+        "main": [
+          "2-0",
+          "2-1"
+        ],
+        "secondary": [
+          "1-0",
+          "3-0"
+        ],
+        "upset": [
+          "1-2"
+        ]
       },
       "analysis": "",
       "confidence": "中"
@@ -71,9 +111,17 @@
       "loss": 5,
       "lean": "主胜",
       "scores": {
-        "main": ["3-0", "2-0"],
-        "secondary": ["4-0", "3-1"],
-        "upset": ["1-1"]
+        "main": [
+          "3-0",
+          "2-0"
+        ],
+        "secondary": [
+          "4-0",
+          "3-1"
+        ],
+        "upset": [
+          "1-1"
+        ]
       },
       "analysis": "",
       "confidence": "高"
@@ -84,9 +132,17 @@
       "loss": 17,
       "lean": "主胜",
       "scores": {
-        "main": ["2-1", "1-0"],
-        "secondary": ["2-0", "3-1"],
-        "upset": ["0-1"]
+        "main": [
+          "2-1",
+          "1-0"
+        ],
+        "secondary": [
+          "2-0",
+          "3-1"
+        ],
+        "upset": [
+          "0-1"
+        ]
       },
       "analysis": "",
       "confidence": "中"
@@ -97,9 +153,17 @@
       "loss": 20,
       "lean": "主胜",
       "scores": {
-        "main": ["1-0", "2-1"],
-        "secondary": ["2-0", "3-1"],
-        "upset": ["0-1"]
+        "main": [
+          "1-0",
+          "2-1"
+        ],
+        "secondary": [
+          "2-0",
+          "3-1"
+        ],
+        "upset": [
+          "0-1"
+        ]
       },
       "analysis": "",
       "confidence": "低"
@@ -110,15 +174,23 @@
       "loss": 50,
       "lean": "客胜",
       "scores": {
-        "main": ["0-2", "0-1"],
-        "secondary": ["1-2", "0-3"],
-        "upset": ["1-0"]
+        "main": [
+          "0-2",
+          "0-1"
+        ],
+        "secondary": [
+          "1-2",
+          "0-3"
+        ],
+        "upset": [
+          "1-0"
+        ]
       },
       "analysis": "",
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-18T12:54:40Z",
+  "updated_at": "2026-06-18T16:34:49Z",
   "summary": {
     "total": 24,
     "correct": 19,
