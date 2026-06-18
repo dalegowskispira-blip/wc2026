@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-18T16:34:49Z",
+  "updated_at": "2026-06-18T19:30:07Z",
   "matches": [
     {
       "id": 1,
@@ -275,8 +275,8 @@
       "home": "捷克",
       "away": "南非",
       "home_score": 1,
-      "away_score": 0,
-      "status": "live",
+      "away_score": 1,
+      "status": "finished",
       "bjt": "00:00"
     },
     {
