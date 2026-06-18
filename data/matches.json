@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-18T19:30:07Z",
+  "updated_at": "2026-06-18T21:35:19Z",
   "matches": [
     {
       "id": 1,
@@ -285,9 +285,9 @@
       "group": "B",
       "home": "瑞士",
       "away": "波黑",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 4,
+      "away_score": 1,
+      "status": "finished",
       "bjt": "03:00"
     },
     {
