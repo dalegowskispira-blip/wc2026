@@ -307,6 +307,13 @@ body{background:var(--bg);color:var(--t1);font-family:var(--font);min-height:100
 .focus-bar-row{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--t2)}
 .focus-bar-mini{flex:1;height:4px;background:var(--bg3);border-radius:99px;overflow:hidden}
 .focus-bar-fill{height:100%;border-radius:99px}
+.focus-status-badge{font-size:10px;padding:2px 7px;border-radius:4px;font-weight:500}
+.focus-status-finished{background:rgba(255,255,255,.07);color:var(--t2)}
+.focus-status-live{background:rgba(239,68,68,.18);color:#fca5a5;animation:livepulse 1.5s ease-in-out infinite}
+.focus-status-upcoming{background:rgba(99,179,237,.12);color:#7ec8e3}
+.focus-score{font-size:18px;font-weight:700;letter-spacing:2px;min-width:56px;text-align:center;color:var(--t1)}
+.focus-score-live{color:#fca5a5}
+@keyframes livepulse{0%,100%{opacity:1}50%{opacity:.55}}
 
 /* ── V4: 对比雷达 ── */
 .compare-radar-wrap{background:var(--card);border:1px solid var(--b1);border-radius:12px;padding:14px;margin-bottom:16px}
@@ -1091,7 +1098,9 @@ function renderAccuracy() {
                 <div class="review-player">🔑 关键球员：${r.review.key_player}</div>
                 <div class="review-text">${r.review.reason}</div>
                </div>`
-            : `<div class="no-review">✅ 结果符合预期，暂无复盘</div>`
+            : correct
+              ? `<div class="no-review">✅ 结果符合预期，暂无复盘</div>`
+              : `<div class="no-review" style="color:var(--red,#f87171)">❌ 预测与实际不符，暂无复盘</div>`
           }
         </div>
       </div>`;
@@ -1814,7 +1823,7 @@ function goToMatch(matchId, matchDate) {
 // ────────────────────────────────────────
 function renderFocus() {
   const today = getTodayStr();
-  const todayUpcoming = matchesData.filter(m => m.date === today && m.status === 'upcoming');
+  const todayMatches = matchesData.filter(m => m.date === today);
 
   function getMatchPriority(m) {
     const pr = getPred(m.home, m.away);
@@ -1830,8 +1839,19 @@ function renderFocus() {
     return {p:4, tag:'正路走势', cls:'focus-tag-normal'};
   }
 
+  function statusOrder(s) {
+    if (s === 'live') return 0;
+    if (s === 'upcoming') return 1;
+    return 2; // finished
+  }
+
   function renderCards(matches, headerHtml) {
-    const sorted = [...matches].sort((a,b) => getMatchPriority(a).p - getMatchPriority(b).p);
+    const sorted = [...matches].sort((a, b) => {
+      const sd = statusOrder(a.status) - statusOrder(b.status);
+      if (sd !== 0) return sd;
+      if (a.status === 'upcoming') return getMatchPriority(a).p - getMatchPriority(b).p;
+      return (a.bjt || '').localeCompare(b.bjt || '');
+    });
     return headerHtml + sorted.map(m => {
       const pr = getPred(m.home, m.away);
       const pred = pr?.pred;
@@ -1840,26 +1860,41 @@ function renderFocus() {
       const draw = pred ? pred.draw : 25;
       const loss = pred ? (rev ? pred.win : pred.loss) : 25;
       const priority = getMatchPriority(m);
+      let statusBadge, rightPanel;
+      if (m.status === 'finished') {
+        statusBadge = '<span class="focus-status-badge focus-status-finished">已完赛</span>';
+        rightPanel = (m.home_score !== null && m.away_score !== null)
+          ? '<div class="focus-score">' + m.home_score + ' - ' + m.away_score + '</div>' : '';
+      } else if (m.status === 'live') {
+        statusBadge = '<span class="focus-status-badge focus-status-live">进行中</span>';
+        rightPanel = (m.home_score !== null && m.away_score !== null)
+          ? '<div class="focus-score focus-score-live">' + m.home_score + ' - ' + m.away_score + '</div>' : '';
+      } else {
+        statusBadge = '<span class="focus-status-badge focus-status-upcoming">即将开赛</span>';
+        rightPanel = pred ? '<div class="focus-bar-wrap">'
+          + '<div class="focus-bar-row"><span style="width:28px;text-align:right">' + win + '%</span><div class="focus-bar-mini"><div class="focus-bar-fill" style="width:' + win + '%;background:var(--green)"></div></div></div>'
+          + '<div class="focus-bar-row"><span style="width:28px;text-align:right">' + draw + '%</span><div class="focus-bar-mini"><div class="focus-bar-fill" style="width:' + draw + '%;background:var(--amber)"></div></div></div>'
+          + '<div class="focus-bar-row"><span style="width:28px;text-align:right">' + loss + '%</span><div class="focus-bar-mini"><div class="focus-bar-fill" style="width:' + loss + '%;background:var(--red)"></div></div></div>'
+          + '</div>' : '';
+      }
       return '<div class="focus-card" onclick="goToMatch(' + m.id + ', \'' + m.date + '\')">'
         + '<div class="focus-card-main">'
         + '<div class="focus-card-teams">' + (FLAGS[m.home]||'🏳️') + ' ' + m.home + ' vs ' + m.away + ' ' + (FLAGS[m.away]||'🏳️') + '</div>'
         + '<div class="focus-card-meta">'
         + '<span>' + (m.bjt||'') + ' BJT</span>'
         + '<span class="gpill">' + m.group + '组</span>'
-        + '<span class="focus-card-tag ' + priority.cls + '">' + priority.tag + '</span>'
+        + statusBadge
+        + (m.status === 'upcoming' ? '<span class="focus-card-tag ' + priority.cls + '">' + priority.tag + '</span>' : '')
         + '</div></div>'
-        + (pred ? '<div class="focus-bar-wrap">'
-          + '<div class="focus-bar-row"><span style="width:28px;text-align:right">' + win + '%</span><div class="focus-bar-mini"><div class="focus-bar-fill" style="width:' + win + '%;background:var(--green)"></div></div></div>'
-          + '<div class="focus-bar-row"><span style="width:28px;text-align:right">' + draw + '%</span><div class="focus-bar-mini"><div class="focus-bar-fill" style="width:' + draw + '%;background:var(--amber)"></div></div></div>'
-          + '<div class="focus-bar-row"><span style="width:28px;text-align:right">' + loss + '%</span><div class="focus-bar-mini"><div class="focus-bar-fill" style="width:' + loss + '%;background:var(--red)"></div></div></div>'
-          + '</div>' : '')
+        + rightPanel
         + '</div>';
     }).join('') + '<div style="font-size:10px;color:var(--t3);text-align:center;margin-top:8px">点击任意比赛跳转完整赛程预测页</div>';
   }
 
-  if (todayUpcoming.length) {
-    const header = '<div style="font-size:11px;color:var(--t2);margin-bottom:14px">今日 ' + today + ' 共 ' + todayUpcoming.length + ' 场待开赛 · 按关注优先级排列</div>';
-    document.getElementById('focus-content').innerHTML = renderCards(todayUpcoming, header);
+  if (todayMatches.length) {
+    const total = todayMatches.length;
+    const header = '<div style="font-size:11px;color:var(--t2);margin-bottom:14px">今日 ' + today + ' 共 ' + total + ' 场 · 按状态与优先级排列</div>';
+    document.getElementById('focus-content').innerHTML = renderCards(todayMatches, header);
     return;
   }
 
@@ -1871,7 +1906,7 @@ function renderFocus() {
 
   const nextDate = futureMatches.reduce(function(min, m) { return m.date < min ? m.date : min; }, futureMatches[0].date);
   const nextMatches = futureMatches.filter(m => m.date === nextDate);
-  const header = '<div style="font-size:11px;color:var(--amber);margin-bottom:14px">今日比赛已全部结束 · 预告 ' + nextDate + ' 共 ' + nextMatches.length + ' 场 · 按关注优先级排列</div>';
+  const header = '<div style="font-size:11px;color:var(--amber);margin-bottom:14px">今日暂无比赛 · 预告 ' + nextDate + ' 共 ' + nextMatches.length + ' 场 · 按关注优先级排列</div>';
   document.getElementById('focus-content').innerHTML = renderCards(nextMatches, header);
 }
 
