@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-17T22:58:19Z",
+  "updated_at": "2026-06-18T00:22:52Z",
   "matches": [
     {
       "id": 1,
@@ -252,9 +252,9 @@
       "group": "L",
       "home": "加纳",
       "away": "巴拿马",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 0,
+      "status": "live",
       "bjt": "07:00"
     },
     {
