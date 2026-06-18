@@ -730,7 +730,8 @@ function getCoreKPW(teamName) {
 }
 
 // 战意因子：48队赛制下正确计算 MI
-// 规则：每组4队，前2名出线，第3有可能靠积分补位
+// 规则：每组4队，前2名出线，8个最佳第三名出线（共12组）
+// 关键：第3轮前任何队都不会被数学淘汰，"生死战"只在第3轮触发
 function getMI(teamName, groupKey) {
   const standings = calcStandings();
   const group = standings[groupKey];
@@ -742,24 +743,29 @@ function getMI(teamName, groupKey) {
   const played = teamEntry.p;
   const pts = teamEntry.pts;
 
-  // 已定出线 (2场以上，积分≥6，名次第1，数学上无法被超越)
+  // 已定出线：第3轮前，积分≥6且排名第1，数学上无法被超越
   if (played >= 2 && rank === 1 && pts >= 6)
     return {mi:0.8, label:'已定出线', cls:'mi-low'};
 
-  // 平局或赢均能出线的宽松状态
+  // 平局出线：第3轮，排名前2且积分≥4，平局也能出线
   if (played >= 2 && rank <= 2 && pts >= 4)
     return {mi:0.9, label:'平局出线', cls:'mi-neutral'};
 
-  // 生死战触发条件（48队赛制扩展逻辑）
-  // ① 传统：2场后积分≤1且排名第3/4
-  if (played >= 2 && rank > 2 && pts <= 1)
-    return {mi:1.3, label:'生死战', cls:'mi-high'};
-  // ② 扩展：第1场就输（0分），本场输则名次必然恶化且出线概率极低
-  if (played >= 1 && pts === 0)
-    return {mi:1.25, label:'必须赢球', cls:'mi-high'};
-  // ③ 扩展：2场后0分，数学上几乎不可能出线
-  if (played >= 2 && pts === 0)
+  // 第1、2轮一律不触发生死战——48队制下最后一轮前不存在数学淘汰
+  if (played < 2) return {mi:1.0, label:'', cls:''};
+
+  // 以下均为第3轮（played === 2）场景
+  // 0分绝境：赢球也只得3分，能否靠最佳第三名出线存疑
+  if (pts === 0)
     return {mi:1.35, label:'绝境生死', cls:'mi-high'};
+
+  // 1分生死：赢球得4分有机会靠最佳第三名，但输/平基本出局
+  if (rank > 2 && pts <= 1)
+    return {mi:1.3, label:'生死战', cls:'mi-high'};
+
+  // 3分悬念：排名第3，赢球得6分出线基本稳，平局4分仍有希望
+  if (rank === 3 && pts === 3)
+    return {mi:1.15, label:'出线悬念', cls:'mi-neutral'};
 
   return {mi:1.0, label:'', cls:''};
 }
