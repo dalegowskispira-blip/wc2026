@@ -16,7 +16,7 @@ import anthropic
 BASE_DIR = Path(__file__).parent.parent
 MATCHES_FILE = BASE_DIR / "data" / "matches.json"
 PREDICTIONS_FILE = BASE_DIR / "data" / "predictions.json"
-MODEL = "claude-opus-4-8"
+MODEL = "claude-sonnet-4-6"
 MAX_RETRIES = 3
 
 SYSTEM_PROMPT = """你是一个专业足球分析师，任务是为2026世界杯小组赛比赛生成预测数据。
@@ -155,14 +155,17 @@ def generate_prediction(match, client):
 
 
 def parse_prediction_json(text):
-    # Try code block first
-    code_match = re.search(r"```(?:json)?\s*(\{[\s\S]*?\})\s*```", text)
-    if code_match:
-        return json.loads(code_match.group(1))
-    # Try bare JSON object
-    obj_match = re.search(r"\{[\s\S]*\}", text)
-    if obj_match:
-        return json.loads(obj_match.group())
+    # Find all {...} blocks and try from last to first (model outputs prose then JSON)
+    candidates = list(re.finditer(r"\{[\s\S]*?\}", text))
+    for m in reversed(candidates):
+        try:
+            return json.loads(m.group())
+        except json.JSONDecodeError:
+            continue
+    # Fallback: try the entire span from first { to last }
+    span_match = re.search(r"\{[\s\S]*\}", text)
+    if span_match:
+        return json.loads(span_match.group())
     raise ValueError(f"No JSON found in response:\n{text[:500]}")
 
 
