@@ -286,25 +286,8 @@ def update_predictions(matches, predictions_map: dict):
         rev_key = f"{away}|{home}"
         pred = predictions_map.get(key) or predictions_map.get(rev_key)
 
-        # Bug2修复：无预测数据也写入 record，用默认值，不再 continue 跳过
         if not pred:
-            record = {
-                "match_id": m["id"],
-                "home": home,
-                "away": away,
-                "predicted": "无预测",
-                "actual": actual_result,
-                "predicted_score": "?",
-                "actual_score": actual_score,
-                "result": "unknown",
-                "confidence": "低",
-                "review": None,
-            }
-            pred_data["records"].append(record)
-            existing_ids.add(m["id"])
-            new_records += 1
-            print(f"  处理(无预测): {home} {actual_score} {away}")
-            continue
+            continue  # 没有预测数据的比赛跳过，不写入 records
 
         pred_result = (
             "主胜" if pred["win"] > pred["loss"] and pred["win"] > pred["draw"]
