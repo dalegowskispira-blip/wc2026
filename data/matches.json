@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-19T21:44:46Z",
+  "updated_at": "2026-06-19T22:59:32Z",
   "matches": [
     {
       "id": 1,
@@ -329,9 +329,9 @@
       "group": "C",
       "home": "苏格兰",
       "away": "摩洛哥",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "live",
       "bjt": "06:00"
     },
     {
