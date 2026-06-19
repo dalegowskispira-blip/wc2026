@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-19T18:17:15Z",
+  "updated_at": "2026-06-19T20:15:35Z",
   "matches": [
     {
       "id": 1,
@@ -318,9 +318,9 @@
       "group": "D",
       "home": "美国",
       "away": "澳大利亚",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 2,
+      "away_score": 0,
+      "status": "live",
       "bjt": "03:00"
     },
     {
