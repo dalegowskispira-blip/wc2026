@@ -610,49 +610,61 @@
       "match_id": 25,
       "home": "捷克",
       "away": "南非",
-      "predicted": "无预测",
+      "predicted": "主胜",
       "actual": "平局",
-      "predicted_score": "?",
+      "predicted_score": "2-0",
       "actual_score": "1-1",
-      "result": "unknown",
-      "confidence": "低",
-      "review": null
+      "result": "wrong",
+      "confidence": "中",
+      "review": {
+        "key_player": "莫科纳",
+        "reason": "捷克萨迪莱克上半场抽射梦幻开局，长时间1-0领先。终场前舒尔茨禁区手球送点，南非莫科纳主罚命中绝平。两队各积2分，出线形势胶着。预测捷克取胜失误，低估了南非的韧性。"
+      }
     },
     {
       "match_id": 26,
       "home": "瑞士",
       "away": "波黑",
-      "predicted": "无预测",
+      "predicted": "主胜",
       "actual": "主胜",
-      "predicted_score": "?",
+      "predicted_score": "2-0",
       "actual_score": "4-1",
-      "result": "unknown",
-      "confidence": "低",
-      "review": null
+      "result": "correct",
+      "confidence": "中高",
+      "review": {
+        "key_player": "曼赞比",
+        "reason": "上半场闷平后，瑞士下半场最后20分钟连入四球爆发。替补登场的曼赞比梅开二度，巴尔加斯传射建功，扎卡点射锁定胜局。波黑穆哈雷莫维奇染红雪上加霜。胜负方向预测正确，比分远超预期。"
+      }
     },
     {
       "match_id": 27,
       "home": "加拿大",
       "away": "卡塔尔",
-      "predicted": "无预测",
+      "predicted": "主胜",
       "actual": "主胜",
-      "predicted_score": "?",
+      "predicted_score": "1-0",
       "actual_score": "6-0",
-      "result": "unknown",
-      "confidence": "低",
-      "review": null
+      "result": "correct",
+      "confidence": "中高",
+      "review": {
+        "key_player": "乔纳森·戴维",
+        "reason": "加拿大火力全开，乔纳森·戴维上演帽子戏法，拉林、萨利巴破门，对手乌龙。卡塔尔单场两张直红（胡马姆恶意放铲断腿）+自摆乌龙彻底崩盘，9人应战。加拿大6-0收获队史世界杯首胜登顶小组。预测主胜正确，比分大幅低估。"
+      }
     },
     {
       "match_id": 28,
       "home": "墨西哥",
       "away": "韩国",
-      "predicted": "无预测",
+      "predicted": "主胜",
       "actual": "主胜",
-      "predicted_score": "?",
+      "predicted_score": "2-1",
       "actual_score": "1-0",
-      "result": "unknown",
-      "confidence": "低",
-      "review": null
+      "result": "correct",
+      "confidence": "中",
+      "review": {
+        "key_player": "罗莫",
+        "reason": "上半场0-0闷战后，第50分钟韩国门将金承奎与队友相撞致命失误脱手，罗莫捡漏破门。孙兴慜全场仅19次触球0射门状态低迷，韩国终场前曹圭成头球被扑出。墨西哥1-0取胜提前锁定小组头名，成为本届首支出线球队。预测主胜正确。"
+      }
     }
   ]
 }
