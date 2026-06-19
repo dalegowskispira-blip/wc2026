@@ -274,12 +274,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-06-19T20:15:35Z",
+  "updated_at": "2026-06-19T21:44:57Z",
   "summary": {
-    "total": 28,
-    "correct": 22,
+    "total": 29,
+    "correct": 23,
     "wrong": 6,
-    "accuracy": 78.6
+    "accuracy": 79.3
   },
   "records": [
     {
@@ -665,6 +665,18 @@
         "key_player": "罗莫",
         "reason": "上半场0-0闷战后，第50分钟韩国门将金承奎与队友相撞致命失误脱手，罗莫捡漏破门。孙兴慜全场仅19次触球0射门状态低迷，韩国终场前曹圭成头球被扑出。墨西哥1-0取胜提前锁定小组头名，成为本届首支出线球队。预测主胜正确。"
       }
+    },
+    {
+      "match_id": 29,
+      "home": "美国",
+      "away": "澳大利亚",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-1",
+      "actual_score": "2-0",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
     }
   ]
 }
