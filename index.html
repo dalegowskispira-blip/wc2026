@@ -503,6 +503,9 @@ function getPred(home, away) {
   const k2 = `${away}|${home}`;
   if (PREDS[k1]) return { pred: PREDS[k1], rev: false };
   if (PREDS[k2]) return { pred: PREDS[k2], rev: true };
+  const jsonPreds = predictionsData?.predictions || {};
+  if (jsonPreds[k1]) return { pred: jsonPreds[k1], rev: false };
+  if (jsonPreds[k2]) return { pred: jsonPreds[k2], rev: true };
   return null;
 }
 
@@ -915,18 +918,32 @@ function renderMatchCard(m) {
     // 增强Hints
     const enhancedHints = buildEnhancedHints(m.home, m.away, pred, groupKey);
 
-    // 比分进度条
-    const sortedScores = [...pred.scores].sort((a,b) => b.p - a.p);
-    const maxP = sortedScores[0]?.p || 1;
-    const scoreBarsHTML = `<div class="score-pred-bars">
-      ${sortedScores.map((s,i) => `<div class="spb-row">
+    // 比分进度条：兼容两种scores格式
+    // PREDS格式: [{s:'3-0', p:28}, ...]（带概率）
+    // JSON格式:  {main:[], secondary:[], upset:[]}（纯字符串，无概率）
+    let normalizedScores;
+    if (Array.isArray(pred.scores)) {
+      normalizedScores = [...pred.scores].sort((a,b) => b.p - a.p);
+    } else if (pred.scores && typeof pred.scores === 'object') {
+      const slots = [
+        ...(pred.scores.main || []).map((s,i) => ({ s, p: 30 - i*5 })),
+        ...(pred.scores.secondary || []).map((s,i) => ({ s, p: 18 - i*4 })),
+        ...(pred.scores.upset || []).map(s => ({ s, p: 6 })),
+      ];
+      normalizedScores = slots;
+    } else {
+      normalizedScores = [];
+    }
+    const maxP = normalizedScores[0]?.p || 1;
+    const scoreBarsHTML = normalizedScores.length ? `<div class="score-pred-bars">
+      ${normalizedScores.map((s,i) => `<div class="spb-row">
         <div class="spb-label">${s.s}</div>
         <div class="spb-track">
           <div class="spb-fill ${i===0?'top-fill':''}" style="width:${Math.round(s.p/maxP*100)}%"></div>
         </div>
         <div class="spb-pct">${s.p}%</div>
       </div>`).join('')}
-    </div>`;
+    </div>` : '';
 
     predHTML = `
     <div class="pred-wrap">
