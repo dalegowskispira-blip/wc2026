@@ -350,12 +350,18 @@ function getYesterdayStat(matchesData, predictionsData) {
 
 // ── 主渲染 ──
 function render(matchesData, predictionsData) {
-  const today = todayStr();
-  const todayMatches = (matchesData || [])
-    .filter(m => m.date === today)
-    .sort((a, b) => (a.bjt || '').localeCompare(b.bjt || ''));
+  // 找最早的 upcoming 日期，取当天全部场次
+  const allUpcoming = (matchesData || [])
+    .filter(m => m.status === 'upcoming')
+    .sort((a, b) => (a.date + (a.bjt||'')).localeCompare(b.date + (b.bjt||'')));
 
-  const dt = new Date(today + 'T12:00:00+08:00');
+  const nextDate = allUpcoming.length ? allUpcoming[0].date : null;
+  const targetMatches = nextDate
+    ? allUpcoming.filter(m => m.date === nextDate)
+    : [];
+
+  const displayDate = nextDate || todayStr();
+  const dt = new Date(displayDate + 'T12:00:00+08:00');
   const wd = ['日','一','二','三','四','五','六'][dt.getDay()];
   const dateLabel = `${dt.getMonth()+1}月${dt.getDate()}日（周${wd}）· 北京时间`;
   document.getElementById('date-strip1').textContent = dateLabel;
@@ -370,21 +376,21 @@ function render(matchesData, predictionsData) {
   const area1 = document.getElementById('cards-area');
   const area2 = document.getElementById('analysis-area');
 
-  if (!todayMatches.length) {
-    area1.innerHTML = area2.innerHTML = '<div class="no-today">今日暂无比赛安排</div>';
+  if (!targetMatches.length) {
+    area1.innerHTML = area2.innerHTML = '<div class="no-today">暂无待开赛比赛</div>';
     return;
   }
 
-  area1.innerHTML = todayMatches.map(m => renderPredCard(m, jsonPreds)).join('');
-  area2.innerHTML = todayMatches.map(m => renderAnalysisCard(m, jsonPreds)).join('');
+  area1.innerHTML = targetMatches.map(m => renderPredCard(m, jsonPreds)).join('');
+  area2.innerHTML = targetMatches.map(m => renderAnalysisCard(m, jsonPreds)).join('');
 }
 
 // ── 兜底数据 ──
 const FALLBACK_MATCHES = [
-  {id:21,date:'2026-06-18',group:'K',home:'葡萄牙',away:'刚果(金)',bjt:'01:00',status:'upcoming'},
-  {id:22,date:'2026-06-18',group:'L',home:'英格兰',away:'克罗地亚',bjt:'04:00',status:'upcoming'},
-  {id:23,date:'2026-06-18',group:'L',home:'加纳',away:'巴拿马',bjt:'07:00',status:'upcoming'},
-  {id:24,date:'2026-06-18',group:'K',home:'乌兹别克',away:'哥伦比亚',bjt:'10:00',status:'upcoming'},
+  {id:29,date:'2026-06-20',group:'D',home:'美国',away:'澳大利亚',bjt:'02:00',status:'upcoming'},
+  {id:30,date:'2026-06-20',group:'C',home:'苏格兰',away:'摩洛哥',bjt:'05:00',status:'upcoming'},
+  {id:31,date:'2026-06-20',group:'C',home:'巴西',away:'海地',bjt:'08:00',status:'upcoming'},
+  {id:32,date:'2026-06-20',group:'D',home:'土耳其',away:'巴拉圭',bjt:'11:00',status:'upcoming'},
 ];
 const FALLBACK_PREDICTIONS = {
   records:[
