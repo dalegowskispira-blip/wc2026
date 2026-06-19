@@ -274,12 +274,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-06-19T09:20:34Z",
+  "updated_at": "2026-06-19T09:53:14Z",
   "summary": {
     "total": 28,
-    "correct": 19,
-    "wrong": 5,
-    "accuracy": 79.2
+    "correct": 22,
+    "wrong": 6,
+    "accuracy": 78.6
   },
   "records": [
     {
