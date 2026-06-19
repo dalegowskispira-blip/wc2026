@@ -3,7 +3,7 @@ name: 生成赛前分析
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 14 * * *'  # 每天北京时间22:00（UTC 14:00）自动跑
+    - cron: '0 6 * * *'  # 每天北京时间14:00（UTC 6:00）自动跑
 
 jobs:
   generate:
