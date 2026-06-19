@@ -5,29 +5,29 @@
 - 比赛结束后调用 Claude API 生成复盘分析
 - 更新 data/matches.json 和 data/predictions.json
 """
- 
+
 import json
 import os
 import time
 import requests
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
- 
+
 BJT = timezone(timedelta(hours=8))
- 
+
 # ─────────────────────────────────────────
 # 配置
 # ─────────────────────────────────────────
 FOOTBALL_API_KEY = os.environ.get("FOOTBALL_API_KEY", "")
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
- 
+
 DATA_DIR = Path(__file__).parent.parent / "data"
 MATCHES_FILE = DATA_DIR / "matches.json"
 PREDICTIONS_FILE = DATA_DIR / "predictions.json"
- 
+
 # football-data.org 世界杯赛事ID（2026赛季）
 WC2026_COMPETITION_ID = 2000  # 需要根据实际API返回更新
- 
+
 # 中文队名映射（API返回英文 → 我们的中文）
 TEAM_NAME_MAP = {
     "Mexico": "墨西哥", "South Africa": "南非", "Korea Republic": "韩国",
@@ -52,23 +52,12 @@ TEAM_NAME_MAP = {
     "Congo DR": "刚果(金)", "Cape Verde Islands": "佛得角",
     "Czech Republic": "捷克",
 }
- 
- 
+
+
 # ─────────────────────────────────────────
-# 修复2：从 predictions.json 读取预测数据
+# 从 predictions.json 读取预测数据
 # ─────────────────────────────────────────
 def load_predictions_map() -> dict:
-    """
-    从 predictions.json 的 predictions 字段读取预测数据。
-    预期结构：
-    {
-      "predictions": {
-        "西班牙|佛得角": {"win": 88, "draw": 8, "loss": 4, "top_score": "3-0"},
-        ...
-      }
-    }
-    如果字段不存在则返回空字典，脚本不会崩溃。
-    """
     try:
         with open(PREDICTIONS_FILE, encoding="utf-8") as f:
             data = json.load(f)
@@ -78,8 +67,20 @@ def load_predictions_map() -> dict:
     except Exception as e:
         print(f"⚠️  加载预测数据失败: {e}，将跳过复盘生成")
         return {}
- 
- 
+
+
+def get_predicted_score(pred: dict) -> str:
+    """Bug1修复：优先读旧字段 top_score，没有则从新结构 scores.main[0] 取。"""
+    if pred.get("top_score"):
+        return pred["top_score"]
+    sc = pred.get("scores")
+    if isinstance(sc, dict):
+        return (sc.get("main") or ["?"])[0]
+    if isinstance(sc, list) and sc:
+        return sc[0].get("s", "?")
+    return "?"
+
+
 # ─────────────────────────────────────────
 # 1. 拉取比赛数据
 # ─────────────────────────────────────────
@@ -88,10 +89,10 @@ def fetch_live_scores():
     if not FOOTBALL_API_KEY:
         print("⚠️  未配置 FOOTBALL_API_KEY，跳过API拉取")
         return None
- 
+
     headers = {"X-Auth-Token": FOOTBALL_API_KEY}
     url = "https://api.football-data.org/v4/competitions/WC/matches"
- 
+
     try:
         resp = requests.get(url, headers=headers, timeout=10)
         resp.raise_for_status()
@@ -101,12 +102,12 @@ def fetch_live_scores():
     except Exception as e:
         print(f"❌ API拉取失败: {e}")
         return None
- 
- 
+
+
 def map_team_name(api_name: str) -> str:
     return TEAM_NAME_MAP.get(api_name, api_name)
- 
- 
+
+
 def api_status_to_local(api_status: str) -> str:
     mapping = {
         "FINISHED": "finished",
@@ -117,8 +118,8 @@ def api_status_to_local(api_status: str) -> str:
         "POSTPONED": "postponed",
     }
     return mapping.get(api_status, "upcoming")
- 
- 
+
+
 # ─────────────────────────────────────────
 # 2. 更新 matches.json
 # ─────────────────────────────────────────
@@ -131,16 +132,16 @@ def utc_to_bjt_date(utc_str: str) -> str:
         return dt.astimezone(BJT).strftime("%Y-%m-%d")
     except Exception:
         return utc_str[:10]
- 
- 
+
+
 def update_matches(api_matches):
     """将API数据合并进本地 matches.json"""
     with open(MATCHES_FILE, encoding="utf-8") as f:
         local_data = json.load(f)
- 
+
     local_matches = {m["id"]: m for m in local_data["matches"]}
     updated_count = 0
- 
+
     for api_m in (api_matches or []):
         home = map_team_name(api_m.get("homeTeam", {}).get("name", ""))
         away = map_team_name(api_m.get("awayTeam", {}).get("name", ""))
@@ -149,10 +150,10 @@ def update_matches(api_matches):
         full = score.get("fullTime", {})
         hs = full.get("home")
         as_ = full.get("away")
- 
+
         utc_date_str = api_m.get("utcDate", "")
         bjt_date = utc_to_bjt_date(utc_date_str)
- 
+
         for local_id, local_m in local_matches.items():
             if local_m["home"] == home and local_m["away"] == away:
                 changed = False
@@ -171,31 +172,26 @@ def update_matches(api_matches):
                 if changed:
                     updated_count += 1
                 break
- 
+
     local_data["updated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     local_data["matches"] = list(local_matches.values())
- 
+
     with open(MATCHES_FILE, "w", encoding="utf-8") as f:
         json.dump(local_data, f, ensure_ascii=False, indent=2)
- 
+
     print(f"✅ matches.json 更新完成，变更 {updated_count} 场")
     return local_data["matches"]
- 
- 
+
+
 # ─────────────────────────────────────────
-# 3 & 4. 用 Claude 生成赛后复盘（含重试）
+# 3. 用 Claude 生成赛后复盘（含重试）
 # ─────────────────────────────────────────
 def generate_review(home: str, away: str, actual_score: str, predicted: dict,
                     max_retries: int = 3, retry_interval: int = 5) -> dict | None:
-    """
-    调用 Claude API 生成赛后复盘分析。
-    - 优化后的 prompt：要求先搜索真实报道，包含进球者/时间/转折点
-    - 最多重试 max_retries 次，每次间隔 retry_interval 秒
-    """
     if not ANTHROPIC_API_KEY:
         print("  ⚠️  未配置 ANTHROPIC_API_KEY，跳过复盘生成")
         return None
- 
+
     hs, as_ = actual_score.split("-")
     hs, as_ = int(hs), int(as_)
     actual_result = "主队胜" if hs > as_ else "平局" if hs == as_ else "客队胜"
@@ -205,31 +201,32 @@ def generate_review(home: str, away: str, actual_score: str, predicted: dict,
         else "客队胜"
     )
     is_correct = pred_result == actual_result
- 
-    # 修复3：优化后的 prompt
+    # Bug1修复：用辅助函数取比分，不直接访问 top_score
+    top_score = get_predicted_score(predicted)
+
     prompt = f"""你是一位专业足球数据分析师。请完成以下步骤：
- 
+
 第一步：用 web_search 搜索关键词「{home} {away} 2026世界杯 赛后」，获取真实赛后报道。
- 
+
 第二步：基于搜索结果，输出一个 JSON 对象（只输出 JSON，不要有任何其他文字、不要有 markdown 代码块）：
- 
+
 {{
   "key_player": "本场最佳或最关键球员姓名",
   "reason": "150字以内的复盘。必须包含：①进球者姓名和大致时间；②比赛关键转折点（如红牌/VAR/扑救）；③预测{'正确' if is_correct else '失误'}的主要原因。如果 web_search 没有找到相关报道，请在开头注明"未找到赛后报道，基于比分推断"，再给出推断性分析。"
 }}
- 
+
 比赛信息（供参考）：
 - 对阵：{home} vs {away}
 - 实际比分：{actual_score}（{actual_result}）
 - AI赛前预测：{pred_result}（胜{predicted['win']}% / 平{predicted['draw']}% / 负{predicted['loss']}%）
-- 预测最可能比分：{predicted['top_score']}
+- 预测最可能比分：{top_score}
 - 预测结果：{'✅ 正确' if is_correct else '❌ 错误'}"""
- 
+
     import anthropic
     import re
- 
+
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
- 
+
     for attempt in range(1, max_retries + 1):
         try:
             msg = client.messages.create(
@@ -238,10 +235,9 @@ def generate_review(home: str, away: str, actual_score: str, predicted: dict,
                 tools=[{"type": "web_search_20250305", "name": "web_search"}],
                 messages=[{"role": "user", "content": prompt}],
             )
- 
+
             text = "".join(block.text for block in msg.content if hasattr(block, "text"))
- 
-            # 提取 JSON（兼容模型偶尔带 markdown 代码块的情况）
+
             clean = re.sub(r"```(?:json)?|```", "", text).strip()
             match = re.search(r'\{.*?\}', clean, re.DOTALL)
             if match:
@@ -251,7 +247,7 @@ def generate_review(home: str, away: str, actual_score: str, predicted: dict,
                 return result
             else:
                 raise ValueError(f"响应中未找到有效JSON，原始内容：{text[:200]}")
- 
+
         except Exception as e:
             print(f"  ⚠️  第{attempt}次尝试失败: {e}")
             if attempt < max_retries:
@@ -259,99 +255,114 @@ def generate_review(home: str, away: str, actual_score: str, predicted: dict,
                 time.sleep(retry_interval)
             else:
                 print(f"  ❌ 已达最大重试次数，放弃生成复盘")
- 
+
     return None
- 
- 
+
+
 # ─────────────────────────────────────────
 # 4. 更新 predictions.json
 # ─────────────────────────────────────────
 def update_predictions(matches, predictions_map: dict):
-    """
-    检查所有已结束且在 predictions_map 里有预测的比赛：
-    修复1：无论预测对错，都生成复盘。
-    """
     with open(PREDICTIONS_FILE, encoding="utf-8") as f:
         pred_data = json.load(f)
- 
+
     existing_ids = {r["match_id"] for r in pred_data["records"]}
     new_records = 0
- 
+
     for m in matches:
         if m["status"] != "finished":
             continue
         if m["id"] in existing_ids:
             continue
- 
+
         home = m["home"]
         away = m["away"]
         actual_score = f"{m['home_score']}-{m['away_score']}"
- 
-        # 正向/反向都查一遍
+        hs, as_ = m["home_score"], m["away_score"]
+        actual_result = "主胜" if hs > as_ else "平局" if hs == as_ else "客胜"
+
+        # 正向/反向查预测数据
         key = f"{home}|{away}"
         rev_key = f"{away}|{home}"
         pred = predictions_map.get(key) or predictions_map.get(rev_key)
+
+        # Bug2修复：无预测数据也写入 record，用默认值，不再 continue 跳过
         if not pred:
-            continue  # 没有预测数据的跳过
- 
-        hs, as_ = m["home_score"], m["away_score"]
-        actual_result = "主胜" if hs > as_ else "平局" if hs == as_ else "客胜"
+            record = {
+                "match_id": m["id"],
+                "home": home,
+                "away": away,
+                "predicted": "无预测",
+                "actual": actual_result,
+                "predicted_score": "?",
+                "actual_score": actual_score,
+                "result": "unknown",
+                "confidence": "低",
+                "review": None,
+            }
+            pred_data["records"].append(record)
+            existing_ids.add(m["id"])
+            new_records += 1
+            print(f"  处理(无预测): {home} {actual_score} {away}")
+            continue
+
         pred_result = (
             "主胜" if pred["win"] > pred["loss"] and pred["win"] > pred["draw"]
             else "平局" if pred["draw"] >= pred["win"] and pred["draw"] >= pred["loss"]
             else "客胜"
         )
         is_correct = pred_result == actual_result
- 
+        # Bug1修复：用辅助函数，不直接访问 top_score
+        predicted_score = get_predicted_score(pred)
+
         print(f"  处理: {home} {actual_score} {away} → 预测{'✅' if is_correct else '❌'}")
- 
-        # 修复1：所有比赛都生成复盘，不再按对错过滤
+
         review = generate_review(home, away, actual_score, pred)
- 
+
         record = {
             "match_id": m["id"],
             "home": home,
             "away": away,
             "predicted": pred_result,
             "actual": actual_result,
-            "predicted_score": pred["top_score"],
+            "predicted_score": predicted_score,
             "actual_score": actual_score,
             "result": "correct" if is_correct else "wrong",
             "confidence": pred.get("confidence", "中"),
             "review": review,
         }
- 
+
         pred_data["records"].append(record)
         existing_ids.add(m["id"])
         new_records += 1
- 
-    # 重新计算总成绩
-    total = len(pred_data["records"])
-    correct = sum(1 for r in pred_data["records"] if r["result"] == "correct")
+
+    # 重新计算总成绩（unknown 不计入 correct/wrong 分母）
+    counted = [r for r in pred_data["records"] if r["result"] in ("correct", "wrong")]
+    total = len(counted)
+    correct = sum(1 for r in counted if r["result"] == "correct")
     pred_data["summary"] = {
-        "total": total,
+        "total": len(pred_data["records"]),
         "correct": correct,
         "wrong": total - correct,
         "accuracy": round(correct / total * 100, 1) if total > 0 else 0,
     }
     pred_data["updated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
- 
+
     with open(PREDICTIONS_FILE, "w", encoding="utf-8") as f:
         json.dump(pred_data, f, ensure_ascii=False, indent=2)
- 
+
     print(f"✅ predictions.json 更新，新增 {new_records} 条，准确率 {pred_data['summary']['accuracy']}%")
- 
- 
+
+
 # ─────────────────────────────────────────
 # 主流程
 # ─────────────────────────────────────────
 if __name__ == "__main__":
     print(f"🚀 开始更新 [{datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}]")
- 
+
     predictions_map = load_predictions_map()
     api_matches = fetch_live_scores()
     matches = update_matches(api_matches)
     update_predictions(matches, predictions_map)
- 
+
     print("✅ 全部完成")
- 
