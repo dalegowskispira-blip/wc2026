@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-20T20:16:10Z",
+  "updated_at": "2026-06-20T21:47:43Z",
   "matches": [
     {
       "id": 1,
@@ -373,8 +373,8 @@
       "group": "E",
       "home": "德国",
       "away": "科特迪瓦",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 1,
+      "away_score": 1,
       "status": "live",
       "bjt": "04:00"
     },
