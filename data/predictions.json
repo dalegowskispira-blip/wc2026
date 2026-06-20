@@ -274,12 +274,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-06-20T04:52:32Z",
+  "updated_at": "2026-06-20T08:22:25Z",
   "summary": {
-    "total": 31,
+    "total": 32,
     "correct": 25,
-    "wrong": 6,
-    "accuracy": 80.6
+    "wrong": 7,
+    "accuracy": 78.1
   },
   "records": [
     {
@@ -700,6 +700,18 @@
       "actual_score": "3-0",
       "result": "correct",
       "confidence": "高",
+      "review": null
+    },
+    {
+      "match_id": 32,
+      "home": "土耳其",
+      "away": "巴拉圭",
+      "predicted": "主胜",
+      "actual": "客胜",
+      "predicted_score": "1-1",
+      "actual_score": "0-1",
+      "result": "wrong",
+      "confidence": "低",
       "review": null
     }
   ]

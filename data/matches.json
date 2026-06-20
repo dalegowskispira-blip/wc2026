@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-20T04:52:21Z",
+  "updated_at": "2026-06-20T08:22:14Z",
   "matches": [
     {
       "id": 1,
@@ -353,7 +353,7 @@
       "away": "巴拉圭",
       "home_score": 0,
       "away_score": 1,
-      "status": "live",
+      "status": "finished",
       "bjt": "11:00"
     },
     {
