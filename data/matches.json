@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-20T00:21:02Z",
+  "updated_at": "2026-06-20T04:52:21Z",
   "matches": [
     {
       "id": 1,
@@ -340,9 +340,9 @@
       "group": "C",
       "home": "巴西",
       "away": "海地",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 3,
+      "away_score": 0,
+      "status": "finished",
       "bjt": "08:30"
     },
     {
@@ -351,9 +351,9 @@
       "group": "D",
       "home": "土耳其",
       "away": "巴拉圭",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "live",
       "bjt": "11:00"
     },
     {
