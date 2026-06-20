@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-19T22:59:32Z",
+  "updated_at": "2026-06-20T00:21:02Z",
   "matches": [
     {
       "id": 1,
@@ -331,7 +331,7 @@
       "away": "摩洛哥",
       "home_score": 0,
       "away_score": 1,
-      "status": "live",
+      "status": "finished",
       "bjt": "06:00"
     },
     {
