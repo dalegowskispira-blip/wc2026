@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-20T17:01:39Z",
+  "updated_at": "2026-06-20T18:54:45Z",
   "matches": [
     {
       "id": 1,
@@ -362,9 +362,9 @@
       "group": "F",
       "home": "荷兰",
       "away": "瑞典",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 4,
+      "away_score": 1,
+      "status": "live",
       "bjt": "01:00"
     },
     {
