@@ -270,8 +270,14 @@ function yesterdayStat(matches,pdata){
 
 function render(matches,pdata){
   const upcoming=(matches||[]).filter(m=>m.status==='upcoming').sort((a,b)=>(a.date+(a.bjt||'')).localeCompare(b.date+(b.bjt||'')));
-  const nd=upcoming.length?upcoming[0].date:null;
-  const ms=nd?upcoming.filter(m=>m.date===nd):[];
+  const dates=[...new Set(upcoming.map(m=>m.date))];
+  let ms=[],usedDates=[];
+  for(const d of dates){
+    usedDates.push(d);
+    ms=upcoming.filter(m=>usedDates.includes(m.date));
+    if(ms.length>=4)break;
+  }
+  const nd=usedDates[0]||null;
 
   const dd=nd||new Date(Date.now()+8*3600000).toISOString().slice(0,10);
   const dt=new Date(dd+'T12:00:00+08:00');
