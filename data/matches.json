@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-21T01:59:13Z",
+  "updated_at": "2026-06-21T07:00:04Z",
   "matches": [
     {
       "id": 1,
@@ -386,7 +386,7 @@
       "away": "库拉索",
       "home_score": 0,
       "away_score": 0,
-      "status": "live",
+      "status": "finished",
       "bjt": "08:00"
     },
     {
@@ -395,9 +395,9 @@
       "group": "F",
       "home": "突尼斯",
       "away": "日本",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 4,
+      "status": "finished",
       "bjt": "12:00"
     },
     {
