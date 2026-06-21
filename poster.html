@@ -262,7 +262,7 @@ function yesterdayStat(matches,pdata){
   const ystr=[yest.getUTCFullYear(),String(yest.getUTCMonth()+1).padStart(2,'0'),String(yest.getUTCDate()).padStart(2,'0')].join('-');
   const mm={};(matches||[]).forEach(m=>mm[m.id]=m);
   const recs=(pdata?.records||[]).filter(r=>mm[r.match_id]?.date===ystr&&r.result!=='pending');
-  if(recs.length){const c=recs.filter(r=>r.result==='correct').length;return`昨日方向 ${c} 中 ${recs.length}`}
+  if(recs.length){const c=recs.filter(r=>r.result==='correct').length;return`昨日方向 ${recs.length} 中 ${c}`}
   const all=(pdata?.records||[]).filter(r=>r.result!=='pending');
   if(all.length){const c=all.filter(r=>r.result==='correct').length;return`累计命中 ${c}/${all.length}`}
   return'方向命中统计';
