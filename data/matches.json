@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-21T22:15:43Z",
+  "updated_at": "2026-06-21T23:51:40Z",
   "matches": [
     {
       "id": 1,
@@ -428,8 +428,8 @@
       "group": "H",
       "home": "乌拉圭",
       "away": "佛得角",
-      "home_score": 0,
-      "away_score": 0,
+      "home_score": 2,
+      "away_score": 2,
       "status": "live",
       "bjt": "06:00"
     },
