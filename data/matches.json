@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-21T20:53:03Z",
+  "updated_at": "2026-06-21T22:15:43Z",
   "matches": [
     {
       "id": 1,
@@ -419,7 +419,7 @@
       "away": "伊朗",
       "home_score": 0,
       "away_score": 0,
-      "status": "live",
+      "status": "finished",
       "bjt": "03:00"
     },
     {
@@ -428,9 +428,9 @@
       "group": "H",
       "home": "乌拉圭",
       "away": "佛得角",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 0,
+      "status": "live",
       "bjt": "06:00"
     },
     {

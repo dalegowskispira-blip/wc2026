@@ -358,12 +358,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-21T20:53:03Z",
+  "updated_at": "2026-06-21T22:15:55Z",
   "summary": {
-    "total": 33,
+    "total": 34,
     "correct": 26,
-    "wrong": 7,
-    "accuracy": 78.8
+    "wrong": 8,
+    "accuracy": 76.5
   },
   "records": [
     {
@@ -808,6 +808,18 @@
       "actual_score": "5-0",
       "result": "correct",
       "confidence": "高",
+      "review": null
+    },
+    {
+      "match_id": 38,
+      "home": "比利时",
+      "away": "伊朗",
+      "predicted": "主胜",
+      "actual": "平局",
+      "predicted_score": "1-0",
+      "actual_score": "0-0",
+      "result": "wrong",
+      "confidence": "中",
       "review": null
     }
   ]
