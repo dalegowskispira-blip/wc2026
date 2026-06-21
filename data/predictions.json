@@ -358,12 +358,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-21T17:06:22Z",
+  "updated_at": "2026-06-21T19:01:38Z",
   "summary": {
-    "total": 32,
-    "correct": 25,
+    "total": 33,
+    "correct": 26,
     "wrong": 7,
-    "accuracy": 78.1
+    "accuracy": 78.8
   },
   "records": [
     {
@@ -796,6 +796,18 @@
       "actual_score": "0-1",
       "result": "wrong",
       "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 37,
+      "home": "西班牙",
+      "away": "沙特",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-0",
+      "actual_score": "5-0",
+      "result": "correct",
+      "confidence": "高",
       "review": null
     }
   ]
