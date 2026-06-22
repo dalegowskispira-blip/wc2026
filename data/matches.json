@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-22T15:36:08Z",
+  "updated_at": "2026-06-22T19:30:20Z",
   "matches": [
     {
       "id": 1,
@@ -450,9 +450,9 @@
       "group": "J",
       "home": "阿根廷",
       "away": "奥地利",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 2,
+      "away_score": 0,
+      "status": "finished",
       "bjt": "01:00"
     },
     {
