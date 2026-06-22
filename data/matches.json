@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-21T23:51:40Z",
+  "updated_at": "2026-06-22T04:22:45Z",
   "matches": [
     {
       "id": 1,
@@ -430,7 +430,7 @@
       "away": "佛得角",
       "home_score": 2,
       "away_score": 2,
-      "status": "live",
+      "status": "finished",
       "bjt": "06:00"
     },
     {
@@ -439,9 +439,9 @@
       "group": "G",
       "home": "新西兰",
       "away": "埃及",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 1,
+      "away_score": 3,
+      "status": "finished",
       "bjt": "09:00"
     },
     {
