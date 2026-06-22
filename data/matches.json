@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-22T19:30:20Z",
+  "updated_at": "2026-06-22T22:03:33Z",
   "matches": [
     {
       "id": 1,
@@ -461,9 +461,9 @@
       "group": "I",
       "home": "法国",
       "away": "伊拉克",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "live",
       "bjt": "05:00"
     },
     {
