@@ -269,17 +269,11 @@ function yesterdayStat(matches,pdata){
 }
 
 function render(matches,pdata){
-  const upcoming=(matches||[]).filter(m=>m.status==='upcoming').sort((a,b)=>(a.date+(a.bjt||'')).localeCompare(b.date+(b.bjt||'')));
-  const dates=[...new Set(upcoming.map(m=>m.date))];
-  let ms=[],usedDates=[];
-  for(const d of dates){
-    usedDates.push(d);
-    ms=upcoming.filter(m=>usedDates.includes(m.date));
-    if(ms.length>=4)break;
-  }
-  const nd=usedDates[0]||null;
+  const tmrw=new Date(Date.now()+8*3600000+86400000);
+  const nd=[tmrw.getUTCFullYear(),String(tmrw.getUTCMonth()+1).padStart(2,'0'),String(tmrw.getUTCDate()).padStart(2,'0')].join('-');
+  const ms=(matches||[]).filter(m=>m.date===nd).sort((a,b)=>(a.bjt||'').localeCompare(b.bjt||''));
 
-  const dd=nd||new Date(Date.now()+8*3600000).toISOString().slice(0,10);
+  const dd=nd;
   const dt=new Date(dd+'T12:00:00+08:00');
   const wd=['日','一','二','三','四','五','六'][dt.getDay()];
   const dl=`${dt.getMonth()+1}月${dt.getDate()}日（周${wd}）· 北京时间`;
@@ -291,9 +285,10 @@ function render(matches,pdata){
   const empty='<div class="no-data">暂无待开赛比赛</div>';
 
   document.getElementById('cards-area').innerHTML=ms.length?ms.map(m=>predCard(m,jp)).join(''):empty;
-  document.getElementById('analysis-a').innerHTML=ms.length?ms.slice(0,2).map(m=>analysisCard(m,jp)).join(''):empty;
-  const rest=ms.slice(2,4);
-  document.getElementById('analysis-b').innerHTML=rest.length?rest.map(m=>analysisCard(m,jp)).join(''):'<div class="no-data">本日场次不足4场</div>';
+  const half=Math.ceil(ms.length/2);
+  document.getElementById('analysis-a').innerHTML=ms.length?ms.slice(0,half).map(m=>analysisCard(m,jp)).join(''):empty;
+  const rest=ms.slice(half);
+  document.getElementById('analysis-b').innerHTML=rest.length?rest.map(m=>analysisCard(m,jp)).join(''):'<div class="no-data">本日比赛不足</div>';
 }
 
 const FB_M=[
