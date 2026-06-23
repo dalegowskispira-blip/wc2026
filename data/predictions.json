@@ -526,12 +526,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-23T16:31:53Z",
+  "updated_at": "2026-06-23T19:09:23Z",
   "summary": {
-    "total": 40,
-    "correct": 31,
+    "total": 41,
+    "correct": 32,
     "wrong": 9,
-    "accuracy": 77.5
+    "accuracy": 78.0
   },
   "records": [
     {
@@ -1077,6 +1077,18 @@
         "reason": "约旦先入球（奥尔万破门）一度领先，本宝阿里定位球扳平，古伊里第82分钟定位球破门绝杀。胜负方向预测正确，阿尔及利亚首战0-3负于阿根廷后及时回血，比分略高于预测的小胜差距，约旦世界杯首秀虽两连败但展现出顽强战意。",
         "generated_at": "2026-06-23T16:00:00Z"
       }
+    },
+    {
+      "match_id": 45,
+      "home": "葡萄牙",
+      "away": "乌兹别克",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-1",
+      "actual_score": "5-0",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
     }
   ]
 }
