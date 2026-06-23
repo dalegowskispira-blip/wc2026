@@ -526,12 +526,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-23T21:14:45Z",
+  "updated_at": "2026-06-23T22:47:05Z",
   "summary": {
-    "total": 41,
+    "total": 42,
     "correct": 32,
-    "wrong": 9,
-    "accuracy": 78.0
+    "wrong": 10,
+    "accuracy": 76.2
   },
   "records": [
     {
@@ -1088,6 +1088,18 @@
       "actual_score": "5-0",
       "result": "correct",
       "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 46,
+      "home": "英格兰",
+      "away": "加纳",
+      "predicted": "主胜",
+      "actual": "平局",
+      "predicted_score": "2-0",
+      "actual_score": "0-0",
+      "result": "wrong",
+      "confidence": "高",
       "review": null
     }
   ]
