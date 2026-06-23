@@ -258,10 +258,10 @@ function analysisCard(m,jp){
 }
 
 function yesterdayStat(matches,pdata){
-  const yest=new Date(Date.now()+8*3600000-86400000);
-  const ystr=[yest.getUTCFullYear(),String(yest.getUTCMonth()+1).padStart(2,'0'),String(yest.getUTCDate()).padStart(2,'0')].join('-');
   const jp=pdata?.predictions||null;
-  const ms=(matches||[]).filter(m=>m.date===ystr&&m.status==='finished'&&m.home_score!=null&&m.away_score!=null);
+  const finished=(matches||[]).filter(m=>m.status==='finished'&&m.home_score!=null&&m.away_score!=null);
+  const ystr=finished.map(m=>m.date).sort().pop();
+  const ms=finished.filter(m=>m.date===ystr);
   if(ms.length){
     const actual=m=>`${m.home_score}-${m.away_score}`;
     const c=ms.filter(m=>{
