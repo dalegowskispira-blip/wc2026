@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-23T19:09:12Z",
+  "updated_at": "2026-06-23T21:14:45Z",
   "matches": [
     {
       "id": 1,
@@ -505,8 +505,8 @@
       "group": "L",
       "home": "英格兰",
       "away": "加纳",
-      "home_score": null,
-      "away_score": null,
+      "home_score": 0,
+      "away_score": 0,
       "status": "upcoming",
       "bjt": "04:00"
     },
