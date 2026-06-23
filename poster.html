@@ -260,12 +260,18 @@ function analysisCard(m,jp){
 function yesterdayStat(matches,pdata){
   const yest=new Date(Date.now()+8*3600000-86400000);
   const ystr=[yest.getUTCFullYear(),String(yest.getUTCMonth()+1).padStart(2,'0'),String(yest.getUTCDate()).padStart(2,'0')].join('-');
-  const mm={};(matches||[]).forEach(m=>mm[m.id]=m);
-  const recs=(pdata?.records||[]).filter(r=>mm[r.match_id]?.date===ystr&&r.result!=='pending');
-  if(recs.length){const c=recs.filter(r=>r.result==='correct').length;return`昨日方向 ${recs.length} 中 ${c}`}
-  const all=(pdata?.records||[]).filter(r=>r.result!=='pending');
-  if(all.length){const c=all.filter(r=>r.result==='correct').length;return`累计命中 ${c}/${all.length}`}
-  return'方向命中统计';
+  const jp=pdata?.predictions||null;
+  const ms=(matches||[]).filter(m=>m.date===ystr&&m.status==='finished'&&m.home_score!=null&&m.away_score!=null);
+  if(ms.length){
+    const actual=m=>`${m.home_score}-${m.away_score}`;
+    const c=ms.filter(m=>{
+      const sc=deriveScores(m.home,m.away,jp);
+      const all=[...(sc?.main||[]),...(sc?.secondary||[]),...(sc?.upset||[])];
+      return all.includes(actual(m));
+    }).length;
+    return`昨日比分 ${ms.length} 中 ${c}`;
+  }
+  return'比分命中统计';
 }
 
 function render(matches,pdata){
