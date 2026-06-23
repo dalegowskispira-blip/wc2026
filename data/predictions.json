@@ -526,12 +526,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-23T03:40:51Z",
+  "updated_at": "2026-06-23T16:00:00Z",
   "summary": {
-    "total": 39,
-    "correct": 30,
+    "total": 40,
+    "correct": 31,
     "wrong": 9,
-    "accuracy": 76.9
+    "accuracy": 77.5
   },
   "records": [
     {
@@ -1024,7 +1024,11 @@
       "actual_score": "2-0",
       "result": "correct",
       "confidence": "中",
-      "review": null
+      "review": {
+        "key_player": "梅西",
+        "reason": "梅西梅开二度（第38分钟由阿尔马达挑传后低射破门，补时阶段乱战中近距离推射锁定胜局），生涯世界杯进球数升至18球，超越克洛泽成历史第一人。胜负方向和大致比分均预测准确，奥地利全场未能制造有威胁射门。",
+        "generated_at": "2026-06-23T16:00:00Z"
+      }
     },
     {
       "match_id": 42,
@@ -1036,7 +1040,11 @@
       "actual_score": "3-0",
       "result": "correct",
       "confidence": "高",
-      "review": null
+      "review": {
+        "key_player": "姆巴佩",
+        "reason": "姆巴佩第14分钟禁区外左脚低射首开纪录，随后利用伊拉克门将开球失误送出助攻由登贝莱扩大比分，登贝莱补时阶段再下一城完成3-0。比赛因天气中断近两小时仍未影响法国节奏，胜负方向和比分均预测精准，伊拉克全场被压制未制造实质威胁。",
+        "generated_at": "2026-06-23T16:00:00Z"
+      }
     },
     {
       "match_id": 43,
@@ -1048,7 +1056,27 @@
       "actual_score": "3-2",
       "result": "correct",
       "confidence": "低",
-      "review": null
+      "review": {
+        "key_player": "哈兰德",
+        "reason": "哈兰德梅开二度（第48、58分钟），霍尔姆格伦·佩德森第43分钟先入一球，塞内加尔萨尔两次破门（第53分钟及补时阶段）制造悬念但未能逆转。胜负方向预测正确，比分略低估——双方进攻效率均高于预期，哈兰德继续刷新个人世界杯进球纪录。",
+        "generated_at": "2026-06-23T16:00:00Z"
+      }
+    },
+    {
+      "match_id": 44,
+      "home": "约旦",
+      "away": "阿尔及利亚",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "0-1",
+      "actual_score": "1-2",
+      "result": "correct",
+      "confidence": "中",
+      "review": {
+        "key_player": "古伊里",
+        "reason": "约旦先入球（奥尔万破门）一度领先，本宝阿里定位球扳平，古伊里第82分钟定位球破门绝杀。胜负方向预测正确，阿尔及利亚首战0-3负于阿根廷后及时回血，比分略高于预测的小胜差距，约旦世界杯首秀虽两连败但展现出顽强战意。",
+        "generated_at": "2026-06-23T16:00:00Z"
+      }
     }
   ]
 }
