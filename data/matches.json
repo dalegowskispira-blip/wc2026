@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-24T20:18:03Z",
+  "updated_at": "2026-06-24T21:53:59Z",
   "matches": [
     {
       "id": 1,
@@ -538,9 +538,9 @@
       "group": "B",
       "home": "瑞士",
       "away": "加拿大",
-      "home_score": 1,
-      "away_score": 0,
-      "status": "live",
+      "home_score": 2,
+      "away_score": 1,
+      "status": "finished",
       "bjt": "03:00"
     },
     {
@@ -549,9 +549,9 @@
       "group": "B",
       "home": "波黑",
       "away": "卡塔尔",
-      "home_score": 2,
+      "home_score": 3,
       "away_score": 1,
-      "status": "live",
+      "status": "finished",
       "bjt": "03:00"
     },
     {

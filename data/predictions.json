@@ -664,12 +664,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-24T20:18:03Z",
+  "updated_at": "2026-06-24T21:54:21Z",
   "summary": {
-    "total": 44,
-    "correct": 34,
-    "wrong": 10,
-    "accuracy": 77.3
+    "total": 46,
+    "correct": 35,
+    "wrong": 11,
+    "accuracy": 76.1
   },
   "records": [
     {
@@ -1260,6 +1260,30 @@
       "actual": "主胜",
       "predicted_score": "2-0",
       "actual_score": "1-0",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 49,
+      "home": "瑞士",
+      "away": "加拿大",
+      "predicted": "平局",
+      "actual": "主胜",
+      "predicted_score": "1-1",
+      "actual_score": "2-1",
+      "result": "wrong",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 50,
+      "home": "波黑",
+      "away": "卡塔尔",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-0",
+      "actual_score": "3-1",
       "result": "correct",
       "confidence": "中",
       "review": null
