@@ -48,15 +48,15 @@ body{background:#06060f;display:flex;flex-direction:column;align-items:center;pa
   overflow:hidden;
 }
 
-/* ── Shot1 坐标（header 含 stat bar ≈ 90px）── */
-#shot1 .ph  {height:90px}
-#shot1 .ds  {top:90px}
-#shot1 .content{top:114px;bottom:44px;padding:8px 12px 3px}
+/* ── 含 stat bar 的页（header ≈ 90px）── */
+.shot.has-stat .ph  {height:90px}
+.shot.has-stat .ds  {top:90px}
+.shot.has-stat .content{top:114px;bottom:44px;padding:8px 12px 3px}
 
-/* ── Shot2 / Shot3 坐标（header 无 stat bar ≈ 65px）── */
-#shot2 .ph,#shot3 .ph {height:65px}
-#shot2 .ds,#shot3 .ds {top:65px}
-#shot2 .content,#shot3 .content{top:89px;bottom:44px;padding:10px 12px 4px}
+/* ── 无 stat bar 的页（header ≈ 65px）── */
+.shot.no-stat .ph {height:65px}
+.shot.no-stat .ds {top:65px}
+.shot.no-stat .content{top:89px;bottom:44px;padding:10px 12px 4px}
 
 /* ── header 元素 ── */
 .ph-title{font-size:20px;font-weight:800;color:#f5c200;letter-spacing:1px;line-height:1}
@@ -114,51 +114,7 @@ body{background:#06060f;display:flex;flex-direction:column;align-items:center;pa
 </head>
 <body>
 
-<div class="sep" style="border-top:none;padding-top:0">📸 截图块一 — 比分预测</div>
-
-<div class="shot" id="shot1">
-  <div class="ph">
-    <div class="ph-title">⚽ WC2026 今日比分参考</div>
-    <div class="ph-sub">三档比分 · 模型倾向 · 娱乐向</div>
-    <div class="ph-stat" id="stat-bar"><span class="ph-stat-label">加载中…</span></div>
-  </div>
-  <div class="ds" id="ds1">北京时间</div>
-  <div class="content" id="cards-area"><div class="no-data">加载中…</div></div>
-  <div class="pf">
-    <div class="pf-disclaimer">娱乐仅供参考 · 理性观赛</div>
-    <div class="pf-brand">WC2026 看板</div>
-  </div>
-</div>
-
-<div class="sep">📸 截图块二 — 判断依据（第1-2场）</div>
-
-<div class="shot" id="shot2">
-  <div class="ph">
-    <div class="ph-title">🔍 WC2026 判断依据（上）</div>
-    <div class="ph-sub">模型分析 · 赛前参考</div>
-  </div>
-  <div class="ds" id="ds2">北京时间</div>
-  <div class="content" id="analysis-a"><div class="no-data">加载中…</div></div>
-  <div class="pf">
-    <div class="pf-disclaimer">娱乐仅供参考 · 理性观赛</div>
-    <div class="pf-brand">WC2026 看板</div>
-  </div>
-</div>
-
-<div class="sep">📸 截图块三 — 判断依据（第3-4场）</div>
-
-<div class="shot" id="shot3">
-  <div class="ph">
-    <div class="ph-title">🔍 WC2026 判断依据（下）</div>
-    <div class="ph-sub">模型分析 · 赛前参考</div>
-  </div>
-  <div class="ds" id="ds3">北京时间</div>
-  <div class="content" id="analysis-b"><div class="no-data">加载中…</div></div>
-  <div class="pf">
-    <div class="pf-disclaimer">娱乐仅供参考 · 理性观赛</div>
-    <div class="pf-brand">WC2026 看板</div>
-  </div>
-</div>
+<div id="poster-root"><div class="sep" style="border-top:none;padding-top:0">加载中…</div></div>
 
 <script>
 const FLAGS={
@@ -274,27 +230,75 @@ function yesterdayStat(matches,pdata){
   return'比分命中统计';
 }
 
+/* 每页容量：比分页每页 4 场、判断依据每页 2 场，超出自动分页 */
+const SCORE_PER_PAGE=4, ANALYSIS_PER_PAGE=2;
+
+function chunk(arr,n){const out=[];for(let i=0;i<arr.length;i+=n)out.push(arr.slice(i,i+n));return out;}
+
+function shotBlock({hasStat,title,sub,statHTML,dateLabel,contentHTML}){
+  return`<div class="shot ${hasStat?'has-stat':'no-stat'}">
+  <div class="ph">
+    <div class="ph-title">${title}</div>
+    <div class="ph-sub">${sub}</div>
+    ${hasStat?`<div class="ph-stat">${statHTML}</div>`:''}
+  </div>
+  <div class="ds">${dateLabel}</div>
+  <div class="content">${contentHTML}</div>
+  <div class="pf">
+    <div class="pf-disclaimer">娱乐仅供参考 · 理性观赛</div>
+    <div class="pf-brand">WC2026 看板</div>
+  </div>
+</div>`;
+}
+function sep(text,first){return`<div class="sep"${first?' style="border-top:none;padding-top:0"':''}>${text}</div>`;}
+
 function render(matches,pdata){
   const tmrw=new Date(Date.now()+8*3600000+86400000);
   const nd=[tmrw.getUTCFullYear(),String(tmrw.getUTCMonth()+1).padStart(2,'0'),String(tmrw.getUTCDate()).padStart(2,'0')].join('-');
   const ms=(matches||[]).filter(m=>m.date===nd).sort((a,b)=>(a.bjt||'').localeCompare(b.bjt||''));
 
-  const dd=nd;
-  const dt=new Date(dd+'T12:00:00+08:00');
+  const dt=new Date(nd+'T12:00:00+08:00');
   const wd=['日','一','二','三','四','五','六'][dt.getDay()];
   const dl=`${dt.getMonth()+1}月${dt.getDate()}日（周${wd}）· 北京时间`;
-  ['ds1','ds2','ds3'].forEach(id=>document.getElementById(id).textContent=dl);
 
-  document.getElementById('stat-bar').innerHTML=`<span class="ph-stat-label">战绩</span><span class="ph-stat-val">${yesterdayStat(matches,pdata)}</span>`;
-
+  const statHTML=`<span class="ph-stat-label">战绩</span><span class="ph-stat-val">${yesterdayStat(matches,pdata)}</span>`;
   const jp=pdata?.predictions||null;
-  const empty='<div class="no-data">暂无待开赛比赛</div>';
+  const root=document.getElementById('poster-root');
 
-  document.getElementById('cards-area').innerHTML=ms.length?ms.map(m=>predCard(m,jp)).join(''):empty;
-  const half=Math.ceil(ms.length/2);
-  document.getElementById('analysis-a').innerHTML=ms.length?ms.slice(0,half).map(m=>analysisCard(m,jp)).join(''):empty;
-  const rest=ms.slice(half);
-  document.getElementById('analysis-b').innerHTML=rest.length?rest.map(m=>analysisCard(m,jp)).join(''):'<div class="no-data">本日比赛不足</div>';
+  if(!ms.length){
+    root.innerHTML=sep('📸 比分预测',true)+shotBlock({
+      hasStat:true,title:'⚽ WC2026 今日比分参考',sub:'三档比分 · 模型倾向 · 娱乐向',
+      statHTML,dateLabel:dl,contentHTML:'<div class="no-data">暂无待开赛比赛</div>'});
+    return;
+  }
+
+  const scorePages=chunk(ms,SCORE_PER_PAGE);
+  const analysisPages=chunk(ms,ANALYSIS_PER_PAGE);
+  let html='';
+
+  // ── 比分预测页（可多页）──
+  scorePages.forEach((grp,i)=>{
+    const tag=scorePages.length>1?`（${i+1}/${scorePages.length}）`:'';
+    html+=sep(`📸 比分预测${tag}`,i===0)+shotBlock({
+      hasStat:i===0,                          // 战绩条只在第一页显示
+      title:`⚽ WC2026 今日比分参考${tag}`,
+      sub:'三档比分 · 模型倾向 · 娱乐向',
+      statHTML,dateLabel:dl,
+      contentHTML:grp.map(m=>predCard(m,jp)).join('')});
+  });
+
+  // ── 判断依据页（可多页）──
+  analysisPages.forEach((grp,i)=>{
+    const tag=analysisPages.length>1?`（${i+1}/${analysisPages.length}）`:'';
+    html+=sep(`📸 判断依据${tag}`)+shotBlock({
+      hasStat:false,
+      title:`🔍 WC2026 判断依据${tag}`,
+      sub:'模型分析 · 赛前参考',
+      dateLabel:dl,
+      contentHTML:grp.map(m=>analysisCard(m,jp)).join('')});
+  });
+
+  root.innerHTML=html;
 }
 
 const FB_M=[
