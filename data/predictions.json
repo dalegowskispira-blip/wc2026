@@ -526,12 +526,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-23T23:59:03Z",
+  "updated_at": "2026-06-24T04:18:48Z",
   "summary": {
-    "total": 42,
-    "correct": 32,
+    "total": 44,
+    "correct": 34,
     "wrong": 10,
-    "accuracy": 76.2
+    "accuracy": 77.3
   },
   "records": [
     {
@@ -1100,6 +1100,30 @@
       "actual_score": "0-0",
       "result": "wrong",
       "confidence": "高",
+      "review": null
+    },
+    {
+      "match_id": 47,
+      "home": "巴拿马",
+      "away": "克罗地亚",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "0-2",
+      "actual_score": "0-1",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 48,
+      "home": "哥伦比亚",
+      "away": "刚果(金)",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-0",
+      "actual_score": "1-0",
+      "result": "correct",
+      "confidence": "中",
       "review": null
     }
   ]
