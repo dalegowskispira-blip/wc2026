@@ -800,12 +800,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-06-25T21:14:03Z",
+  "updated_at": "2026-06-25T22:56:11Z",
   "summary": {
-    "total": 50,
-    "correct": 38,
-    "wrong": 12,
-    "accuracy": 76.0
+    "total": 52,
+    "correct": 39,
+    "wrong": 13,
+    "accuracy": 75.0
   },
   "records": [
     {
@@ -1470,6 +1470,30 @@
       "actual_score": "1-0",
       "result": "correct",
       "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 55,
+      "home": "厄瓜多尔",
+      "away": "德国",
+      "predicted": "客胜",
+      "actual": "主胜",
+      "predicted_score": "1-1",
+      "actual_score": "2-1",
+      "result": "wrong",
+      "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 56,
+      "home": "库拉索",
+      "away": "科特迪瓦",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "0-1",
+      "actual_score": "0-2",
+      "result": "correct",
+      "confidence": "中",
       "review": null
     }
   ]
