@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-25T19:27:18Z",
+  "updated_at": "2026-06-25T21:14:03Z",
   "matches": [
     {
       "id": 1,
@@ -604,9 +604,9 @@
       "group": "E",
       "home": "厄瓜多尔",
       "away": "德国",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 1,
+      "away_score": 1,
+      "status": "live",
       "bjt": "04:00"
     },
     {
@@ -615,9 +615,9 @@
       "group": "E",
       "home": "库拉索",
       "away": "科特迪瓦",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "live",
       "bjt": "04:00"
     },
     {
