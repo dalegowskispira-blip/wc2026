@@ -1853,18 +1853,20 @@ function renderFocus() {
     return {p:4, tag:'正路走势', cls:'focus-tag-normal'};
   }
 
-  // 取最近4场 upcoming，按日期+BJT升序
-  const next4 = matchesData
+  // 取下一个还有 upcoming 比赛的日期（BJT），展示该日全部比赛
+  const upcoming = matchesData
     .filter(m => m.status === 'upcoming')
-    .sort((a, b) => (a.date + (a.bjt||'')).localeCompare(b.date + (b.bjt||'')))
-    .slice(0, 4);
+    .sort((a, b) => (a.date + (a.bjt||'')).localeCompare(b.date + (b.bjt||'')));
 
-  if (!next4.length) {
+  if (!upcoming.length) {
     document.getElementById('focus-content').innerHTML = '<div class="no-data"><div class="no-data-icon">🏆</div><div>全部比赛已结束</div></div>';
     return;
   }
 
-  const header = '<div style="font-size:11px;color:var(--t2);margin-bottom:14px">接下来4场 · 按时间排列</div>';
+  const nextDate = upcoming[0].date;
+  const next4 = upcoming.filter(m => m.date === nextDate);
+
+  const header = '<div style="font-size:11px;color:var(--t2);margin-bottom:14px">' + nextDate + ' 全部 ' + next4.length + ' 场 · 按时间排列</div>';
 
   const cards = next4.map(m => {
     const pr = getPred(m.home, m.away);
