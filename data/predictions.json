@@ -800,12 +800,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-06-25T01:32:09Z",
+  "updated_at": "2026-06-25T06:09:32Z",
   "summary": {
-    "total": 48,
-    "correct": 37,
-    "wrong": 11,
-    "accuracy": 77.1
+    "total": 50,
+    "correct": 38,
+    "wrong": 12,
+    "accuracy": 76.0
   },
   "records": [
     {
@@ -1446,6 +1446,30 @@
       "actual_score": "0-3",
       "result": "correct",
       "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 53,
+      "home": "捷克",
+      "away": "墨西哥",
+      "predicted": "主胜",
+      "actual": "客胜",
+      "predicted_score": "1-1",
+      "actual_score": "0-3",
+      "result": "wrong",
+      "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 54,
+      "home": "南非",
+      "away": "韩国",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "1-1",
+      "actual_score": "1-0",
+      "result": "correct",
+      "confidence": "低",
       "review": null
     }
   ]
