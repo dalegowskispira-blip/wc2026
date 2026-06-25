@@ -664,12 +664,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-24T23:04:55Z",
+  "updated_at": "2026-06-25T01:32:09Z",
   "summary": {
-    "total": 46,
-    "correct": 35,
+    "total": 48,
+    "correct": 37,
     "wrong": 11,
-    "accuracy": 76.1
+    "accuracy": 77.1
   },
   "records": [
     {
@@ -1284,6 +1284,30 @@
       "actual": "主胜",
       "predicted_score": "2-0",
       "actual_score": "3-1",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 51,
+      "home": "摩洛哥",
+      "away": "海地",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-0",
+      "actual_score": "4-2",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 52,
+      "home": "苏格兰",
+      "away": "巴西",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "0-2",
+      "actual_score": "0-3",
       "result": "correct",
       "confidence": "中",
       "review": null

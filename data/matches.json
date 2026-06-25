@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-24T23:04:55Z",
+  "updated_at": "2026-06-25T01:31:47Z",
   "matches": [
     {
       "id": 1,
@@ -560,9 +560,9 @@
       "group": "C",
       "home": "摩洛哥",
       "away": "海地",
-      "home_score": 2,
+      "home_score": 4,
       "away_score": 2,
-      "status": "live",
+      "status": "finished",
       "bjt": "06:00"
     },
     {
@@ -572,8 +572,8 @@
       "home": "苏格兰",
       "away": "巴西",
       "home_score": 0,
-      "away_score": 2,
-      "status": "live",
+      "away_score": 3,
+      "status": "finished",
       "bjt": "06:00"
     },
     {
@@ -582,9 +582,9 @@
       "group": "A",
       "home": "捷克",
       "away": "墨西哥",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 0,
+      "status": "live",
       "bjt": "09:00"
     },
     {
@@ -593,9 +593,9 @@
       "group": "A",
       "home": "南非",
       "away": "韩国",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 0,
+      "status": "live",
       "bjt": "09:00"
     },
     {
