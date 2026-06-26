@@ -800,12 +800,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-06-26T00:12:37Z",
+  "updated_at": "2026-06-26T04:50:37Z",
   "summary": {
-    "total": 52,
-    "correct": 39,
-    "wrong": 13,
-    "accuracy": 75.0
+    "total": 56,
+    "correct": 41,
+    "wrong": 15,
+    "accuracy": 73.2
   },
   "records": [
     {
@@ -1492,6 +1492,54 @@
       "actual": "客胜",
       "predicted_score": "0-1",
       "actual_score": "0-2",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 57,
+      "home": "突尼斯",
+      "away": "荷兰",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "0-2",
+      "actual_score": "1-3",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 58,
+      "home": "日本",
+      "away": "瑞典",
+      "predicted": "主胜",
+      "actual": "平局",
+      "predicted_score": "1-1",
+      "actual_score": "1-1",
+      "result": "wrong",
+      "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 59,
+      "home": "土耳其",
+      "away": "美国",
+      "predicted": "客胜",
+      "actual": "主胜",
+      "predicted_score": "1-1",
+      "actual_score": "3-2",
+      "result": "wrong",
+      "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 60,
+      "home": "巴拉圭",
+      "away": "澳大利亚",
+      "predicted": "平局",
+      "actual": "平局",
+      "predicted_score": "0-0",
+      "actual_score": "0-0",
       "result": "correct",
       "confidence": "中",
       "review": null
