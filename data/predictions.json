@@ -936,12 +936,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-26T20:47:38Z",
+  "updated_at": "2026-06-26T22:15:03Z",
   "summary": {
-    "total": 56,
-    "correct": 41,
+    "total": 58,
+    "correct": 43,
     "wrong": 15,
-    "accuracy": 73.2
+    "accuracy": 74.1
   },
   "records": [
     {
@@ -1678,6 +1678,30 @@
       "actual_score": "0-0",
       "result": "correct",
       "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 61,
+      "home": "挪威",
+      "away": "法国",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "1-2",
+      "actual_score": "1-4",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 62,
+      "home": "塞内加尔",
+      "away": "伊拉克",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "1-1",
+      "actual_score": "5-0",
+      "result": "correct",
+      "confidence": "低",
       "review": null
     }
   ]
