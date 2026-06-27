@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-26T23:42:59Z",
+  "updated_at": "2026-06-27T03:34:19Z",
   "matches": [
     {
       "id": 1,
@@ -692,9 +692,9 @@
       "group": "H",
       "home": "乌拉圭",
       "away": "西班牙",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "finished",
       "bjt": "08:00"
     },
     {
@@ -703,9 +703,9 @@
       "group": "H",
       "home": "佛得角",
       "away": "沙特",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 0,
+      "status": "finished",
       "bjt": "08:00"
     },
     {
@@ -714,8 +714,8 @@
       "group": "G",
       "home": "新西兰",
       "away": "比利时",
-      "home_score": null,
-      "away_score": null,
+      "home_score": 0,
+      "away_score": 1,
       "status": "upcoming",
       "bjt": "11:00"
     },
@@ -725,9 +725,9 @@
       "group": "G",
       "home": "埃及",
       "away": "伊朗",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 1,
+      "away_score": 1,
+      "status": "live",
       "bjt": "11:00"
     },
     {
