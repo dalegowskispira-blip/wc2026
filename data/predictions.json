@@ -936,12 +936,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-27T03:34:41Z",
+  "updated_at": "2026-06-27T06:53:37Z",
   "summary": {
-    "total": 60,
-    "correct": 44,
-    "wrong": 16,
-    "accuracy": 73.3
+    "total": 62,
+    "correct": 45,
+    "wrong": 17,
+    "accuracy": 72.6
   },
   "records": [
     {
@@ -1724,6 +1724,30 @@
       "actual": "平局",
       "predicted_score": "1-0",
       "actual_score": "0-0",
+      "result": "wrong",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 65,
+      "home": "新西兰",
+      "away": "比利时",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "0-2",
+      "actual_score": "1-5",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 66,
+      "home": "埃及",
+      "away": "伊朗",
+      "predicted": "主胜",
+      "actual": "平局",
+      "predicted_score": "1-0",
+      "actual_score": "1-1",
       "result": "wrong",
       "confidence": "中",
       "review": null

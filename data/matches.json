@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-27T03:34:19Z",
+  "updated_at": "2026-06-27T06:53:15Z",
   "matches": [
     {
       "id": 1,
@@ -714,9 +714,9 @@
       "group": "G",
       "home": "新西兰",
       "away": "比利时",
-      "home_score": 0,
-      "away_score": 1,
-      "status": "upcoming",
+      "home_score": 1,
+      "away_score": 5,
+      "status": "finished",
       "bjt": "11:00"
     },
     {
@@ -727,7 +727,7 @@
       "away": "伊朗",
       "home_score": 1,
       "away_score": 1,
-      "status": "live",
+      "status": "finished",
       "bjt": "11:00"
     },
     {
