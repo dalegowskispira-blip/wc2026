@@ -1085,12 +1085,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-27T22:03:52Z",
+  "updated_at": "2026-06-27T23:34:35Z",
   "summary": {
-    "total": 62,
-    "correct": 45,
+    "total": 64,
+    "correct": 47,
     "wrong": 17,
-    "accuracy": 72.6
+    "accuracy": 73.4
   },
   "records": [
     {
@@ -1898,6 +1898,30 @@
       "predicted_score": "1-0",
       "actual_score": "1-1",
       "result": "wrong",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 71,
+      "home": "巴拿马",
+      "away": "英格兰",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "0-3",
+      "actual_score": "0-2",
+      "result": "correct",
+      "confidence": "高",
+      "review": null
+    },
+    {
+      "match_id": 72,
+      "home": "克罗地亚",
+      "away": "加纳",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-1",
+      "actual_score": "2-1",
+      "result": "correct",
       "confidence": "中",
       "review": null
     }

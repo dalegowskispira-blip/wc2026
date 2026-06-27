@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-27T22:03:52Z",
+  "updated_at": "2026-06-27T23:34:13Z",
   "matches": [
     {
       "id": 1,
@@ -781,8 +781,8 @@
       "home": "巴拿马",
       "away": "英格兰",
       "home_score": 0,
-      "away_score": 0,
-      "status": "live",
+      "away_score": 2,
+      "status": "finished",
       "bjt": "05:00"
     },
     {
@@ -791,9 +791,9 @@
       "group": "L",
       "home": "克罗地亚",
       "away": "加纳",
-      "home_score": 1,
-      "away_score": 0,
-      "status": "live",
+      "home_score": 2,
+      "away_score": 1,
+      "status": "finished",
       "bjt": "05:00"
     }
   ]
