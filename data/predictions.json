@@ -1173,12 +1173,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-06-28T20:14:42Z",
+  "updated_at": "2026-06-28T21:38:22Z",
   "summary": {
-    "total": 68,
-    "correct": 49,
+    "total": 69,
+    "correct": 50,
     "wrong": 19,
-    "accuracy": 72.1
+    "accuracy": 72.5
   },
   "records": [
     {
@@ -2057,6 +2057,18 @@
       "actual": "客胜",
       "predicted_score": "0-3",
       "actual_score": "1-3",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 73,
+      "home": "南非",
+      "away": "加拿大",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "1-2",
+      "actual_score": "0-1",
       "result": "correct",
       "confidence": "中",
       "review": null
