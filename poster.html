@@ -200,7 +200,7 @@ function predCard(m,jp){
   const sc=deriveScores(m.home,m.away,jp);
   const hf=FLAGS[m.home]||'🏳️',af=FLAGS[m.away]||'🏳️';
   return`<div class="card">
-<div class="card-head"><div class="card-teams">${hf} ${m.home} <span style="color:rgba(255,255,255,.28);font-weight:400">vs</span> ${m.away} ${af}</div><div class="card-meta"><span class="card-time">${m.bjt||''} BJT</span><span class="gpill">${m.group}组</span></div></div>
+<div class="card-head"><div class="card-teams">${hf} ${m.home} <span style="color:rgba(255,255,255,.28);font-weight:400">vs</span> ${m.away} ${af}</div><div class="card-meta"><span class="card-time">${m.bjt||''} BJT</span>${m.group?`<span class="gpill">${m.group}组</span>`:(m.stage?`<span class="gpill">${m.stage}</span>`:'')}</div></div>
 ${sc?`<div class="card-lean">模型倾向 <span>${sc.dirLabel}</span></div>`:''}
 <div class="chips">${chip('chip-main','主推',sc?.main)}${chip('chip-secondary','次选',sc?.secondary)}${chip('chip-upset','爆冷',sc?.upset)}</div>
 </div>`;
@@ -210,7 +210,7 @@ function analysisCard(m,jp){
   const sc=deriveScores(m.home,m.away,jp);
   const hf=FLAGS[m.home]||'🏳️',af=FLAGS[m.away]||'🏳️';
   const body=sc?.analysis?`<div class="ac-text">${sc.analysis}</div>`:`<div class="ac-pending">分析生成中…</div>`;
-  return`<div class="ac"><div class="ac-head"><div class="ac-teams">${hf} ${m.home} <span style="color:rgba(255,255,255,.28);font-weight:400">vs</span> ${m.away} ${af}</div><div class="ac-meta"><span class="card-time">${m.bjt||''} BJT</span><span class="gpill">${m.group}组</span></div></div>${body}</div>`;
+  return`<div class="ac"><div class="ac-head"><div class="ac-teams">${hf} ${m.home} <span style="color:rgba(255,255,255,.28);font-weight:400">vs</span> ${m.away} ${af}</div><div class="ac-meta"><span class="card-time">${m.bjt||''} BJT</span>${m.group?`<span class="gpill">${m.group}组</span>`:(m.stage?`<span class="gpill">${m.stage}</span>`:'')}</div></div>${body}</div>`;
 }
 
 function yesterdayStat(matches,pdata){
