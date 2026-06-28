@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-28T03:57:34Z",
+  "updated_at": "2026-06-28T07:55:10Z",
   "matches": [
     {
       "id": 1,
@@ -736,9 +736,9 @@
       "group": "J",
       "home": "阿尔及利亚",
       "away": "奥地利",
-      "home_score": 2,
-      "away_score": 2,
-      "status": "live",
+      "home_score": 3,
+      "away_score": 3,
+      "status": "finished",
       "bjt": "10:00"
     },
     {
@@ -749,7 +749,7 @@
       "away": "阿根廷",
       "home_score": 1,
       "away_score": 3,
-      "status": "live",
+      "status": "finished",
       "bjt": "10:00"
     },
     {
