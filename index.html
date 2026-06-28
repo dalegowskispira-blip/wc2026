@@ -315,6 +315,26 @@ body{background:var(--bg);color:var(--t1);font-family:var(--font);min-height:100
 .focus-score-live{color:#fca5a5}
 @keyframes livepulse{0%,100%{opacity:1}50%{opacity:.55}}
 
+/* ── 晋级路线图 ── */
+.br-intro{font-size:11px;color:var(--t3);margin-bottom:12px}
+.br-stage{margin-bottom:4px}
+.br-stage-hd{display:flex;align-items:baseline;gap:8px;margin:12px 0 8px}
+.br-stage-name{font-size:15px;font-weight:700;color:var(--ac2)}
+.br-stage-sub{font-size:11px;color:var(--t3)}
+.br-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.br-card{background:var(--card);border:1px solid var(--b1);border-radius:10px;padding:10px;cursor:pointer;transition:border-color .15s}
+.br-card:hover{border-color:var(--ac)}
+.br-done{opacity:.95}
+.br-tbd{opacity:.45;cursor:default;border-style:dashed}
+.br-row{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:600;gap:6px}
+.br-team{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.br-vs{text-align:center;font-size:10px;color:var(--t3);margin:3px 0}
+.br-score{text-align:center;font-size:15px;font-weight:800;color:var(--ac2);margin:3px 0;letter-spacing:1px}
+.br-live{color:#fca5a5}
+.br-win{color:var(--green);font-size:11px;flex:none}
+.br-time{font-size:10px;color:var(--t3);text-align:center;margin-top:6px;border-top:1px solid var(--b1);padding-top:5px}
+.br-connector{text-align:center;color:var(--t3);font-size:11px;margin:0 0 8px;letter-spacing:4px}
+
 /* ── V4: 对比雷达 ── */
 .compare-radar-wrap{background:var(--card);border:1px solid var(--b1);border-radius:12px;padding:14px;margin-bottom:16px}
 .compare-radar-title{font-size:10px;color:var(--t2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em}
@@ -348,7 +368,8 @@ body{background:var(--bg);color:var(--t1);font-family:var(--font);min-height:100
     </div>
   </div>
   <div class="nav">
-    <div class="nav-tab active" onclick="showPage('matches',this)">📅 赛程预测</div>
+    <div class="nav-tab active" onclick="showPage('bracket',this)">🏆 晋级路线</div>
+    <div class="nav-tab" onclick="showPage('matches',this)">📅 赛程预测</div>
     <div class="nav-tab" onclick="showPage('accuracy',this)">🎯 预测战绩</div>
     <div class="nav-tab" onclick="showPage('standings',this)">📊 积分榜</div>
     <div class="nav-tab" onclick="showPage('results',this)">📋 历史比分</div>
@@ -356,7 +377,11 @@ body{background:var(--bg);color:var(--t1);font-family:var(--font);min-height:100
     <div class="nav-tab" onclick="showPage('focus',this)">🔥 今日焦点</div>
   </div>
   <div class="wrap">
-    <div class="page active" id="page-matches">
+    <div class="page active" id="page-bracket">
+      <div id="bracket-content"></div>
+    </div>
+
+    <div class="page" id="page-matches">
       <div class="search-row">
         <input type="date" id="date-filter">
         <button class="btn-primary" onclick="filterByDate()">查询</button>
@@ -447,6 +472,8 @@ async function loadData() {
   document.getElementById('date-filter').value = today;
   const todayM = matchesData.filter(m => m.date === today);
   renderMatchList(todayM.length ? todayM : matchesData.filter(m => m.date >= today).slice(0, 20));
+  // 默认首页：晋级路线图
+  renderBracket();
 }
 
 // ────────────────────────────────────────
@@ -1816,6 +1843,61 @@ function showPage(name, tabEl) {
   if (name === 'results') renderResults();
   if (name === 'teams') renderTeamsGrid();
   if (name === 'focus') renderFocus();
+  if (name === 'bracket') renderBracket();
+}
+
+// ────────────────────────────────────────
+// 晋级路线图（首页）：按阶段竖向展示淘汰赛树，
+// 数据来自 matchesData 中带 stage 字段的淘汰赛，未确定的槽位显示「待定」
+// ────────────────────────────────────────
+function renderBracket() {
+  const STAGES = [
+    { key: '1/16决赛', label: '32强', sub: '1/16决赛', count: 16 },
+    { key: '1/8决赛',  label: '16强', sub: '1/8决赛',  count: 8 },
+    { key: '1/4决赛',  label: '8强',  sub: '1/4决赛',  count: 4 },
+    { key: '半决赛',   label: '4强',  sub: '半决赛',   count: 2 },
+    { key: '决赛',     label: '冠军', sub: '决赛',     count: 1 },
+  ];
+  const ko = (matchesData || []).filter(m => m.stage);
+
+  function bracketCard(m) {
+    if (!m) {
+      return '<div class="br-card br-tbd"><div class="br-row"><span class="br-team">待定</span></div>'
+        + '<div class="br-vs">vs</div><div class="br-row"><span class="br-team">待定</span></div>'
+        + '<div class="br-time">赛程待定</div></div>';
+    }
+    const done = m.status === 'finished' && m.home_score != null && m.away_score != null;
+    const live = m.status === 'live';
+    const dt = new Date(m.date + 'T12:00:00');
+    const wd = ['日','一','二','三','四','五','六'][dt.getDay()];
+    const timeStr = (dt.getMonth()+1) + '/' + dt.getDate() + '（周' + wd + '）' + (m.bjt ? ' ' + m.bjt + ' BJT' : '');
+    let mid;
+    if (done) mid = '<div class="br-score">' + m.home_score + ' - ' + m.away_score + '</div>';
+    else if (live) mid = '<div class="br-score br-live">LIVE</div>';
+    else mid = '<div class="br-vs">vs</div>';
+    const hw = done && m.home_score > m.away_score ? '<span class="br-win">✓</span>' : '';
+    const aw = done && m.away_score > m.home_score ? '<span class="br-win">✓</span>' : '';
+    return '<div class="br-card' + (done ? ' br-done' : '') + '" onclick="goToMatch(' + m.id + ', \'' + m.date + '\')">'
+      + '<div class="br-row"><span class="br-team">' + (FLAGS[m.home]||'🏳️') + ' ' + m.home + '</span>' + hw + '</div>'
+      + mid
+      + '<div class="br-row"><span class="br-team">' + (FLAGS[m.away]||'🏳️') + ' ' + m.away + '</span>' + aw + '</div>'
+      + '<div class="br-time">' + timeStr + '</div>'
+      + '</div>';
+  }
+
+  let html = '<div class="br-intro">从32强到决赛的完整晋级路线 · 点击任意比赛查看详情 · 对阵未定的槽位显示「待定」</div>';
+  STAGES.forEach((st, si) => {
+    const ms = ko.filter(m => m.stage === st.key)
+      .sort((a, b) => (a.date + (a.bjt||'')).localeCompare(b.date + (b.bjt||'')));
+    let cards = '';
+    for (let i = 0; i < st.count; i++) cards += bracketCard(ms[i]);
+    html += '<div class="br-stage">'
+      + '<div class="br-stage-hd"><span class="br-stage-name">' + st.label + '</span>'
+      + '<span class="br-stage-sub">' + st.sub + ' · ' + ms.length + '/' + st.count + '</span></div>'
+      + '<div class="br-grid">' + cards + '</div></div>';
+    if (si < STAGES.length - 1) html += '<div class="br-connector">▼ ▼ ▼</div>';
+  });
+  document.getElementById('bracket-content').innerHTML = html;
 }
 
 // 今日焦点：点击跳转到赛程预测并定位到对应比赛
