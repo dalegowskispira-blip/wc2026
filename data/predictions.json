@@ -1085,12 +1085,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-27T23:34:35Z",
+  "updated_at": "2026-06-28T03:57:56Z",
   "summary": {
-    "total": 64,
-    "correct": 47,
-    "wrong": 17,
-    "accuracy": 73.4
+    "total": 66,
+    "correct": 48,
+    "wrong": 18,
+    "accuracy": 72.7
   },
   "records": [
     {
@@ -1921,6 +1921,30 @@
       "actual": "主胜",
       "predicted_score": "2-1",
       "actual_score": "2-1",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 69,
+      "home": "哥伦比亚",
+      "away": "葡萄牙",
+      "predicted": "客胜",
+      "actual": "平局",
+      "predicted_score": "1-2",
+      "actual_score": "0-0",
+      "result": "wrong",
+      "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 70,
+      "home": "刚果(金)",
+      "away": "乌兹别克",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-1",
+      "actual_score": "3-1",
       "result": "correct",
       "confidence": "中",
       "review": null
