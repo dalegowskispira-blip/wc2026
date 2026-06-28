@@ -897,7 +897,7 @@ function renderMatchCard(m) {
   const awayTacHTML = awayTactic ? `<span class="tactic-tag ${awayTactic.cls}">${awayTactic.tag}</span>` : '';
 
   // 冷门预警
-  const groupKey = m.group + '组';
+  const groupKey = m.group ? m.group + '组' : '';
   const upsetRisk = !done && !live && pred ? getUpsetRisk(m.home, m.away, pred) : null;
   const upsetHTML = upsetRisk ? `<div class="upset-row">
     <span class="upset-label">冷门预警指数 Upset Risk</span>
@@ -986,7 +986,7 @@ function renderMatchCard(m) {
     <div class="mc-inner">
       <div class="mc-top">
         <div class="mc-meta">
-          <span class="gpill">${m.group}组</span>
+          <span class="gpill">${m.group ? m.group+'组' : (m.stage||'淘汰赛')}</span>
           ${!done && !live && m.bjt ? `<span class="tpill">${m.bjt} BJT</span>` : ''}
           ${homeTacHTML}${awayTacHTML}
         </div>
@@ -1842,7 +1842,7 @@ function renderFocus() {
   function getMatchPriority(m) {
     const pr = getPred(m.home, m.away);
     const pred = pr?.pred;
-    const groupKey = m.group + '组';
+    const groupKey = m.group ? m.group + '组' : '';
     const homeMI = getMI(m.home, groupKey);
     const awayMI = getMI(m.away, groupKey);
     const upset = pred ? getUpsetRisk(m.home, m.away, pred) : null;
@@ -1887,7 +1887,7 @@ function renderFocus() {
       + '<div class="focus-card-teams">' + (FLAGS[m.home]||'🏳️') + ' ' + m.home + ' vs ' + m.away + ' ' + (FLAGS[m.away]||'🏳️') + '</div>'
       + '<div class="focus-card-meta">'
       + '<span>' + m.date + ' ' + (m.bjt||'') + ' BJT</span>'
-      + '<span class="gpill">' + m.group + '组</span>'
+      + '<span class="gpill">' + (m.group ? m.group + '组' : (m.stage||'淘汰赛')) + '</span>'
       + statusBadge
       + '<span class="focus-card-tag ' + priority.cls + '">' + priority.tag + '</span>'
       + '</div></div>'

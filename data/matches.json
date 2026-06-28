@@ -795,6 +795,18 @@
       "away_score": 1,
       "status": "finished",
       "bjt": "05:00"
+    },
+    {
+      "id": 73,
+      "date": "2026-06-29",
+      "stage": "1/16决赛",
+      "group": null,
+      "home": "南非",
+      "away": "加拿大",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "03:00"
     }
   ]
 }
