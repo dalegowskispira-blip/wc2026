@@ -1179,12 +1179,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-06-29T18:29:24Z",
+  "updated_at": "2026-06-29T20:28:34Z",
   "summary": {
-    "total": 69,
-    "correct": 50,
+    "total": 70,
+    "correct": 51,
     "wrong": 19,
-    "accuracy": 72.5
+    "accuracy": 72.9
   },
   "records": [
     {
@@ -2075,6 +2075,18 @@
       "actual": "客胜",
       "predicted_score": "1-2",
       "actual_score": "0-1",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 74,
+      "home": "巴西",
+      "away": "日本",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-1",
+      "actual_score": "2-1",
       "result": "correct",
       "confidence": "中",
       "review": null

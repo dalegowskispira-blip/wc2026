@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-29T18:29:24Z",
+  "updated_at": "2026-06-29T20:28:22Z",
   "matches": [
     {
       "id": 1,
@@ -815,9 +815,9 @@
       "group": null,
       "home": "巴西",
       "away": "日本",
-      "home_score": 1,
+      "home_score": 2,
       "away_score": 1,
-      "status": "live",
+      "status": "finished",
       "bjt": "01:00"
     },
     {
