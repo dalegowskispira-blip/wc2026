@@ -64,6 +64,11 @@ body{background:#06060f;display:flex;flex-direction:column;align-items:center;pa
 .ph-stat{margin-top:7px;display:inline-flex;align-items:center;gap:5px;background:rgba(245,194,0,.08);border:1px solid rgba(245,194,0,.2);border-radius:20px;padding:3px 11px}
 .ph-stat-label{font-size:10.5px;color:rgba(255,255,255,.42)}
 .ph-stat-val{font-size:11.5px;font-weight:700;color:#f5c200;margin-left:3px}
+/* 高命中视觉强化 */
+.ph-stat-val.hot{font-size:14px;color:#ffd633}
+.ph-stat-val.allhit{font-size:16px;color:#ffd84d;text-shadow:0 0 10px rgba(245,194,0,.65)}
+.ph-stat.strong{background:rgba(245,194,0,.16);border-color:rgba(245,194,0,.55);padding:5px 14px;box-shadow:0 0 14px rgba(245,194,0,.25)}
+.ph-stat-badge{margin-left:7px;font-size:11px;font-weight:800;color:#10221a;background:#f5c200;border-radius:20px;padding:2px 9px}
 
 /* ── footer 元素 ── */
 .pf-disclaimer{font-size:10.5px;color:rgba(255,255,255,.2);letter-spacing:.5px}
@@ -225,9 +230,9 @@ function yesterdayStat(matches,pdata){
       const all=[...(sc?.main||[]),...(sc?.secondary||[]),...(sc?.upset||[])];
       return all.includes(actual(m));
     }).length;
-    return`昨日比分 ${ms.length} 中 ${c}`;
+    return{text:`昨日比分 ${ms.length} 中 ${c}`,hit:c,total:ms.length};
   }
-  return'比分命中统计';
+  return{text:'比分命中统计',hit:0,total:0};
 }
 
 /* 每页容量：比分页每页 4 场、判断依据每页 2 场，超出自动分页 */
@@ -235,12 +240,12 @@ const SCORE_PER_PAGE=4, ANALYSIS_PER_PAGE=2;
 
 function chunk(arr,n){const out=[];for(let i=0;i<arr.length;i+=n)out.push(arr.slice(i,i+n));return out;}
 
-function shotBlock({hasStat,title,sub,statHTML,dateLabel,contentHTML}){
+function shotBlock({hasStat,title,sub,statHTML,statClass,dateLabel,contentHTML}){
   return`<div class="shot ${hasStat?'has-stat':'no-stat'}">
   <div class="ph">
     <div class="ph-title">${title}</div>
     <div class="ph-sub">${sub}</div>
-    ${hasStat?`<div class="ph-stat">${statHTML}</div>`:''}
+    ${hasStat?`<div class="${statClass||'ph-stat'}">${statHTML}</div>`:''}
   </div>
   <div class="ds">${dateLabel}</div>
   <div class="content">${contentHTML}</div>
@@ -261,7 +266,12 @@ function render(matches,pdata){
   const wd=['日','一','二','三','四','五','六'][dt.getDay()];
   const dl=`${dt.getMonth()+1}月${dt.getDate()}日（周${wd}）· 北京时间`;
 
-  const statHTML=`<span class="ph-stat-label">战绩</span><span class="ph-stat-val">${yesterdayStat(matches,pdata)}</span>`;
+  const ys=yesterdayStat(matches,pdata);
+  const allHit=ys.total>0&&ys.hit===ys.total;
+  const highHit=ys.total>0&&ys.hit/ys.total>=0.5;
+  const valCls=allHit?'ph-stat-val allhit':(highHit?'ph-stat-val hot':'ph-stat-val');
+  const statCls=allHit?'ph-stat strong':'ph-stat';
+  const statHTML=`<span class="ph-stat-label">战绩</span><span class="${valCls}">${ys.text}</span>${allHit?'<span class="ph-stat-badge">🎯 全中</span>':''}`;
   const jp=pdata?.predictions||null;
   // 阶段标题：淘汰赛用 stage 字段（如 1/16决赛），小组赛阶段统一显示「小组赛」
   const stageLabel=ms.length?(ms[0].stage||(ms[0].group?'小组赛':'')):'';
@@ -272,7 +282,7 @@ function render(matches,pdata){
   if(!ms.length){
     root.innerHTML=sep('📸 比分预测',true)+shotBlock({
       hasStat:true,title:'⚽ WC2026 今日比分参考',sub:'三档比分 · 模型倾向 · 娱乐向',
-      statHTML,dateLabel:dl,contentHTML:'<div class="no-data">暂无待开赛比赛</div>'});
+      statHTML,statClass:statCls,dateLabel:dl,contentHTML:'<div class="no-data">暂无待开赛比赛</div>'});
     return;
   }
 
@@ -287,7 +297,7 @@ function render(matches,pdata){
       hasStat:i===0,                          // 战绩条只在第一页显示
       title:`⚽ WC2026 今日比分参考${tag}`,
       sub:subScore,
-      statHTML,dateLabel:dl,
+      statHTML,statClass:statCls,dateLabel:dl,
       contentHTML:grp.map(m=>predCard(m,jp)).join('')});
   });
 
