@@ -827,10 +827,12 @@
       "group": null,
       "home": "德国",
       "away": "巴拉圭",
-      "home_score": 4,
-      "away_score": 5,
+      "home_score": 1,
+      "away_score": 1,
       "status": "finished",
-      "bjt": "04:30"
+      "bjt": "04:30",
+      "home_pen": 3,
+      "away_pen": 4
     },
     {
       "id": 76,
@@ -839,10 +841,12 @@
       "group": null,
       "home": "荷兰",
       "away": "摩洛哥",
-      "home_score": 4,
-      "away_score": 4,
+      "home_score": 1,
+      "away_score": 1,
       "status": "finished",
-      "bjt": "09:00"
+      "bjt": "09:00",
+      "home_pen": 2,
+      "away_pen": 3
     },
     {
       "id": 77,

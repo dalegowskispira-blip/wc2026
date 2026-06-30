@@ -926,8 +926,9 @@ function renderMatchCard(m) {
     `<div class="kpw-alert"><span class="kpw-icon">🚨</span><span>${a}</span></div>`
   ).join('');
 
+  const hasPenC = done && m.home_pen != null && m.away_pen != null;
   const scoreHTML = done || live
-    ? `<div class="score-num">${m.home_score ?? '–'}<span style="color:var(--t3);margin:0 2px">:</span>${m.away_score ?? '–'}</div><div class="score-lbl">${live ? '⚡比赛中' : '最终'}</div>`
+    ? `<div class="score-num">${m.home_score ?? '–'}<span style="color:var(--t3);margin:0 2px">:</span>${m.away_score ?? '–'}</div><div class="score-lbl">${live ? '⚡比赛中' : (hasPenC ? '点球 '+m.home_pen+'-'+m.away_pen : '最终')}</div>`
     : `<div class="score-vs">VS</div><div class="score-lbl">${m.bjt ? m.bjt + ' BJT' : ''}</div>`;
 
   const spClass = done ? 'sp-done' : live ? 'sp-live' : 'sp-up';
@@ -1881,12 +1882,15 @@ function bracketCard(m) {
   const live = m.status === 'live';
   const dt = new Date(m.date + 'T12:00:00');
   const md = (dt.getMonth()+1) + '/' + dt.getDate();
-  const hw = done && m.home_score > m.away_score;
-  const aw = done && m.away_score > m.home_score;
+  const hasPen = done && m.home_pen != null && m.away_pen != null;
+  // 晋级方：有点球按点球，否则按法定比分
+  const hw = done && (hasPen ? m.home_pen > m.away_pen : m.home_score > m.away_score);
+  const aw = done && (hasPen ? m.away_pen > m.home_pen : m.away_score > m.home_score);
   const hs = done ? '<span class="bk-sc">' + m.home_score + '</span>' : '';
   const as = done ? '<span class="bk-sc">' + m.away_score + '</span>' : '';
   let foot;
-  if (done) foot = '<div class="bk-mt">' + md + ' 已结束</div>';
+  if (done && hasPen) foot = '<div class="bk-mt">' + md + ' · 点球 ' + m.home_pen + '-' + m.away_pen + '</div>';
+  else if (done) foot = '<div class="bk-mt">' + md + ' 已结束</div>';
   else if (live) foot = '<div class="bk-mt bk-mt-live">' + md + ' 进行中</div>';
   else foot = '<div class="bk-mt">' + md + (m.bjt ? ' ' + m.bjt + ' BJT' : ' 待定') + '</div>';
   return '<div class="bk-match' + (done ? ' bk-done' : '') + '" onclick="goToMatch(' + m.id + ', \'' + m.date + '\')">'
@@ -1948,8 +1952,10 @@ function renderBracket() {
   const finalM = stageMs[4][0];
   let champ = null;
   if (finalM && finalM.status === 'finished' && finalM.home_score != null && finalM.away_score != null) {
-    if (finalM.home_score > finalM.away_score) champ = finalM.home;
-    else if (finalM.away_score > finalM.home_score) champ = finalM.away;
+    const fp = finalM.home_pen != null && finalM.away_pen != null;
+    const fh = fp ? finalM.home_pen : finalM.home_score, fa = fp ? finalM.away_pen : finalM.away_score;
+    if (fh > fa) champ = finalM.home;
+    else if (fa > fh) champ = finalM.away;
   }
   const champHTML = '<div class="bk-champion">'
     + (champ

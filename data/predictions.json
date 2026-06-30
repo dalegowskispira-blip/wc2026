@@ -2164,12 +2164,18 @@
       "home": "德国",
       "away": "巴拉圭",
       "predicted": "主胜",
-      "actual": "客胜",
+      "actual": "平局",
       "predicted_score": "2-1",
-      "actual_score": "5-6",
+      "actual_score": "1-1",
       "result": "wrong",
       "confidence": "中",
-      "review": null
+      "review": {
+        "key_player": "",
+        "reason": "90分钟1-1战平，点球大战德国3-4不敌巴拉圭出局，爆出本届最大冷门之一。预测主胜方向错误：德国虽控球占优、哈弗茨头球扳平，但久攻难破巴拉圭铁桶、塔禁区犯规致进球被VAR取消，最终点球失三球落败。",
+        "generated_at": "2026-06-30T12:00:00Z"
+      },
+      "pen_score": "3-4",
+      "advanced": "巴拉圭"
     },
     {
       "match_id": 76,
@@ -2178,10 +2184,16 @@
       "predicted": "主胜",
       "actual": "平局",
       "predicted_score": "2-2",
-      "actual_score": "4-4",
+      "actual_score": "1-1",
       "result": "wrong",
       "confidence": "低",
-      "review": null
+      "review": {
+        "key_player": "",
+        "reason": "90分钟1-1，加时无果，点球荷兰2-3负摩洛哥出局。预测主胜方向错误：加克波先拔头筹，迪奥普第91分钟头球绝平，门将布努点球扑救成为胜负手，摩洛哥延续大赛点球强势。",
+        "generated_at": "2026-06-30T12:00:00Z"
+      },
+      "pen_score": "2-3",
+      "advanced": "摩洛哥"
     }
   ]
 }

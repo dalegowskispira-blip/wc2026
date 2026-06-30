@@ -151,6 +151,15 @@ def update_matches(api_matches):
         hs = full.get("home")
         as_ = full.get("away")
 
+        # 点球大战处理：football-data 的 fullTime 会把点球数并进总比分
+        # (例 90/120分钟 1-1、点球 3-4 → fullTime 返回 4-5)。
+        # 这里拆出真实的法定比分(home_score/away_score)与点球比分(home_pen/away_pen)。
+        pens = score.get("penalties") or {}
+        ph, pa = pens.get("home"), pens.get("away")
+        is_shootout = (score.get("duration") == "PENALTY_SHOOTOUT") or (ph is not None and pa is not None)
+        if is_shootout and hs is not None and as_ is not None and ph is not None and pa is not None:
+            hs, as_ = hs - ph, as_ - pa  # 还原为法定（含加时）比分
+
         utc_date_str = api_m.get("utcDate", "")
         bjt_date = utc_to_bjt_date(utc_date_str)
 
@@ -168,6 +177,15 @@ def update_matches(api_matches):
                     changed = True
                 if as_ is not None and local_m.get("away_score") != as_:
                     local_m["away_score"] = as_
+                    changed = True
+                # 点球比分写入独立字段（非点球场清空，避免残留）
+                new_ph = ph if is_shootout else None
+                new_pa = pa if is_shootout else None
+                if local_m.get("home_pen") != new_ph:
+                    local_m["home_pen"] = new_ph
+                    changed = True
+                if local_m.get("away_pen") != new_pa:
+                    local_m["away_pen"] = new_pa
                     changed = True
                 if changed:
                     updated_count += 1
