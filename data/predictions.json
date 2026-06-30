@@ -1247,12 +1247,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-30T18:57:07Z",
+  "updated_at": "2026-06-30T21:00:30Z",
   "summary": {
-    "total": 72,
-    "correct": 51,
+    "total": 73,
+    "correct": 52,
     "wrong": 21,
-    "accuracy": 70.8
+    "accuracy": 71.2
   },
   "records": [
     {
@@ -2194,6 +2194,18 @@
       },
       "pen_score": "2-3",
       "advanced": "摩洛哥"
+    },
+    {
+      "match_id": 77,
+      "home": "科特迪瓦",
+      "away": "挪威",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "1-1",
+      "actual_score": "1-2",
+      "result": "correct",
+      "confidence": "低",
+      "review": null
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-30T18:57:07Z",
+  "updated_at": "2026-06-30T21:00:19Z",
   "matches": [
     {
       "id": 1,
@@ -857,7 +857,7 @@
       "away": "挪威",
       "home_score": 1,
       "away_score": 2,
-      "status": "live",
+      "status": "finished",
       "bjt": "01:00"
     },
     {
