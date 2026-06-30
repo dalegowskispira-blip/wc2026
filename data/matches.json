@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-30T16:36:37Z",
+  "updated_at": "2026-06-30T18:57:07Z",
   "matches": [
     {
       "id": 1,
@@ -855,9 +855,9 @@
       "group": null,
       "home": "科特迪瓦",
       "away": "挪威",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 1,
+      "away_score": 2,
+      "status": "live",
       "bjt": "01:00"
     },
     {
