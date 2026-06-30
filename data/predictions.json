@@ -1179,12 +1179,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-06-30T00:15:10Z",
+  "updated_at": "2026-06-30T04:45:45Z",
   "summary": {
-    "total": 71,
+    "total": 72,
     "correct": 51,
-    "wrong": 20,
-    "accuracy": 71.8
+    "wrong": 21,
+    "accuracy": 70.8
   },
   "records": [
     {
@@ -2101,6 +2101,18 @@
       "actual_score": "5-6",
       "result": "wrong",
       "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 76,
+      "home": "荷兰",
+      "away": "摩洛哥",
+      "predicted": "主胜",
+      "actual": "平局",
+      "predicted_score": "2-2",
+      "actual_score": "4-4",
+      "result": "wrong",
+      "confidence": "低",
       "review": null
     }
   ]
