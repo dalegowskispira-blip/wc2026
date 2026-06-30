@@ -349,6 +349,7 @@ body{background:var(--bg);color:var(--t1);font-family:var(--font);min-height:100
 .bk-nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
 .bk-w .bk-nm{color:var(--green)}
 .bk-sc{font-weight:800;color:var(--ac2);flex:none}
+.bk-pen{font-size:9px;font-weight:700;color:var(--t3);margin-left:2px}
 .bk-mt{font-size:9px;color:var(--t3);margin-top:3px;border-top:1px solid var(--b1);padding-top:3px;text-align:center}
 .bk-mt-live{color:#fca5a5}
 .bk-champion{align-self:center;text-align:center;background:linear-gradient(135deg,rgba(124,111,255,.16),rgba(245,158,11,.13));border:1px solid var(--b1);border-radius:12px;padding:16px 14px}
@@ -1886,10 +1887,12 @@ function bracketCard(m) {
   // 晋级方：有点球按点球，否则按法定比分
   const hw = done && (hasPen ? m.home_pen > m.away_pen : m.home_score > m.away_score);
   const aw = done && (hasPen ? m.away_pen > m.home_pen : m.away_score > m.home_score);
-  const hs = done ? '<span class="bk-sc">' + m.home_score + '</span>' : '';
-  const as = done ? '<span class="bk-sc">' + m.away_score + '</span>' : '';
+  const penH = hasPen ? '<span class="bk-pen">(' + m.home_pen + ')</span>' : '';
+  const penA = hasPen ? '<span class="bk-pen">(' + m.away_pen + ')</span>' : '';
+  const hs = done ? '<span class="bk-sc">' + m.home_score + penH + '</span>' : '';
+  const as = done ? '<span class="bk-sc">' + m.away_score + penA + '</span>' : '';
   let foot;
-  if (done && hasPen) foot = '<div class="bk-mt">' + md + ' · 点球 ' + m.home_pen + '-' + m.away_pen + '</div>';
+  if (done && hasPen) foot = '<div class="bk-mt">' + md + ' · 点球决出</div>';
   else if (done) foot = '<div class="bk-mt">' + md + ' 已结束</div>';
   else if (live) foot = '<div class="bk-mt bk-mt-live">' + md + ' 进行中</div>';
   else foot = '<div class="bk-mt">' + md + (m.bjt ? ' ' + m.bjt + ' BJT' : ' 待定') + '</div>';
