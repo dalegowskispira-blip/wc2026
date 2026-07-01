@@ -1247,12 +1247,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-06-30T22:50:01Z",
+  "updated_at": "2026-07-01T00:05:57Z",
   "summary": {
-    "total": 73,
-    "correct": 52,
+    "total": 74,
+    "correct": 53,
     "wrong": 21,
-    "accuracy": 71.2
+    "accuracy": 71.6
   },
   "records": [
     {
@@ -2205,6 +2205,18 @@
       "actual_score": "1-2",
       "result": "correct",
       "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 78,
+      "home": "法国",
+      "away": "瑞典",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-1",
+      "actual_score": "3-0",
+      "result": "correct",
+      "confidence": "中",
       "review": null
     }
   ]
