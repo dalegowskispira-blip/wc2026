@@ -1247,12 +1247,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-07-01T00:05:57Z",
+  "updated_at": "2026-07-01T05:05:48Z",
   "summary": {
-    "total": 74,
-    "correct": 53,
+    "total": 75,
+    "correct": 54,
     "wrong": 21,
-    "accuracy": 71.6
+    "accuracy": 72.0
   },
   "records": [
     {
@@ -2215,6 +2215,18 @@
       "actual": "主胜",
       "predicted_score": "2-1",
       "actual_score": "3-0",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 79,
+      "home": "墨西哥",
+      "away": "厄瓜多尔",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "1-0",
+      "actual_score": "2-0",
       "result": "correct",
       "confidence": "中",
       "review": null
