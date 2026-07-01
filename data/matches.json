@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-01T21:06:49Z",
+  "updated_at": "2026-07-01T22:47:19Z",
   "matches": [
     {
       "id": 1,
@@ -903,8 +903,8 @@
       "group": null,
       "home": "比利时",
       "away": "塞内加尔",
-      "home_score": 0,
-      "away_score": 1,
+      "home_score": 2,
+      "away_score": 2,
       "status": "live",
       "bjt": "04:00"
     },
