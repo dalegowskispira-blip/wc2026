@@ -991,6 +991,54 @@
       "away_score": null,
       "status": "upcoming",
       "bjt": "09:30"
+    },
+    {
+      "id": 89,
+      "date": "2026-07-05",
+      "stage": "1/8决赛",
+      "group": null,
+      "home": "巴拉圭",
+      "away": "法国",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "05:00"
+    },
+    {
+      "id": 90,
+      "date": "2026-07-05",
+      "stage": "1/8决赛",
+      "group": null,
+      "home": "加拿大",
+      "away": "摩洛哥",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "06:00"
+    },
+    {
+      "id": 91,
+      "date": "2026-07-06",
+      "stage": "1/8决赛",
+      "group": null,
+      "home": "巴西",
+      "away": "挪威",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "04:00"
+    },
+    {
+      "id": 92,
+      "date": "2026-07-06",
+      "stage": "1/8决赛",
+      "group": null,
+      "home": "墨西哥",
+      "away": "待定",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "08:00"
     }
   ]
 }
