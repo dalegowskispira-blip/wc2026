@@ -1387,12 +1387,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-07-02T00:08:47Z",
+  "updated_at": "2026-07-02T04:40:21Z",
   "summary": {
-    "total": 77,
-    "correct": 56,
+    "total": 78,
+    "correct": 57,
     "wrong": 21,
-    "accuracy": 72.7
+    "accuracy": 73.1
   },
   "records": [
     {
@@ -2393,6 +2393,18 @@
       "actual_score": "3-2",
       "result": "correct",
       "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 82,
+      "home": "美国",
+      "away": "波黑",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-1",
+      "actual_score": "2-0",
+      "result": "correct",
+      "confidence": "中",
       "review": null
     }
   ]
