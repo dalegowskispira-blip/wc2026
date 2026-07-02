@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-02T22:07:31Z",
+  "updated_at": "2026-07-02T23:37:51Z",
   "matches": [
     {
       "id": 1,
@@ -940,9 +940,9 @@
       "group": null,
       "home": "葡萄牙",
       "away": "克罗地亚",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 0,
+      "status": "live",
       "bjt": "07:00"
     },
     {
