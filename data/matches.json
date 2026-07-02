@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-01T22:47:19Z",
+  "updated_at": "2026-07-02T00:08:36Z",
   "matches": [
     {
       "id": 1,
@@ -903,9 +903,9 @@
       "group": null,
       "home": "比利时",
       "away": "塞内加尔",
-      "home_score": 2,
+      "home_score": 3,
       "away_score": 2,
-      "status": "live",
+      "status": "finished",
       "bjt": "04:00"
     },
     {
@@ -915,9 +915,9 @@
       "group": null,
       "home": "美国",
       "away": "波黑",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 0,
+      "status": "live",
       "bjt": "08:00"
     },
     {

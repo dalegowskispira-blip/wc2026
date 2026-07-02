@@ -1317,12 +1317,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-07-01T22:47:19Z",
+  "updated_at": "2026-07-02T00:08:47Z",
   "summary": {
-    "total": 76,
-    "correct": 55,
+    "total": 77,
+    "correct": 56,
     "wrong": 21,
-    "accuracy": 72.4
+    "accuracy": 72.7
   },
   "records": [
     {
@@ -2311,6 +2311,18 @@
       "actual_score": "2-1",
       "result": "correct",
       "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 81,
+      "home": "比利时",
+      "away": "塞内加尔",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-2",
+      "actual_score": "3-2",
+      "result": "correct",
+      "confidence": "低",
       "review": null
     }
   ]
