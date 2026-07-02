@@ -159,6 +159,8 @@ def update_matches(api_matches):
         is_shootout = (score.get("duration") == "PENALTY_SHOOTOUT") or (ph is not None and pa is not None)
         if is_shootout and hs is not None and as_ is not None and ph is not None and pa is not None:
             hs, as_ = hs - ph, as_ - pa  # 还原为法定（含加时）比分
+        # 加时决出（非点球）标记
+        is_aet = score.get("duration") == "EXTRA_TIME"
 
         utc_date_str = api_m.get("utcDate", "")
         bjt_date = utc_to_bjt_date(utc_date_str)
@@ -186,6 +188,10 @@ def update_matches(api_matches):
                     changed = True
                 if local_m.get("away_pen") != new_pa:
                     local_m["away_pen"] = new_pa
+                    changed = True
+                new_aet = True if is_aet else None
+                if local_m.get("aet") != new_aet:
+                    local_m["aet"] = new_aet
                     changed = True
                 if changed:
                     updated_count += 1

@@ -906,7 +906,8 @@
       "home_score": 3,
       "away_score": 2,
       "status": "finished",
-      "bjt": "04:00"
+      "bjt": "04:00",
+      "aet": true
     },
     {
       "id": 82,
@@ -1034,7 +1035,19 @@
       "stage": "1/8决赛",
       "group": null,
       "home": "墨西哥",
-      "away": "待定",
+      "away": "英格兰",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "08:00"
+    },
+    {
+      "id": 93,
+      "date": "2026-07-07",
+      "stage": "1/8决赛",
+      "group": null,
+      "home": "美国",
+      "away": "比利时",
       "home_score": null,
       "away_score": null,
       "status": "upcoming",

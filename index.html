@@ -928,8 +928,9 @@ function renderMatchCard(m) {
   ).join('');
 
   const hasPenC = done && m.home_pen != null && m.away_pen != null;
+  const scoreLbl = live ? '⚡比赛中' : (hasPenC ? '点球 '+m.home_pen+'-'+m.away_pen : (m.aet ? '加时' : '最终'));
   const scoreHTML = done || live
-    ? `<div class="score-num">${m.home_score ?? '–'}<span style="color:var(--t3);margin:0 2px">:</span>${m.away_score ?? '–'}</div><div class="score-lbl">${live ? '⚡比赛中' : (hasPenC ? '点球 '+m.home_pen+'-'+m.away_pen : '最终')}</div>`
+    ? `<div class="score-num">${m.home_score ?? '–'}<span style="color:var(--t3);margin:0 2px">:</span>${m.away_score ?? '–'}</div><div class="score-lbl">${scoreLbl}</div>`
     : `<div class="score-vs">VS</div><div class="score-lbl">${m.bjt ? m.bjt + ' BJT' : ''}</div>`;
 
   const spClass = done ? 'sp-done' : live ? 'sp-live' : 'sp-up';
@@ -1893,6 +1894,7 @@ function bracketCard(m) {
   const as = done ? '<span class="bk-sc">' + m.away_score + penA + '</span>' : '';
   let foot;
   if (done && hasPen) foot = '<div class="bk-mt">' + md + ' · 点球决出</div>';
+  else if (done && m.aet) foot = '<div class="bk-mt">' + md + ' · 加时决出</div>';
   else if (done) foot = '<div class="bk-mt">' + md + ' 已结束</div>';
   else if (live) foot = '<div class="bk-mt bk-mt-live">' + md + ' 进行中</div>';
   else foot = '<div class="bk-mt">' + md + (m.bjt ? ' ' + m.bjt + ' BJT' : ' 待定') + '</div>';
