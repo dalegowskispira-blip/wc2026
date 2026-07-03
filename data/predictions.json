@@ -1387,12 +1387,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-07-02T23:37:51Z",
+  "updated_at": "2026-07-03T03:22:46Z",
   "summary": {
-    "total": 79,
-    "correct": 58,
+    "total": 80,
+    "correct": 59,
     "wrong": 21,
-    "accuracy": 73.4
+    "accuracy": 73.8
   },
   "records": [
     {
@@ -2417,6 +2417,18 @@
       "actual_score": "3-0",
       "result": "correct",
       "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 84,
+      "home": "葡萄牙",
+      "away": "克罗地亚",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "1-1",
+      "actual_score": "2-1",
+      "result": "correct",
+      "confidence": "低",
       "review": null
     }
   ]
