@@ -1044,12 +1044,12 @@ function renderMatchCard(m) {
         <span class="spill ${spClass}">${spText}</span>${upsetTag}
       </div>
       <div class="teams">
-        <div class="team" ${homeKey ? `onclick="showTeam('${homeKey}')"` : ''}>
+        <div class="team" ${homeKey ? `onclick="showTeam('${homeKey}', '${awayKey || ''}')"` : ''}>
           <div class="team-fn"><span class="tf">${FLAGS[m.home]||'🏳️'}</span><span class="tn">${m.home}</span></div>
           <div class="tr">${RANKS[m.home] ? 'FIFA #'+RANKS[m.home] : ''}</div>
         </div>
         <div class="score-box">${scoreHTML}</div>
-        <div class="team r" ${awayKey ? `onclick="showTeam('${awayKey}')"` : ''}>
+        <div class="team r" ${awayKey ? `onclick="showTeam('${awayKey}', '${homeKey || ''}')"` : ''}>
           <div class="team-fn"><span class="tf">${FLAGS[m.away]||'🏳️'}</span><span class="tn">${m.away}</span></div>
           <div class="tr">${RANKS[m.away] ? 'FIFA #'+RANKS[m.away] : ''}</div>
         </div>
@@ -1575,9 +1575,22 @@ function renderTeamsGrid() {
     `).join('');
 }
 
-function showTeam(key) {
+function findKnockoutOpponent(key) {
+  const pending = (matchesData || [])
+    .filter(m => m.stage && m.status !== 'finished' && (m.home === key || m.away === key))
+    .sort((a, b) => (a.date + (a.bjt||'')).localeCompare(b.date + (b.bjt||'')))[0];
+  if (pending) return pending.home === key ? pending.away : pending.home;
+
+  const latest = (matchesData || [])
+    .filter(m => m.stage && (m.home === key || m.away === key))
+    .sort((a, b) => (b.date + (b.bjt||'')).localeCompare(a.date + (a.bjt||'')))[0];
+  return latest ? (latest.home === key ? latest.away : latest.home) : null;
+}
+
+function showTeam(key, opponentKey = '') {
   const t = TEAM_DATA[key];
   if (!t) { alert('该队详细数据即将上线'); return; }
+  const contextOpponentKey = opponentKey && TEAM_DATA[opponentKey] ? opponentKey : findKnockoutOpponent(key);
   radarInstances.forEach(c => { try { c.destroy(); } catch(e){} });
   radarInstances = [];
   window._currentPlayerRadarData = [];
@@ -1722,7 +1735,7 @@ function showTeam(key) {
   }).join('');
 
   document.getElementById('team-detail').innerHTML = `
-    <div class="back-btn" onclick="showPage('teams', document.querySelectorAll('.nav-tab')[4])">← 全部球队</div>
+    <div class="back-btn" onclick="showPage('teams', Array.from(document.querySelectorAll('.nav-tab')).find(t => (t.getAttribute('onclick')||'').includes("'teams'")))">← 全部球队</div>
     <div class="team-hd">
       <div class="team-flag-lg">${t.flag}</div>
       <div>
@@ -1740,7 +1753,7 @@ function showTeam(key) {
       <div class="tsc"><div class="tsc-l">传球成功率</div><div class="tsc-v">${t.stats.pa}</div></div>
     </div>
     <div class="compare-radar-wrap">
-      <div class="compare-radar-title">与组内强敌对比（雷达）</div>
+      <div class="compare-radar-title">${contextOpponentKey ? '与当前淘汰赛对手对比（雷达）' : '与组内强敌对比（雷达）'}</div>
       <canvas id="compare-radar"></canvas>
       <div class="compare-legend" id="compare-legend"></div>
     </div>
@@ -1751,9 +1764,8 @@ function showTeam(key) {
   `;
 
   setTimeout(() => {
-    // V4: 对比雷达图（本队 vs 组内FIFA排名最高对手）
-    // 直接从 TEAM_DATA 里找同组其他队，按 FIFA rank 选最强对手，不依赖积分榜
-    const rivalTeamKey = Object.keys(TEAM_DATA)
+    // 对比雷达图：优先使用当前比赛/淘汰赛对手；没有上下文时退回组内FIFA排名最高对手。
+    const rivalTeamKey = contextOpponentKey || Object.keys(TEAM_DATA)
       .filter(k => k !== key && TEAM_DATA[k].group === t.group && TEAM_DATA[k].stats)
       .sort((a, b) => (TEAM_DATA[a].rank || 999) - (TEAM_DATA[b].rank || 999))[0] || null;
     const rival = rivalTeamKey ? TEAM_DATA[rivalTeamKey] : null;
@@ -1882,8 +1894,8 @@ function bracketCard(m) {
   }
   const done = m.status === 'finished' && m.home_score != null && m.away_score != null;
   const live = m.status === 'live';
-  const dt = new Date(m.date + 'T12:00:00');
-  const md = (dt.getMonth()+1) + '/' + dt.getDate();
+  const dt = m.date ? new Date(m.date + 'T12:00:00') : null;
+  const md = dt ? (dt.getMonth()+1) + '/' + dt.getDate() : '';
   const hasPen = done && m.home_pen != null && m.away_pen != null;
   // 晋级方：有点球按点球，否则按法定比分
   const hw = done && (hasPen ? m.home_pen > m.away_pen : m.home_score > m.away_score);
@@ -1897,12 +1909,57 @@ function bracketCard(m) {
   else if (done && m.aet) foot = '<div class="bk-mt">' + md + ' · 加时决出</div>';
   else if (done) foot = '<div class="bk-mt">' + md + ' 已结束</div>';
   else if (live) foot = '<div class="bk-mt bk-mt-live">' + md + ' 进行中</div>';
+  else if (m.synthetic) foot = '<div class="bk-mt">赛程待定</div>';
   else foot = '<div class="bk-mt">' + md + (m.bjt ? ' ' + m.bjt + ' BJT' : ' 待定') + '</div>';
-  return '<div class="bk-match' + (done ? ' bk-done' : '') + '" onclick="goToMatch(' + m.id + ', \'' + m.date + '\')">'
+  const click = m.id ? ' onclick="goToMatch(' + m.id + ', \'' + m.date + '\')"' : '';
+  return '<div class="bk-match' + (done ? ' bk-done' : '') + (m.synthetic ? ' bk-tbd' : '') + '"' + click + '>'
     + '<div class="bk-tm' + (hw ? ' bk-w' : '') + '"><span class="bk-nm">' + (FLAGS[m.home]||'🏳️') + ' ' + m.home + '</span>' + hs + '</div>'
     + '<div class="bk-tm' + (aw ? ' bk-w' : '') + '"><span class="bk-nm">' + (FLAGS[m.away]||'🏳️') + ' ' + m.away + '</span>' + as + '</div>'
     + foot
     + '</div>';
+}
+
+function getMatchWinner(m) {
+  if (!m || m.status !== 'finished' || m.home_score == null || m.away_score == null) return null;
+  if (m.home_pen != null && m.away_pen != null) {
+    if (m.home_pen > m.away_pen) return m.home;
+    if (m.away_pen > m.home_pen) return m.away;
+    return null;
+  }
+  if (m.home_score > m.away_score) return m.home;
+  if (m.away_score > m.home_score) return m.away;
+  return null;
+}
+
+function makeDerivedBracketMatch(stageKey, home, away, index) {
+  return {
+    synthetic: true,
+    id: null,
+    stage: stageKey,
+    group: null,
+    home: home || '待定',
+    away: away || '待定',
+    home_score: null,
+    away_score: null,
+    status: 'upcoming',
+    date: '',
+    bjt: '',
+    bracket_index: index,
+  };
+}
+
+function fillDerivedStageSlots(stageSlots, prevSlots, stageKey, count) {
+  const out = [];
+  for (let i = 0; i < count; i++) {
+    if (stageSlots[i]) {
+      out.push(stageSlots[i]);
+      continue;
+    }
+    const a = getMatchWinner(prevSlots[i * 2]);
+    const b = getMatchWinner(prevSlots[i * 2 + 1]);
+    out.push(makeDerivedBracketMatch(stageKey, a, b, i));
+  }
+  return out;
 }
 
 function renderBracket() {
@@ -1915,8 +1972,14 @@ function renderBracket() {
     { key: '决赛',     h1: '决赛', h2: '冠军之战', count: 1 },
   ];
   const ko = (matchesData || []).filter(m => m.stage);
-  const stageMs = STAGES.map(st => ko.filter(m => m.stage === st.key)
-    .sort((a, b) => (a.date + (a.bjt||'')).localeCompare(b.date + (b.bjt||''))));
+  const officialStageMs = STAGES.map(st => ko.filter(m => m.stage === st.key)
+    .sort((a, b) => (a.date + (a.bjt||'')).localeCompare(b.date + (b.bjt||'')))
+    .slice(0, st.count));
+  const stageMs = [];
+  stageMs[0] = officialStageMs[0];
+  for (let si = 1; si < STAGES.length; si++) {
+    stageMs[si] = fillDerivedStageSlots(officialStageMs[si], stageMs[si - 1], STAGES[si].key, STAGES[si].count);
+  }
 
   // 把一个阶段的全部对阵按顺序分到左右两个半区
   function half(si, side) {
