@@ -1910,7 +1910,7 @@ function bracketCard(m) {
   else if (done && m.aet) foot = '<div class="bk-mt">' + md + ' · 加时决出</div>';
   else if (done) foot = '<div class="bk-mt">' + md + ' 已结束</div>';
   else if (live) foot = '<div class="bk-mt bk-mt-live">' + md + ' 进行中</div>';
-  else if (m.synthetic) foot = '<div class="bk-mt">赛程待定</div>';
+  else if (m.synthetic) foot = '<div class="bk-mt">' + (md ? md + (m.bjt ? ' ' + m.bjt + ' BJT' : ' 待定') : '赛程待定') + '</div>';
   else foot = '<div class="bk-mt">' + md + (m.bjt ? ' ' + m.bjt + ' BJT' : ' 待定') + '</div>';
   const isEmptySynthetic = m.synthetic && m.home === '待定' && m.away === '待定';
   const click = m.id
@@ -1935,19 +1935,19 @@ function getMatchWinner(m) {
   return null;
 }
 
-function makeDerivedBracketMatch(stageKey, home, away, index) {
+function makeDerivedBracketMatch(stageKey, home, away, index, slot) {
   return {
     synthetic: true,
     id: null,
     stage: stageKey,
     group: null,
-    home: home || '待定',
-    away: away || '待定',
+    home: home || slot?.home || '待定',
+    away: away || slot?.away || '待定',
     home_score: null,
     away_score: null,
     status: 'upcoming',
-    date: '',
-    bjt: '',
+    date: slot?.date || '',
+    bjt: slot?.bjt || '',
     bracket_index: index,
   };
 }
@@ -1955,15 +1955,41 @@ function makeDerivedBracketMatch(stageKey, home, away, index) {
 function fillDerivedStageSlots(stageSlots, prevSlots, stageKey, count) {
   const out = [];
   for (let i = 0; i < count; i++) {
-    if (stageSlots[i]) {
-      out.push(stageSlots[i]);
+    const slot = stageSlots[i];
+    if (slot && slot.status === 'finished') {
+      out.push(slot);
       continue;
     }
     const a = getMatchWinner(prevSlots[i * 2]);
     const b = getMatchWinner(prevSlots[i * 2 + 1]);
-    out.push(makeDerivedBracketMatch(stageKey, a, b, i));
+    if (!a && !b && slot) {
+      out.push(slot);
+      continue;
+    }
+    out.push(makeDerivedBracketMatch(stageKey, a, b, i, slot));
   }
   return out;
+}
+
+function orderStageMatches(matches, stageKey) {
+  const order = {
+    // 1/16 must follow the knockout slot graph, not chronological kickoff order.
+    '1/16决赛': [75,78,73,76,74,77,79,80,83,84,82,81,86,88,85,87],
+    '1/8决赛': [89,90,91,92,93,94,95,96],
+    '1/4决赛': [97,98,99,100],
+    '半决赛': [101,102],
+    '决赛': [104],
+  }[stageKey];
+  if (!order) {
+    return matches.sort((a, b) => (a.date + (a.bjt||'')).localeCompare(b.date + (b.bjt||'')));
+  }
+  const byId = new Map(matches.map(m => [m.id, m]));
+  const ordered = order.map(id => byId.get(id));
+  matches
+    .filter(m => !order.includes(m.id))
+    .sort((a, b) => (a.date + (a.bjt||'')).localeCompare(b.date + (b.bjt||'')))
+    .forEach(m => ordered.push(m));
+  return ordered;
 }
 
 function renderBracket() {
@@ -1976,9 +2002,7 @@ function renderBracket() {
     { key: '决赛',     h1: '决赛', h2: '冠军之战', count: 1 },
   ];
   const ko = (matchesData || []).filter(m => m.stage);
-  const officialStageMs = STAGES.map(st => ko.filter(m => m.stage === st.key)
-    .sort((a, b) => (a.date + (a.bjt||'')).localeCompare(b.date + (b.bjt||'')))
-    .slice(0, st.count));
+  const officialStageMs = STAGES.map(st => orderStageMatches(ko.filter(m => m.stage === st.key), st.key).slice(0, st.count));
   const stageMs = [];
   stageMs[0] = officialStageMs[0];
   for (let si = 1; si < STAGES.length; si++) {
