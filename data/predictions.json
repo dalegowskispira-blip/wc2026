@@ -1387,12 +1387,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-07-03T03:22:46Z",
+  "updated_at": "2026-07-03T06:47:40Z",
   "summary": {
-    "total": 80,
-    "correct": 59,
+    "total": 81,
+    "correct": 60,
     "wrong": 21,
-    "accuracy": 73.8
+    "accuracy": 74.1
   },
   "records": [
     {
@@ -2429,6 +2429,18 @@
       "actual_score": "2-1",
       "result": "correct",
       "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 85,
+      "home": "瑞士",
+      "away": "阿尔及利亚",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-1",
+      "actual_score": "2-0",
+      "result": "correct",
+      "confidence": "中",
       "review": null
     }
   ]

@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-03T03:22:34Z",
+  "updated_at": "2026-07-03T06:47:29Z",
   "matches": [
     {
       "id": 1,
@@ -952,9 +952,9 @@
       "group": null,
       "home": "瑞士",
       "away": "阿尔及利亚",
-      "home_score": 1,
+      "home_score": 2,
       "away_score": 0,
-      "status": "live",
+      "status": "finished",
       "bjt": "11:00"
     },
     {
