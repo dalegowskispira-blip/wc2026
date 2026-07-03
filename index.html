@@ -1911,8 +1911,11 @@ function bracketCard(m) {
   else if (live) foot = '<div class="bk-mt bk-mt-live">' + md + ' 进行中</div>';
   else if (m.synthetic) foot = '<div class="bk-mt">赛程待定</div>';
   else foot = '<div class="bk-mt">' + md + (m.bjt ? ' ' + m.bjt + ' BJT' : ' 待定') + '</div>';
-  const click = m.id ? ' onclick="goToMatch(' + m.id + ', \'' + m.date + '\')"' : '';
-  return '<div class="bk-match' + (done ? ' bk-done' : '') + (m.synthetic ? ' bk-tbd' : '') + '"' + click + '>'
+  const isEmptySynthetic = m.synthetic && m.home === '待定' && m.away === '待定';
+  const click = m.id
+    ? ' onclick="goToMatch(' + m.id + ', \'' + m.date + '\')"'
+    : (m.synthetic && !isEmptySynthetic ? ' onclick="goToDerivedMatch(\'' + m.home + '\', \'' + m.away + '\', \'' + m.stage + '\')"' : '');
+  return '<div class="bk-match' + (done ? ' bk-done' : '') + (isEmptySynthetic ? ' bk-tbd' : '') + '"' + click + '>'
     + '<div class="bk-tm' + (hw ? ' bk-w' : '') + '"><span class="bk-nm">' + (FLAGS[m.home]||'🏳️') + ' ' + m.home + '</span>' + hs + '</div>'
     + '<div class="bk-tm' + (aw ? ' bk-w' : '') + '"><span class="bk-nm">' + (FLAGS[m.away]||'🏳️') + ' ' + m.away + '</span>' + as + '</div>'
     + foot
@@ -2059,6 +2062,32 @@ function goToMatch(matchId, matchDate) {
     const el = document.getElementById('mc-' + matchId);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, 80);
+}
+
+function goToDerivedMatch(home, away, stage) {
+  const exact = (matchesData || []).find(m =>
+    m.stage === stage && (
+      (m.home === home && m.away === away) ||
+      (m.home === away && m.away === home)
+    )
+  );
+  if (exact) {
+    goToMatch(exact.id, exact.date);
+    return;
+  }
+
+  const tab = Array.from(document.querySelectorAll('.nav-tab'))
+    .find(t => (t.getAttribute('onclick')||'').includes("'matches'"));
+  showPage('matches', tab);
+
+  const dateInput = document.getElementById('date-filter');
+  if (dateInput) dateInput.value = '';
+
+  const teams = [home, away].filter(t => t && t !== '待定');
+  const related = (matchesData || [])
+    .filter(m => teams.includes(m.home) || teams.includes(m.away))
+    .sort((a, b) => (b.date + (b.bjt||'')).localeCompare(a.date + (a.bjt||'')));
+  renderMatchList(related.length ? related : matchesData.filter(m => m.stage === stage).slice(0, 20));
 }
 
 // ────────────────────────────────────────
