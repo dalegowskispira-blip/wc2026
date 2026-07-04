@@ -198,7 +198,7 @@ function deriveScores(home,away,jp){
 function chip(cls,label,scores){
   if(!scores||!scores.length)
     return`<div class="chip chip-none"><div class="chip-label">${label}</div><div class="chip-scores"><div class="chip-s1">-</div></div></div>`;
-  return`<div class="chip ${cls}"><div class="chip-label">${label}</div><div class="chip-scores"><div class="chip-s1">${scores[0]||''}</div>${scores[1]?`<div class="chip-s2">${scores[1]}</div>`:''}</div></div>`;
+  return`<div class="chip ${cls}"><div class="chip-label">${label}</div><div class="chip-scores"><div class="chip-s1">${scores[0]||''}</div></div></div>`;
 }
 
 function predCard(m,jp){

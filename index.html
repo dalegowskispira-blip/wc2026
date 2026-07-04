@@ -125,6 +125,9 @@ body{background:var(--bg);color:var(--t1);font-family:var(--font);min-height:100
 .insights{display:flex;flex-direction:column;gap:4px}
 .insight{font-size:11px;color:var(--t2);display:flex;gap:5px}
 .insight::before{content:'·';color:var(--t3);flex-shrink:0}
+.pred-analysis{margin-top:8px;background:var(--bg3);border:1px solid var(--b1);border-radius:8px;padding:9px 11px}
+.pred-analysis-title{font-size:9px;color:var(--t3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+.pred-analysis-text{font-size:12px;line-height:1.7;color:var(--t2)}
 
 /* ── PREDICTION RECORD ── */
 .rec-card{background:var(--card);border:1px solid var(--b1);border-radius:12px;margin-bottom:8px;overflow:hidden}
@@ -551,12 +554,18 @@ const PREDS = {
 function getPred(home, away) {
   const k1 = `${home}|${away}`;
   const k2 = `${away}|${home}`;
-  if (PREDS[k1]) return { pred: PREDS[k1], rev: false };
-  if (PREDS[k2]) return { pred: PREDS[k2], rev: true };
   const jsonPreds = predictionsData?.predictions || {};
   if (jsonPreds[k1]) return { pred: jsonPreds[k1], rev: false };
   if (jsonPreds[k2]) return { pred: jsonPreds[k2], rev: true };
+  if (PREDS[k1]) return { pred: PREDS[k1], rev: false };
+  if (PREDS[k2]) return { pred: PREDS[k2], rev: true };
   return null;
+}
+
+function escapeHTML(s) {
+  return String(s || '').replace(/[&<>"']/g, ch => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[ch]));
 }
 
 // ────────────────────────────────────────
@@ -969,6 +978,11 @@ function renderMatchCard(m) {
 
     // 增强Hints
     const enhancedHints = buildEnhancedHints(m.home, m.away, pred, groupKey);
+    const analysisHTML = pred.analysis ? `
+      <div class="pred-analysis">
+        <div class="pred-analysis-title">判断依据</div>
+        <div class="pred-analysis-text">${escapeHTML(pred.analysis)}</div>
+      </div>` : '';
 
     // 比分进度条：兼容两种scores格式
     // PREDS格式: [{s:'3-0', p:28}, ...]（带概率）
@@ -1026,6 +1040,7 @@ function renderMatchCard(m) {
       <div class="insights">
         ${enhancedHints.map(h => `<div class="insight">${h}</div>`).join('')}
       </div>
+      ${analysisHTML}
       ${(() => {
         const rFlags = getRiskFlags(m.home, m.away, m.date);
         return rFlags.length ? `<div class="risk-flags">${rFlags.map(f=>`<span class="risk-flag ${f.cls}">${f.text}</span>`).join('')}</div>` : '';
