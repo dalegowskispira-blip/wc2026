@@ -1501,12 +1501,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-07-04T17:34:24Z",
+  "updated_at": "2026-07-04T19:15:29Z",
   "summary": {
-    "total": 84,
-    "correct": 62,
+    "total": 85,
+    "correct": 63,
     "wrong": 22,
-    "accuracy": 73.8
+    "accuracy": 74.1
   },
   "records": [
     {
@@ -2601,6 +2601,18 @@
       "actual": "主胜",
       "predicted_score": "1-0",
       "actual_score": "1-0",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 90,
+      "home": "加拿大",
+      "away": "摩洛哥",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "1-1",
+      "actual_score": "0-3",
       "result": "correct",
       "confidence": "中",
       "review": null
