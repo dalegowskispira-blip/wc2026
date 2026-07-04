@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-04T16:03:23Z",
+  "updated_at": "2026-07-04T17:34:24Z",
   "matches": [
     {
       "id": 1,
@@ -1015,9 +1015,9 @@
       "group": null,
       "home": "加拿大",
       "away": "摩洛哥",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 0,
+      "away_score": 0,
+      "status": "live",
       "bjt": "01:00"
     },
     {
