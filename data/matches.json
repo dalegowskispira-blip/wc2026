@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-03T19:40:28Z",
+  "updated_at": "2026-07-04T07:22:37Z",
   "matches": [
     {
       "id": 1,
@@ -966,8 +966,10 @@
       "away": "埃及",
       "home_score": 1,
       "away_score": 1,
-      "status": "live",
-      "bjt": "02:00"
+      "status": "finished",
+      "bjt": "02:00",
+      "home_pen": 2,
+      "away_pen": 4
     },
     {
       "id": 87,
@@ -976,10 +978,11 @@
       "group": null,
       "home": "阿根廷",
       "away": "佛得角",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
-      "bjt": "06:00"
+      "home_score": 3,
+      "away_score": 2,
+      "status": "finished",
+      "bjt": "06:00",
+      "aet": true
     },
     {
       "id": 88,
@@ -988,9 +991,9 @@
       "group": null,
       "home": "哥伦比亚",
       "away": "加纳",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 1,
+      "away_score": 0,
+      "status": "finished",
       "bjt": "09:30"
     },
     {
