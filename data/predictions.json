@@ -1501,12 +1501,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-07-04T22:58:25Z",
+  "updated_at": "2026-07-05T00:09:25Z",
   "summary": {
-    "total": 85,
-    "correct": 63,
+    "total": 86,
+    "correct": 64,
     "wrong": 22,
-    "accuracy": 74.1
+    "accuracy": 74.4
   },
   "records": [
     {
@@ -2613,6 +2613,18 @@
       "actual": "客胜",
       "predicted_score": "1-1",
       "actual_score": "0-3",
+      "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 89,
+      "home": "巴拉圭",
+      "away": "法国",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "0-2",
+      "actual_score": "0-1",
       "result": "correct",
       "confidence": "中",
       "review": null
