@@ -1547,12 +1547,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-07-05T21:01:58Z",
+  "updated_at": "2026-07-05T22:30:50Z",
   "summary": {
-    "total": 86,
+    "total": 87,
     "correct": 64,
-    "wrong": 22,
-    "accuracy": 74.4
+    "wrong": 23,
+    "accuracy": 73.6
   },
   "records": [
     {
@@ -2672,6 +2672,18 @@
       "predicted_score": "0-2",
       "actual_score": "0-1",
       "result": "correct",
+      "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 91,
+      "home": "巴西",
+      "away": "挪威",
+      "predicted": "主胜",
+      "actual": "客胜",
+      "predicted_score": "2-1",
+      "actual_score": "1-2",
+      "result": "wrong",
       "confidence": "中",
       "review": null
     }
