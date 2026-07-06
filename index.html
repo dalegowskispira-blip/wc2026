@@ -568,6 +568,121 @@ function escapeHTML(s) {
   }[ch]));
 }
 
+function parseScoreLine(score) {
+  const m = String(score || '').trim().match(/^(\d+)\s*[-:]\s*(\d+)$/);
+  if (!m) return null;
+  return { home: Number(m[1]), away: Number(m[2]) };
+}
+
+function flipScoreLine(score) {
+  const parsed = parseScoreLine(score);
+  return parsed ? `${parsed.away}-${parsed.home}` : score;
+}
+
+function scoreDirection(score) {
+  const parsed = parseScoreLine(score);
+  if (!parsed) return 'other';
+  if (parsed.home > parsed.away) return 'home';
+  if (parsed.home < parsed.away) return 'away';
+  return 'draw';
+}
+
+function normalizeScoreWeights(rows, confidence) {
+  const valid = rows.filter(r => Number.isFinite(r.raw) && r.raw > 0);
+  if (!valid.length) return [];
+  const avg = valid.reduce((sum, r) => sum + r.raw, 0) / valid.length;
+  const sharpness = confidence === '高' ? 1.14 : confidence === '低' ? 0.78 : 1;
+  const adjusted = valid.map(r => ({ ...r, raw: avg + (r.raw - avg) * sharpness }));
+  const total = adjusted.reduce((sum, r) => sum + r.raw, 0) || 1;
+  let normalized = adjusted.map(r => ({ ...r, p: Math.max(4, Math.round(r.raw / total * 100)) }));
+  const diff = 100 - normalized.reduce((sum, r) => sum + r.p, 0);
+  if (normalized.length) normalized[0].p += diff;
+  return normalized.sort((a, b) => b.p - a.p);
+}
+
+function inferScoreWeightBars(match, pred, rev, adjustedProb, groupKey) {
+  if (Array.isArray(pred.score_probs)) {
+    const explicit = pred.score_probs.map((item, i) => {
+      const score = rev ? flipScoreLine(item.score || item.s) : (item.score || item.s);
+      return {
+        s: score,
+        label: item.label || '',
+        raw: Number(item.weight ?? item.prob ?? item.p ?? (40 - i * 5)),
+      };
+    }).filter(x => parseScoreLine(x.s));
+    return normalizeScoreWeights(explicit, pred.confidence || pred.conf);
+  }
+
+  const buckets = [
+    ['main', '主推', 1.24],
+    ['secondary', '次选', 0.95],
+    ['upset', '爆冷', 0.72],
+    ['blowout', '大胜', 0.66],
+  ];
+  const seen = new Set();
+  const candidates = [];
+  buckets.forEach(([key, label, prior]) => {
+    (pred.scores?.[key] || []).forEach(score => {
+      const s = rev ? flipScoreLine(score) : score;
+      if (!parseScoreLine(s) || seen.has(s)) return;
+      seen.add(s);
+      candidates.push({ s, label, category: key, prior });
+    });
+  });
+  if (!candidates.length) return [];
+
+  const probs = adjustedProb || { win: pred.win, draw: pred.draw, loss: pred.loss };
+  const homeProb = Number(probs.win) || 0;
+  const drawProb = Number(probs.draw) || 0;
+  const awayProb = Number(probs.loss) || 0;
+  const favDir = homeProb >= drawProb && homeProb >= awayProb ? 'home' : awayProb >= drawProb ? 'away' : 'draw';
+  const favEdge = Math.abs(homeProb - awayProb);
+  const upsetRisk = getUpsetRisk(match.home, match.away, pred);
+  const homeTactic = getTacticTag(match.home);
+  const awayTactic = getTacticTag(match.away);
+  const homeMI = getMI(match.home, groupKey);
+  const awayMI = getMI(match.away, groupKey);
+  const riskFlags = getRiskFlags(match.home, match.away, match.date);
+  const text = `${pred.analysis || ''} ${riskFlags.map(f => f.text).join(' ')}`;
+  const lowTempo = /低比分|点球|久攻不下|收紧|防守|纪律|低位|拖慢|高温|雷暴|湿热|控温/.test(text);
+  const openGame = /对攻|高节奏|防线隐患|身后|转换|火力|冲击|打穿|大胜|滚雪球/.test(text);
+
+  return normalizeScoreWeights(candidates.map(item => {
+    const parsed = parseScoreLine(item.s);
+    const dir = scoreDirection(item.s);
+    const outcomeProb = dir === 'home' ? homeProb : dir === 'away' ? awayProb : drawProb;
+    const totalGoals = parsed.home + parsed.away;
+    const margin = Math.abs(parsed.home - parsed.away);
+    let raw = Math.max(6, outcomeProb) * item.prior;
+
+    if (dir === favDir) raw *= 1.16;
+    if (dir === 'draw' && Math.abs(homeProb - awayProb) <= 12) raw *= 1.14;
+    if (item.category === 'upset' && dir !== favDir) raw *= upsetRisk?.level === 'high' ? 1.34 : upsetRisk?.level === 'mid' ? 1.18 : 1.04;
+    if (item.category === 'blowout') raw *= (favEdge >= 28 && margin >= 3) ? 1.22 : 0.72;
+    if (favEdge < 12 && margin >= 2) raw *= 0.78;
+    if (favEdge >= 24 && dir === favDir && margin >= 2) raw *= 1.12;
+
+    if (lowTempo && totalGoals >= 4) raw *= 0.72;
+    if (lowTempo && totalGoals <= 2) raw *= 1.10;
+    if (openGame && totalGoals >= 3) raw *= 1.12;
+    if (openGame && totalGoals <= 1) raw *= 0.86;
+
+    if (homeTactic?.tag === '低位防守型' || awayTactic?.tag === '低位防守型') {
+      if (totalGoals <= 2) raw *= 1.08;
+      if (totalGoals >= 4) raw *= 0.82;
+    }
+    if (homeTactic?.tag === '快速反击型' || awayTactic?.tag === '快速反击型') {
+      if (parsed.home > 0 && parsed.away > 0) raw *= 1.06;
+    }
+    if (homeMI.mi > 1.1 && dir === 'home') raw *= 1.05;
+    if (awayMI.mi > 1.1 && dir === 'away') raw *= 1.05;
+    if (homeMI.mi < 0.9 && dir === 'away') raw *= 1.04;
+    if (awayMI.mi < 0.9 && dir === 'home') raw *= 1.04;
+
+    return { ...item, raw };
+  }), pred.confidence || pred.conf);
+}
+
 // ────────────────────────────────────────
 // V4: H2H 历史交锋数据（真实历史赛事）
 // ────────────────────────────────────────
@@ -984,7 +1099,7 @@ function renderMatchCard(m) {
         <div class="pred-analysis-text">${escapeHTML(pred.analysis)}</div>
       </div>` : '';
 
-    // 比分展示：旧内置数据有单比分概率；JSON 只有档位，不生成伪概率。
+    // 比分展示：旧内置数据使用原始概率；JSON 使用多因子参考权重，避免固定模板。
     let scoreSectionHTML = '';
     if (Array.isArray(pred.scores)) {
       const normalizedScores = [...pred.scores].sort((a,b) => b.p - a.p);
@@ -1001,16 +1116,18 @@ function renderMatchCard(m) {
         </div>`).join('')}
       </div>` : '';
     } else if (pred.scores && typeof pred.scores === 'object') {
-      const scorePills = [
-        ...(pred.scores.main || []).map(s => ({ s, label: '主推', cls: 'top' })),
-        ...(pred.scores.secondary || []).map(s => ({ s, label: '次选', cls: '' })),
-        ...(pred.scores.upset || []).map(s => ({ s, label: '爆冷', cls: '' })),
-        ...(pred.scores.blowout || []).map(s => ({ s, label: '大胜', cls: '' })),
-      ];
-      scoreSectionHTML = scorePills.length ? `
-      <div style="font-size:9px;color:var(--t3);margin-bottom:5px">比分倾向</div>
-      <div class="scores-row">
-        ${scorePills.map(x => `<span class="sp-pill ${x.cls}">${x.label}<strong>${escapeHTML(x.s)}</strong></span>`).join('')}
+      const weightedScores = inferScoreWeightBars(m, pred, rev, { win: adjWin, draw: adjDraw, loss: adjLoss }, groupKey);
+      const maxP = weightedScores[0]?.p || 1;
+      scoreSectionHTML = weightedScores.length ? `
+      <div style="font-size:9px;color:var(--t3);margin-bottom:5px">比分参考权重</div>
+      <div class="score-pred-bars">
+        ${weightedScores.map((x,i) => `<div class="spb-row">
+          <div class="spb-label">${escapeHTML(x.s)}${x.label ? `<span style="font-size:9px;color:var(--t3);margin-left:5px">${escapeHTML(x.label)}</span>` : ''}</div>
+          <div class="spb-track">
+            <div class="spb-fill ${i===0?'top-fill':''}" style="width:${Math.round(x.p/maxP*100)}%"></div>
+          </div>
+          <div class="spb-pct">${x.p}%</div>
+        </div>`).join('')}
       </div>` : '';
     }
 
