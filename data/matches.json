@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-06T00:06:51Z",
+  "updated_at": "2026-07-06T04:51:35Z",
   "matches": [
     {
       "id": 1,
@@ -1039,9 +1039,9 @@
       "group": null,
       "home": "墨西哥",
       "away": "英格兰",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 2,
+      "away_score": 3,
+      "status": "finished",
       "bjt": "08:00"
     },
     {

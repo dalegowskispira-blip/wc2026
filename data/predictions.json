@@ -1547,12 +1547,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-07-06T00:06:51Z",
+  "updated_at": "2026-07-06T04:51:46Z",
   "summary": {
-    "total": 87,
-    "correct": 64,
+    "total": 88,
+    "correct": 65,
     "wrong": 23,
-    "accuracy": 73.6
+    "accuracy": 73.9
   },
   "records": [
     {
@@ -2685,6 +2685,18 @@
       "actual_score": "1-2",
       "result": "wrong",
       "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 92,
+      "home": "墨西哥",
+      "away": "英格兰",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "1-1",
+      "actual_score": "2-3",
+      "result": "correct",
+      "confidence": "低",
       "review": null
     }
   ]
