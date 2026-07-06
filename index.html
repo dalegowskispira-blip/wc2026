@@ -984,32 +984,35 @@ function renderMatchCard(m) {
         <div class="pred-analysis-text">${escapeHTML(pred.analysis)}</div>
       </div>` : '';
 
-    // 比分进度条：兼容两种scores格式
-    // PREDS格式: [{s:'3-0', p:28}, ...]（带概率）
-    // JSON格式:  {main:[], secondary:[], upset:[]}（纯字符串，无概率）
-    let normalizedScores;
+    // 比分展示：旧内置数据有单比分概率；JSON 只有档位，不生成伪概率。
+    let scoreSectionHTML = '';
     if (Array.isArray(pred.scores)) {
-      normalizedScores = [...pred.scores].sort((a,b) => b.p - a.p);
+      const normalizedScores = [...pred.scores].sort((a,b) => b.p - a.p);
+      const maxP = normalizedScores[0]?.p || 1;
+      scoreSectionHTML = normalizedScores.length ? `
+      <div style="font-size:9px;color:var(--t3);margin-bottom:5px">比分预测概率</div>
+      <div class="score-pred-bars">
+        ${normalizedScores.map((s,i) => `<div class="spb-row">
+          <div class="spb-label">${escapeHTML(s.s)}</div>
+          <div class="spb-track">
+            <div class="spb-fill ${i===0?'top-fill':''}" style="width:${Math.round(s.p/maxP*100)}%"></div>
+          </div>
+          <div class="spb-pct">${s.p}%</div>
+        </div>`).join('')}
+      </div>` : '';
     } else if (pred.scores && typeof pred.scores === 'object') {
-      const slots = [
-        ...(pred.scores.main || []).map((s,i) => ({ s, p: 30 - i*5 })),
-        ...(pred.scores.secondary || []).map((s,i) => ({ s, p: 18 - i*4 })),
-        ...(pred.scores.upset || []).map(s => ({ s, p: 6 })),
+      const scorePills = [
+        ...(pred.scores.main || []).map(s => ({ s, label: '主推', cls: 'top' })),
+        ...(pred.scores.secondary || []).map(s => ({ s, label: '次选', cls: '' })),
+        ...(pred.scores.upset || []).map(s => ({ s, label: '爆冷', cls: '' })),
+        ...(pred.scores.blowout || []).map(s => ({ s, label: '大胜', cls: '' })),
       ];
-      normalizedScores = slots;
-    } else {
-      normalizedScores = [];
+      scoreSectionHTML = scorePills.length ? `
+      <div style="font-size:9px;color:var(--t3);margin-bottom:5px">比分倾向</div>
+      <div class="scores-row">
+        ${scorePills.map(x => `<span class="sp-pill ${x.cls}">${x.label}<strong>${escapeHTML(x.s)}</strong></span>`).join('')}
+      </div>` : '';
     }
-    const maxP = normalizedScores[0]?.p || 1;
-    const scoreBarsHTML = normalizedScores.length ? `<div class="score-pred-bars">
-      ${normalizedScores.map((s,i) => `<div class="spb-row">
-        <div class="spb-label">${s.s}</div>
-        <div class="spb-track">
-          <div class="spb-fill ${i===0?'top-fill':''}" style="width:${Math.round(s.p/maxP*100)}%"></div>
-        </div>
-        <div class="spb-pct">${s.p}%</div>
-      </div>`).join('')}
-    </div>` : '';
 
     predHTML = `
     <div class="pred-wrap">
@@ -1035,8 +1038,7 @@ function renderMatchCard(m) {
         </div>
       </div>
       ${other > 0 ? `<div class="other-prob">加时/延伸概率：${other}%</div>` : ''}
-      <div style="font-size:9px;color:var(--t3);margin-bottom:5px">比分预测概率</div>
-      ${scoreBarsHTML}
+      ${scoreSectionHTML}
       <div class="insights">
         ${enhancedHints.map(h => `<div class="insight">${h}</div>`).join('')}
       </div>
