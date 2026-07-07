@@ -218,10 +218,16 @@ function analysisCard(m,jp){
   return`<div class="ac"><div class="ac-head"><div class="ac-teams">${hf} ${m.home} <span style="color:rgba(255,255,255,.28);font-weight:400">vs</span> ${m.away} ${af}</div><div class="ac-meta"><span class="card-time">${m.bjt||''} BJT</span>${m.group?`<span class="gpill">${m.group}组</span>`:(m.stage?`<span class="gpill">${m.stage}</span>`:'')}</div></div>${body}</div>`;
 }
 
-function yesterdayStat(matches,pdata){
+function addDays(dateStr, delta){
+  const d=new Date(dateStr+'T12:00:00+08:00');
+  d.setDate(d.getDate()+delta);
+  return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
+}
+
+function yesterdayStat(matches,pdata,reportDate){
   const jp=pdata?.predictions||null;
   const finished=(matches||[]).filter(m=>m.status==='finished'&&m.home_score!=null&&m.away_score!=null);
-  const ystr=finished.map(m=>m.date).sort().pop();
+  const ystr=reportDate?addDays(reportDate,-1):finished.map(m=>m.date).sort().pop();
   const ms=finished.filter(m=>m.date===ystr);
   if(ms.length){
     const actual=m=>`${m.home_score}-${m.away_score}`;
@@ -266,7 +272,7 @@ function render(matches,pdata){
   const wd=['日','一','二','三','四','五','六'][dt.getDay()];
   const dl=`${dt.getMonth()+1}月${dt.getDate()}日（周${wd}）· 北京时间`;
 
-  const ys=yesterdayStat(matches,pdata);
+  const ys=yesterdayStat(matches,pdata,nd);
   const allHit=ys.total>0&&ys.hit===ys.total;
   const highHit=ys.total>0&&ys.hit/ys.total>=0.5;
   const valCls=allHit?'ph-stat-val allhit':(highHit?'ph-stat-val hot':'ph-stat-val');

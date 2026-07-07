@@ -492,11 +492,10 @@ async function loadData() {
   document.getElementById('loading-overlay').classList.add('hidden');
   updateClock();
   setInterval(updateClock, 30000);
-  // 默认显示今天
-  const today = getTodayStr();
-  document.getElementById('date-filter').value = today;
-  const todayM = matchesData.filter(m => m.date === today);
-  renderMatchList(todayM.length ? todayM : matchesData.filter(m => m.date >= today).slice(0, 20));
+  // 默认显示今天；若今天比赛都已结束，自动跳到下一个待赛日。
+  const defaultDate = getDefaultMatchDate();
+  document.getElementById('date-filter').value = defaultDate;
+  renderMatchList(matchesData.filter(m => m.date === defaultDate));
   // 默认首页：晋级路线图
   renderBracket();
 }
@@ -506,6 +505,15 @@ async function loadData() {
 // ────────────────────────────────────────
 function getTodayStr() {
   return new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Shanghai' });
+}
+function getDefaultMatchDate() {
+  const today = getTodayStr();
+  const todayMatches = matchesData.filter(m => m.date === today);
+  if (todayMatches.some(m => m.status !== 'finished')) return today;
+  const upcoming = matchesData
+    .filter(m => m.status !== 'finished' && m.date >= today)
+    .sort((a, b) => (a.date + (a.bjt || '')).localeCompare(b.date + (b.bjt || '')));
+  return upcoming[0]?.date || today;
 }
 function updateClock() {
   const el = document.getElementById('cur-time');
@@ -1196,8 +1204,9 @@ function renderMatchCard(m) {
 
 function renderMatchList(list) {
   const c = document.getElementById('matches-list');
-  if (!list.length) { c.innerHTML = `<div class="no-data"><div class="no-data-icon">🔍</div><div>该日期无赛事</div></div>`; return; }
-  const g = groupBy(list, 'date');
+  const sortedList = [...list].sort((a, b) => (a.date + (a.bjt || '')).localeCompare(b.date + (b.bjt || '')));
+  if (!sortedList.length) { c.innerHTML = `<div class="no-data"><div class="no-data-icon">🔍</div><div>该日期无赛事</div></div>`; return; }
+  const g = groupBy(sortedList, 'date');
   c.innerHTML = Object.keys(g).sort().map(d => `
     <div class="day-hd"><span class="day-hd-label">${fmtDate(d)}</span><span class="day-hd-count">${g[d].length}场</span><div class="day-hd-line"></div></div>
     ${g[d].map(m => renderMatchCard(m)).join('')}
@@ -2090,7 +2099,8 @@ function fillDerivedStageSlots(stageSlots, prevSlots, stageKey, count) {
   const out = [];
   for (let i = 0; i < count; i++) {
     const slot = stageSlots[i];
-    if (slot && slot.status === 'finished') {
+    const hasOfficialTeams = slot && slot.home && slot.away && slot.home !== '待定' && slot.away !== '待定';
+    if (slot && (slot.status === 'finished' || hasOfficialTeams)) {
       out.push(slot);
       continue;
     }

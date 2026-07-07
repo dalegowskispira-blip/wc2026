@@ -1049,11 +1049,11 @@
       "date": "2026-07-07",
       "stage": "1/8决赛",
       "group": null,
-      "home": "西班牙",
-      "away": "葡萄牙",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home": "葡萄牙",
+      "away": "西班牙",
+      "home_score": 0,
+      "away_score": 1,
+      "status": "finished",
       "bjt": "03:00"
     },
     {

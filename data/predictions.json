@@ -1637,12 +1637,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-07-07T07:39:46Z",
+  "updated_at": "2026-07-07T08:30:00Z",
   "summary": {
-    "total": 89,
-    "correct": 65,
+    "total": 90,
+    "correct": 66,
     "wrong": 24,
-    "accuracy": 73.0
+    "accuracy": 73.3
   },
   "records": [
     {
@@ -2454,25 +2454,25 @@
       "review": null
     },
     {
-      "match_id": 71,
-      "home": "巴拿马",
-      "away": "英格兰",
-      "predicted": "客胜",
-      "actual": "客胜",
-      "predicted_score": "0-3",
-      "actual_score": "0-2",
-      "result": "correct",
-      "confidence": "高",
+      "match_id": 67,
+      "home": "阿尔及利亚",
+      "away": "奥地利",
+      "predicted": "主胜",
+      "actual": "平局",
+      "predicted_score": "2-1",
+      "actual_score": "3-3",
+      "result": "wrong",
+      "confidence": "中",
       "review": null
     },
     {
-      "match_id": 72,
-      "home": "克罗地亚",
-      "away": "加纳",
-      "predicted": "主胜",
-      "actual": "主胜",
-      "predicted_score": "2-1",
-      "actual_score": "2-1",
+      "match_id": 68,
+      "home": "约旦",
+      "away": "阿根廷",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "0-3",
+      "actual_score": "1-3",
       "result": "correct",
       "confidence": "中",
       "review": null
@@ -2502,25 +2502,25 @@
       "review": null
     },
     {
-      "match_id": 67,
-      "home": "阿尔及利亚",
-      "away": "奥地利",
-      "predicted": "主胜",
-      "actual": "平局",
-      "predicted_score": "2-1",
-      "actual_score": "3-3",
-      "result": "wrong",
-      "confidence": "中",
-      "review": null
-    },
-    {
-      "match_id": 68,
-      "home": "约旦",
-      "away": "阿根廷",
+      "match_id": 71,
+      "home": "巴拿马",
+      "away": "英格兰",
       "predicted": "客胜",
       "actual": "客胜",
       "predicted_score": "0-3",
-      "actual_score": "1-3",
+      "actual_score": "0-2",
+      "result": "correct",
+      "confidence": "高",
+      "review": null
+    },
+    {
+      "match_id": 72,
+      "home": "克罗地亚",
+      "away": "加纳",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-1",
+      "actual_score": "2-1",
       "result": "correct",
       "confidence": "中",
       "review": null
@@ -2754,22 +2754,6 @@
       }
     },
     {
-      "match_id": 90,
-      "home": "加拿大",
-      "away": "摩洛哥",
-      "predicted": "客胜",
-      "actual": "客胜",
-      "predicted_score": "1-1",
-      "actual_score": "0-3",
-      "result": "correct",
-      "confidence": "中",
-      "review": {
-        "key_player": "布努",
-        "reason": "摩洛哥3-0加拿大，方向正确且摩洛哥成熟度明显高于预期。加拿大主场情绪和冲击没有转化为控场，戴维斯变量没有改变整体出球和防守组织差距；摩洛哥经历上一轮点球后没有明显体能崩盘，反而凭防守组织、右路连线和淘汰赛经验打出更干净的胜利。后续分析摩洛哥时，应上调其淘汰赛成熟度和零封能力，不再过度放大上一轮120分钟消耗。",
-        "generated_at": "2026-07-07T00:00:00Z"
-      }
-    },
-    {
       "match_id": 89,
       "home": "巴拉圭",
       "away": "法国",
@@ -2782,6 +2766,22 @@
       "review": {
         "key_player": "姆巴佩",
         "reason": "法国1-0巴拉圭，客胜方向正确但比分比预期更小。巴拉圭低位防守、门将状态和点球淘汰德国后的心理韧性继续有效，成功把法国拖成低节奏硬仗；法国前场个人质量仍能解决比赛，但高温和巴拉圭收缩让大比分空间被压低。后续预测法国时，强队权重仍高，但遇到成熟低位队要更多保留1-0/2-0，而不是自动给3球以上。",
+        "generated_at": "2026-07-07T00:00:00Z"
+      }
+    },
+    {
+      "match_id": 90,
+      "home": "加拿大",
+      "away": "摩洛哥",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "1-1",
+      "actual_score": "0-3",
+      "result": "correct",
+      "confidence": "中",
+      "review": {
+        "key_player": "布努",
+        "reason": "摩洛哥3-0加拿大，方向正确且摩洛哥成熟度明显高于预期。加拿大主场情绪和冲击没有转化为控场，戴维斯变量没有改变整体出球和防守组织差距；摩洛哥经历上一轮点球后没有明显体能崩盘，反而凭防守组织、右路连线和淘汰赛经验打出更干净的胜利。后续分析摩洛哥时，应上调其淘汰赛成熟度和零封能力，不再过度放大上一轮120分钟消耗。",
         "generated_at": "2026-07-07T00:00:00Z"
       }
     },
@@ -2815,6 +2815,22 @@
         "key_player": "凯恩",
         "reason": "墨西哥2-3英格兰，客胜方向正确但墨西哥主场和海拔确实制造了高压。英格兰纸面实力与前场质量最终兑现，但右路防守、压迫节奏和机会转化仍不稳定；墨西哥主场情绪、海拔和开局压迫能把强队拖进乱战。后续预测英格兰时，不能只看阵容强度，需要继续标注抗压和右路隐患；但在开放比赛里，凯恩、贝林厄姆、萨卡的个人质量仍有强兜底能力。",
         "generated_at": "2026-07-07T00:00:00Z"
+      }
+    },
+    {
+      "match_id": 93,
+      "home": "葡萄牙",
+      "away": "西班牙",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "1-2",
+      "actual_score": "0-1",
+      "result": "correct",
+      "confidence": "中",
+      "review": {
+        "key_player": "西班牙防线",
+        "reason": "葡萄牙0-1西班牙，预测方向命中但比分比主档更小。西班牙延续本届零封稳定性，控球和防守纪律压住葡萄牙的边路冲击；葡萄牙阵容完整但阵地战流畅度问题继续存在，C罗最后一届世界杯的情绪动员没有转化成足够终结质量。后续分析西班牙时，防守稳定性和淘汰赛控场权重要继续上调，但边锋伤病仍会压低大比分空间。",
+        "generated_at": "2026-07-07T08:30:00Z"
       }
     },
     {
