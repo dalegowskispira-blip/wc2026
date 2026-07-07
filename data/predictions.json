@@ -1637,12 +1637,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-07-07T21:55:47Z",
+  "updated_at": "2026-07-07T23:04:36Z",
   "summary": {
-    "total": 91,
+    "total": 92,
     "correct": 67,
-    "wrong": 24,
-    "accuracy": 73.6
+    "wrong": 25,
+    "accuracy": 72.8
   },
   "records": [
     {
@@ -2855,6 +2855,18 @@
       "actual_score": "3-2",
       "result": "correct",
       "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 96,
+      "home": "瑞士",
+      "away": "哥伦比亚",
+      "predicted": "客胜",
+      "actual": "主胜",
+      "predicted_score": "1-1",
+      "actual_score": "1-0",
+      "result": "wrong",
+      "confidence": "低",
       "review": null
     }
   ]
