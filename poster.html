@@ -230,13 +230,12 @@ function yesterdayStat(matches,pdata,reportDate){
   const ystr=reportDate?addDays(reportDate,-1):finished.map(m=>m.date).sort().pop();
   const ms=finished.filter(m=>m.date===ystr);
   if(ms.length){
-    const actual=m=>`${m.home_score}-${m.away_score}`;
+    const actualLean=m=>m.home_score>m.away_score?'主胜':m.home_score<m.away_score?'客胜':'平局';
     const c=ms.filter(m=>{
       const sc=deriveScores(m.home,m.away,jp);
-      const all=[...(sc?.main||[]),...(sc?.secondary||[]),...(sc?.upset||[])];
-      return all.includes(actual(m));
+      return sc?.dirLabel===actualLean(m);
     }).length;
-    return{text:`昨日比分 ${ms.length} 中 ${c}`,hit:c,total:ms.length};
+    return{text:`昨日预测 ${ms.length} 中 ${c}`,hit:c,total:ms.length};
   }
   return{text:'比分命中统计',hit:0,total:0};
 }
