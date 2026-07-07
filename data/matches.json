@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-07T16:02:02Z",
+  "updated_at": "2026-07-07T18:29:26Z",
   "matches": [
     {
       "id": 1,
@@ -1075,9 +1075,9 @@
       "group": null,
       "home": "阿根廷",
       "away": "埃及",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 3,
+      "away_score": 2,
+      "status": "finished",
       "bjt": "00:00"
     },
     {
