@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-06T23:37:59Z",
+  "updated_at": "2026-07-07T03:30:52Z",
   "matches": [
     {
       "id": 1,
@@ -1063,9 +1063,9 @@
       "group": null,
       "home": "美国",
       "away": "比利时",
-      "home_score": null,
-      "away_score": null,
-      "status": "upcoming",
+      "home_score": 1,
+      "away_score": 4,
+      "status": "finished",
       "bjt": "08:00"
     },
     {

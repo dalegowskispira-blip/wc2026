@@ -1591,12 +1591,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-07-06T23:37:59Z",
+  "updated_at": "2026-07-07T03:31:03Z",
   "summary": {
-    "total": 88,
+    "total": 89,
     "correct": 65,
-    "wrong": 23,
-    "accuracy": 73.9
+    "wrong": 24,
+    "accuracy": 73.0
   },
   "records": [
     {
@@ -2740,6 +2740,18 @@
       "predicted_score": "1-1",
       "actual_score": "2-3",
       "result": "correct",
+      "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 94,
+      "home": "美国",
+      "away": "比利时",
+      "predicted": "主胜",
+      "actual": "客胜",
+      "predicted_score": "2-1",
+      "actual_score": "1-4",
+      "result": "wrong",
       "confidence": "低",
       "review": null
     }
