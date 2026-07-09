@@ -1071,7 +1071,7 @@
     {
       "id": 95,
       "date": "2026-07-08",
-      "stage": "1/8决赛",
+      "stage": "1/4决赛",
       "group": null,
       "home": "阿根廷",
       "away": "埃及",
@@ -1083,7 +1083,7 @@
     {
       "id": 96,
       "date": "2026-07-08",
-      "stage": "1/8决赛",
+      "stage": "1/4决赛",
       "group": null,
       "home": "瑞士",
       "away": "哥伦比亚",
@@ -1093,6 +1093,18 @@
       "bjt": "04:00",
       "home_pen": 4,
       "away_pen": 3
+    },
+    {
+      "id": 97,
+      "date": "2026-07-10",
+      "stage": "1/4决赛",
+      "group": null,
+      "home": "法国",
+      "away": "摩洛哥",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": ""
     }
   ]
 }

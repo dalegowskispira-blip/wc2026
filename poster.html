@@ -201,11 +201,13 @@ function chip(cls,label,scores){
   return`<div class="chip ${cls}"><div class="chip-label">${label}</div><div class="chip-scores"><div class="chip-s1">${scores[0]||''}</div></div></div>`;
 }
 
+function timeLabel(m){return m.bjt?`${m.bjt} BJT`:'时间待定'}
+
 function predCard(m,jp){
   const sc=deriveScores(m.home,m.away,jp);
   const hf=FLAGS[m.home]||'🏳️',af=FLAGS[m.away]||'🏳️';
   return`<div class="card">
-<div class="card-head"><div class="card-teams">${hf} ${m.home} <span style="color:rgba(255,255,255,.28);font-weight:400">vs</span> ${m.away} ${af}</div><div class="card-meta"><span class="card-time">${m.bjt||''} BJT</span>${m.group?`<span class="gpill">${m.group}组</span>`:(m.stage?`<span class="gpill">${m.stage}</span>`:'')}</div></div>
+<div class="card-head"><div class="card-teams">${hf} ${m.home} <span style="color:rgba(255,255,255,.28);font-weight:400">vs</span> ${m.away} ${af}</div><div class="card-meta"><span class="card-time">${timeLabel(m)}</span>${m.group?`<span class="gpill">${m.group}组</span>`:(m.stage?`<span class="gpill">${m.stage}</span>`:'')}</div></div>
 ${sc?`<div class="card-lean">模型倾向 <span>${sc.dirLabel}</span></div>`:''}
 <div class="chips">${chip('chip-main','主推',sc?.main)}${chip('chip-secondary','次选',sc?.secondary)}${chip('chip-upset','爆冷',sc?.upset)}</div>
 </div>`;
@@ -215,7 +217,7 @@ function analysisCard(m,jp){
   const sc=deriveScores(m.home,m.away,jp);
   const hf=FLAGS[m.home]||'🏳️',af=FLAGS[m.away]||'🏳️';
   const body=sc?.analysis?`<div class="ac-text">${sc.analysis}</div>`:`<div class="ac-pending">分析生成中…</div>`;
-  return`<div class="ac"><div class="ac-head"><div class="ac-teams">${hf} ${m.home} <span style="color:rgba(255,255,255,.28);font-weight:400">vs</span> ${m.away} ${af}</div><div class="ac-meta"><span class="card-time">${m.bjt||''} BJT</span>${m.group?`<span class="gpill">${m.group}组</span>`:(m.stage?`<span class="gpill">${m.stage}</span>`:'')}</div></div>${body}</div>`;
+  return`<div class="ac"><div class="ac-head"><div class="ac-teams">${hf} ${m.home} <span style="color:rgba(255,255,255,.28);font-weight:400">vs</span> ${m.away} ${af}</div><div class="ac-meta"><span class="card-time">${timeLabel(m)}</span>${m.group?`<span class="gpill">${m.group}组</span>`:(m.stage?`<span class="gpill">${m.stage}</span>`:'')}</div></div>${body}</div>`;
 }
 
 function addDays(dateStr, delta){
@@ -288,6 +290,17 @@ function render(matches,pdata){
     root.innerHTML=sep('📸 比分预测',true)+shotBlock({
       hasStat:true,title:'⚽ WC2026 今日比分参考',sub:'三档比分 · 模型倾向 · 娱乐向',
       statHTML,statClass:statCls,dateLabel:dl,contentHTML:'<div class="no-data">暂无待开赛比赛</div>'});
+    return;
+  }
+
+  if(ms.length===1){
+    const m=ms[0];
+    root.innerHTML=sep('📸 比分预测 + 判断依据',true)+shotBlock({
+      hasStat:true,
+      title:'⚽ WC2026 今日比分参考',
+      sub:`${stageLabel?stageLabel+' · ':''}三档比分 · 判断依据`,
+      statHTML,statClass:statCls,dateLabel:dl,
+      contentHTML:predCard(m,jp)+analysisCard(m,jp)});
     return;
   }
 
