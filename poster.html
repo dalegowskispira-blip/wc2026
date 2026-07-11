@@ -238,8 +238,11 @@ function yesterdayStat(matches,pdata,reportDate){
       const m=ms[0];
       const sc=deriveScores(m.home,m.away,jp);
       const dirOK=sc?.dirLabel===actualLean(m);
-      const mainOK=(sc?.main||[])[0]===actualScore(m);
-      const text=mainOK?'方向正确 · 主推命中':(dirOK?'方向正确 · 主推未中':'方向错误');
+      const actual=actualScore(m);
+      const mainOK=(sc?.main||[]).includes(actual);
+      const secondaryOK=(sc?.secondary||[]).includes(actual);
+      const upsetOK=(sc?.upset||[]).includes(actual);
+      const text=mainOK?'方向正确 · 主推命中':(secondaryOK?'方向正确 · 次选命中':(upsetOK?'爆冷命中':(dirOK?'方向正确':'方向错误')));
       return{text,hit:dirOK?1:0,total:1};
     }
     const c=ms.filter(m=>{
