@@ -1721,12 +1721,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-07-11T22:50:19Z",
+  "updated_at": "2026-07-11T23:56:07Z",
   "summary": {
-    "total": 94,
-    "correct": 69,
+    "total": 95,
+    "correct": 70,
     "wrong": 25,
-    "accuracy": 73.4
+    "accuracy": 73.7
   },
   "records": [
     {
@@ -2975,6 +2975,18 @@
       "actual_score": "2-1",
       "result": "correct",
       "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 99,
+      "home": "挪威",
+      "away": "英格兰",
+      "predicted": "客胜",
+      "actual": "客胜",
+      "predicted_score": "1-2",
+      "actual_score": "1-2",
+      "result": "correct",
+      "confidence": "低",
       "review": null
     }
   ]
