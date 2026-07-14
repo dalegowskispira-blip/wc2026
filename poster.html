@@ -259,6 +259,40 @@ const SCORE_PER_PAGE=4, ANALYSIS_PER_PAGE=2;
 
 function chunk(arr,n){const out=[];for(let i=0;i<arr.length;i+=n)out.push(arr.slice(i,i+n));return out;}
 
+function sortByKickoff(a,b){
+  return (a.date||'').localeCompare(b.date||'') || (a.bjt||'').localeCompare(b.bjt||'');
+}
+
+function dateLabelFor(dateStr){
+  const dt=new Date(dateStr+'T12:00:00+08:00');
+  const wd=['日','一','二','三','四','五','六'][dt.getDay()];
+  return `${dt.getMonth()+1}月${dt.getDate()}日（周${wd}）· 北京时间`;
+}
+
+function selectPosterBatch(matches,pdata){
+  const jp=pdata?.predictions||null;
+  const nowBjt=new Date(Date.now()+8*3600000);
+  const today=[nowBjt.getUTCFullYear(),String(nowBjt.getUTCMonth()+1).padStart(2,'0'),String(nowBjt.getUTCDate()).padStart(2,'0')].join('-');
+  const tmrw=new Date(nowBjt.getTime()+86400000);
+  const nd=[tmrw.getUTCFullYear(),String(tmrw.getUTCMonth()+1).padStart(2,'0'),String(tmrw.getUTCDate()).padStart(2,'0')].join('-');
+  const all=matches||[];
+  const upcoming=all.filter(m=>m.status!=='finished' && (m.date||'')>=today);
+  const semis=upcoming
+    .filter(m=>m.stage==='\u534a\u51b3\u8d5b' && deriveScores(m.home,m.away,jp))
+    .sort(sortByKickoff);
+  if(semis.length===2){
+    const label=semis[0].date===semis[1].date
+      ? dateLabelFor(semis[0].date)
+      : `${dateLabelFor(semis[0].date).split('·')[0].trim()} - ${dateLabelFor(semis[1].date).split('·')[0].trim()} · 北京时间`;
+    return{date:semis[0].date,dateLabel:label,matches:semis};
+  }
+  return{
+    date:nd,
+    dateLabel:dateLabelFor(nd),
+    matches:all.filter(m=>m.date===nd).sort(sortByKickoff),
+  };
+}
+
 function shotBlock({hasStat,title,sub,statHTML,statClass,dateLabel,contentHTML}){
   return`<div class="shot ${hasStat?'has-stat':'no-stat'}">
   <div class="ph">
@@ -277,14 +311,11 @@ function shotBlock({hasStat,title,sub,statHTML,statClass,dateLabel,contentHTML})
 function sep(text,first){return`<div class="sep"${first?' style="border-top:none;padding-top:0"':''}>${text}</div>`;}
 
 function render(matches,pdata){
-  const tmrw=new Date(Date.now()+8*3600000+86400000);
-  const nd=[tmrw.getUTCFullYear(),String(tmrw.getUTCMonth()+1).padStart(2,'0'),String(tmrw.getUTCDate()).padStart(2,'0')].join('-');
-  const ms=(matches||[]).filter(m=>m.date===nd).sort((a,b)=>(a.bjt||'').localeCompare(b.bjt||''));
+  const batch=selectPosterBatch(matches,pdata);
+  const nd=batch.date;
+  const ms=batch.matches;
 
-  const dt=new Date(nd+'T12:00:00+08:00');
-  const wd=['日','一','二','三','四','五','六'][dt.getDay()];
-  const dl=`${dt.getMonth()+1}月${dt.getDate()}日（周${wd}）· 北京时间`;
-
+  const displayDateLabel=batch.dateLabel;
   const ys=yesterdayStat(matches,pdata,nd);
   const highHit=ys.total>0&&ys.hit/ys.total>=0.5;
   const valCls=highHit?'ph-stat-val hot':'ph-stat-val';
@@ -300,7 +331,7 @@ function render(matches,pdata){
   if(!ms.length){
     root.innerHTML=sep('📸 比分预测',true)+shotBlock({
       hasStat:true,title:'⚽ WC2026 今日比分参考',sub:'三档比分 · 模型倾向 · 娱乐向',
-      statHTML,statClass:statCls,dateLabel:dl,contentHTML:'<div class="no-data">暂无待开赛比赛</div>'});
+      statHTML,statClass:statCls,dateLabel:displayDateLabel,contentHTML:'<div class="no-data">暂无待开赛比赛</div>'});
     return;
   }
 
@@ -310,7 +341,7 @@ function render(matches,pdata){
       hasStat:true,
       title:'⚽ WC2026 今日比分参考',
       sub:`${stageLabel?stageLabel+' · ':''}三档比分 · 判断依据`,
-      statHTML,statClass:statCls,dateLabel:dl,
+      statHTML,statClass:statCls,dateLabel:displayDateLabel,
       contentHTML:predCard(m,jp)+analysisCard(m,jp)});
     return;
   }
@@ -326,7 +357,7 @@ function render(matches,pdata){
       hasStat:i===0,                          // 战绩条只在第一页显示
       title:`⚽ WC2026 今日比分参考${tag}`,
       sub:subScore,
-      statHTML,statClass:statCls,dateLabel:dl,
+      statHTML,statClass:statCls,dateLabel:displayDateLabel,
       contentHTML:grp.map(m=>predCard(m,jp)).join('')});
   });
 
@@ -337,7 +368,7 @@ function render(matches,pdata){
       hasStat:false,
       title:`🔍 WC2026 判断依据${tag}`,
       sub:subAna,
-      dateLabel:dl,
+      dateLabel:displayDateLabel,
       contentHTML:grp.map(m=>analysisCard(m,jp)).join('')});
   });
 
