@@ -1154,11 +1154,11 @@
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": ""
+      "bjt": "03:00"
     },
     {
       "id": 102,
-      "date": "2026-07-15",
+      "date": "2026-07-16",
       "stage": "半决赛",
       "group": null,
       "home": "英格兰",
@@ -1166,7 +1166,7 @@
       "home_score": null,
       "away_score": null,
       "status": "upcoming",
-      "bjt": ""
+      "bjt": "03:00"
     }
   ]
 }
