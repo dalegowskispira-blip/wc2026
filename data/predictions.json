@@ -1761,12 +1761,12 @@
       "confidence": "低"
     }
   },
-  "updated_at": "2026-07-15T20:33:44Z",
+  "updated_at": "2026-07-15T22:02:10Z",
   "summary": {
-    "total": 97,
+    "total": 98,
     "correct": 71,
-    "wrong": 26,
-    "accuracy": 73.2
+    "wrong": 27,
+    "accuracy": 72.4
   },
   "records": [
     {
@@ -3051,6 +3051,18 @@
       "actual_score": "0-2",
       "result": "wrong",
       "confidence": "中",
+      "review": null
+    },
+    {
+      "match_id": 102,
+      "home": "英格兰",
+      "away": "阿根廷",
+      "predicted": "主胜",
+      "actual": "客胜",
+      "predicted_score": "2-1",
+      "actual_score": "1-2",
+      "result": "wrong",
+      "confidence": "低",
       "review": null
     }
   ]
