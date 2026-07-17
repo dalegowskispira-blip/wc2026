@@ -1167,6 +1167,30 @@
       "away_score": 2,
       "status": "finished",
       "bjt": "03:00"
+    },
+    {
+      "id": 103,
+      "date": "2026-07-19",
+      "stage": "季军赛",
+      "group": null,
+      "home": "法国",
+      "away": "英格兰",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "05:00"
+    },
+    {
+      "id": 104,
+      "date": "2026-07-20",
+      "stage": "决赛",
+      "group": null,
+      "home": "西班牙",
+      "away": "阿根廷",
+      "home_score": null,
+      "away_score": null,
+      "status": "upcoming",
+      "bjt": "03:00"
     }
   ]
 }

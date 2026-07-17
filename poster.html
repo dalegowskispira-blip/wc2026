@@ -277,15 +277,20 @@ function selectPosterBatch(matches,pdata){
   const nd=[tmrw.getUTCFullYear(),String(tmrw.getUTCMonth()+1).padStart(2,'0'),String(tmrw.getUTCDate()).padStart(2,'0')].join('-');
   const all=matches||[];
   const upcoming=all.filter(m=>m.status!=='finished' && (m.date||'')>=today);
+  const makeBatch=grp=>{
+    const label=grp[0].date===grp[1].date
+      ? dateLabelFor(grp[0].date)
+      : `${dateLabelFor(grp[0].date).split('·')[0].trim()} - ${dateLabelFor(grp[1].date).split('·')[0].trim()} · 北京时间`;
+    return{date:grp[0].date,dateLabel:label,matches:grp};
+  };
   const semis=upcoming
     .filter(m=>m.stage==='\u534a\u51b3\u8d5b' && deriveScores(m.home,m.away,jp))
     .sort(sortByKickoff);
-  if(semis.length===2){
-    const label=semis[0].date===semis[1].date
-      ? dateLabelFor(semis[0].date)
-      : `${dateLabelFor(semis[0].date).split('·')[0].trim()} - ${dateLabelFor(semis[1].date).split('·')[0].trim()} · 北京时间`;
-    return{date:semis[0].date,dateLabel:label,matches:semis};
-  }
+  if(semis.length===2)return makeBatch(semis);
+  const finals=upcoming
+    .filter(m=>(m.stage==='\u5b63\u519b\u8d5b'||m.stage==='\u51b3\u8d5b') && deriveScores(m.home,m.away,jp))
+    .sort(sortByKickoff);
+  if(finals.length===2)return makeBatch(finals);
   return{
     date:nd,
     dateLabel:dateLabelFor(nd),
@@ -323,7 +328,7 @@ function render(matches,pdata){
   const statHTML=`<span class="ph-stat-label">战绩</span><span class="${valCls}">${ys.text}</span>`;
   const jp=pdata?.predictions||null;
   // 阶段标题：淘汰赛用 stage 字段（如 1/16决赛），小组赛阶段统一显示「小组赛」
-  const stageLabel=ms.length?(ms[0].stage||(ms[0].group?'小组赛':'')):'';
+  const stageLabel=ms.length?[...new Set(ms.map(m=>m.stage||(m.group?'小组赛':'')).filter(Boolean))].join(' / '):'';
   const subScore=`${stageLabel?stageLabel+' · ':''}三档比分 · 模型倾向 · 娱乐向`;
   const subAna=`${stageLabel?stageLabel+' · ':''}模型分析 · 赛前参考`;
   const root=document.getElementById('poster-root');
