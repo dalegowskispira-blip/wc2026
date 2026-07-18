@@ -1801,12 +1801,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-07-18T22:23:16Z",
+  "updated_at": "2026-07-18T23:27:06Z",
   "summary": {
-    "total": 98,
+    "total": 99,
     "correct": 71,
-    "wrong": 27,
-    "accuracy": 72.4
+    "wrong": 28,
+    "accuracy": 71.7
   },
   "records": [
     {
@@ -3101,6 +3101,18 @@
       "actual": "客胜",
       "predicted_score": "2-1",
       "actual_score": "1-2",
+      "result": "wrong",
+      "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 103,
+      "home": "法国",
+      "away": "英格兰",
+      "predicted": "主胜",
+      "actual": "客胜",
+      "predicted_score": "2-1",
+      "actual_score": "4-6",
       "result": "wrong",
       "confidence": "低",
       "review": null

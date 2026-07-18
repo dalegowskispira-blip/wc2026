@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-18T22:23:16Z",
+  "updated_at": "2026-07-18T23:26:55Z",
   "matches": [
     {
       "id": 1,
@@ -1175,9 +1175,9 @@
       "group": null,
       "home": "法国",
       "away": "英格兰",
-      "home_score": 2,
-      "away_score": 4,
-      "status": "live",
+      "home_score": 4,
+      "away_score": 6,
+      "status": "finished",
       "bjt": "05:00"
     },
     {
