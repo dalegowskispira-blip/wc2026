@@ -1801,12 +1801,12 @@
       "confidence": "中"
     }
   },
-  "updated_at": "2026-07-19T21:53:44Z",
+  "updated_at": "2026-07-19T22:53:48Z",
   "summary": {
-    "total": 99,
-    "correct": 71,
+    "total": 100,
+    "correct": 72,
     "wrong": 28,
-    "accuracy": 71.7
+    "accuracy": 72.0
   },
   "records": [
     {
@@ -3115,6 +3115,18 @@
       "actual_score": "4-6",
       "result": "wrong",
       "confidence": "低",
+      "review": null
+    },
+    {
+      "match_id": 104,
+      "home": "西班牙",
+      "away": "阿根廷",
+      "predicted": "主胜",
+      "actual": "主胜",
+      "predicted_score": "2-1",
+      "actual_score": "1-0",
+      "result": "correct",
+      "confidence": "中",
       "review": null
     }
   ]
