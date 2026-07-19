@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-19T19:40:45Z",
+  "updated_at": "2026-07-19T20:51:18Z",
   "matches": [
     {
       "id": 1,
@@ -1189,7 +1189,7 @@
       "away": "阿根廷",
       "home_score": 0,
       "away_score": 0,
-      "status": "upcoming",
+      "status": "live",
       "bjt": "03:00"
     }
   ]
